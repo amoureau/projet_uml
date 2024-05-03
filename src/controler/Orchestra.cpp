@@ -1,5 +1,7 @@
 #include "../view/Results.h"
 
+#include "../model/User.h"
+#include "../model/Admin.h"
 #include "../model/Sensor.h"
 
 #include <iostream>
@@ -64,6 +66,8 @@ void loadData(void) {
 
 int main(void)
 {
+    User currUser = Admin();
+
     loadData();
 
 
