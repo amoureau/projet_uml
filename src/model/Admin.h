@@ -4,6 +4,7 @@
 
 //--------------------------------------------------- Interfaces utilisÃ©es
 #include <string>
+#include "User.h"
 using namespace std;
 //------------------------------------------------------------- Constantes
 
