@@ -1,6 +1,6 @@
-//---------- Interface de la classe <ComputationAgent> (fichier ComputationAgent.h)  ----------------
-#if ! defined ( COMPUTATIONAGENT_H )
-#define COMPUTATIONAGENT_H
+//---------- Interface de la classe <PrivateIndividual> (fichier PrivateIndividual.h) ----------------
+#if ! defined ( PRIVATEINDIVIDUAL_H )
+#define PRIVATEINDIVIDUAL_H
 
 //--------------------------------------------------- Interfaces utilisÃ©es
 #include <string>
@@ -13,7 +13,7 @@ using namespace std;
 // Rôle de la classe 
 //------------------------------------------------------------------------
 
-class ComputationAgent 
+class PrivateIndividual 
 {
 //----------------------------------------------------------------- PUBLIC
 
@@ -24,13 +24,13 @@ public:
 
 //-------------------------------------------- Constructeurs - destructeur
 
-    ComputationAgent ();
+    PrivateIndividual ();
     // Mode d'emploi : Constructeur par défaut
     //
     // Contrat :
     //
 
-    virtual ~ComputationAgent ( );
+    virtual ~PrivateIndividual ( );
     // Mode d'emploi : Destructeur
     //
     // Contrat :
