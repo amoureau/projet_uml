@@ -13,7 +13,7 @@ using namespace std;
 // Rôle de la classe 
 //------------------------------------------------------------------------
 
-class Attributes 
+class Admin 
 {
 //----------------------------------------------------------------- PUBLIC
 
@@ -24,13 +24,13 @@ public:
 
 //-------------------------------------------- Constructeurs - destructeur
 
-    Attributes ();
+    Admin ();
     // Mode d'emploi : Constructeur par défaut
     //
     // Contrat :
     //
 
-    virtual ~Attributes ( );
+    virtual ~Admin ( );
     // Mode d'emploi : Destructeur
     //
     // Contrat :
