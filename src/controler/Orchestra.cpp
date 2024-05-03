@@ -15,7 +15,6 @@ using namespace std;
 // Définition d'un objet "Personne" avec des attributs nom, prénom et âge
 
 
-static void sensorsDATA(void)
 
 // Fonction pour charger un fichier CSV et le découper en objets "Personne"
 void loadData(void) {
@@ -30,7 +29,7 @@ void loadData(void) {
     // liste globale
     vector<Sensor> listSensors;
 
-
+    /*
     for(string fichierCSV :  listCSV)
     {
         ifstream fichier(fichierCSV);
@@ -56,8 +55,8 @@ void loadData(void) {
             personnes.push_back(personne);
         }
     }
+    */
 
-    fichier.close();
 
 }
 
