@@ -31,7 +31,24 @@ class ComputationAgent
 public:
 //----------------------------------------------------- MÃ©thodes publiques
 
-static pair<bool, vector<double>> ComputeSensorAnalysed() {
+static pair<bool, vector<double>> ComputeSensorAnalysed(Sensor &sensor, double areaRadius, vector<Sensor> &listSensors, vector<Measurement> &listMeasurements) {
+    bool anomalies = false;
+
+    double ecartType = 0.0;
+    for (Measurement &meas : listMeasurements) {
+        double moyenne = ComputeMeanForAnAttribute(sensor.getLatitude(), sensor.getLongitude(), meas.getAttributes(), 0.1, 0, 0, listSensors, listMeasurements);
+        if (moyenne != 0) {
+            ecartType = computeEcartType( sensor.getLatitude(), sensor.getLongitude(), areaRadius, sensor);
+            if (meas.getValue() > moyenne + 3*ecartType || meas.getValue() < moyenne - 3*ecartType) {
+                anomalies = true;
+                break;
+            }
+        }
+    }
+
+    return pair<bool, vector<double>>(anomalies, vector<double>{ecartType, 
+        //TODO: ajouter durée de fonctionnement, etc.) et s’il est susceptible d’être défaillant
+    });
 
 }
 
@@ -55,10 +72,15 @@ static pair<bool, vector<double>> ComputeSensorAnalysed() {
 
 protected:
 //----------------------------------------------------- Méthodes protégées
-double ComputeMeanForAnAttribute (double latitude, double longitude, Attributes attribute, double radius, time_t startTime, time_t endTime) {
+static double computeEcartType(double latitude, double longitude, double radius, Sensor &sensor) {
+    //TODO
+    return 0.0;
+}
+
+static double ComputeMeanForAnAttribute (double latitude, double longitude, Attributes &attribute, double radius, time_t startTime, time_t endTime, vector<Sensor> &listSensors, vector<Measurement> &listMeasurements) {
     vector<Sensor> sensorsDansZone;
 
-    for (Sensor sensor: listSensors) {
+    for (Sensor &sensor: listSensors) {
         if (calculateDistance( latitude, longitude, sensor.getLatitude(), sensor.getLongitude() ) < radius) {
             sensorsDansZone.push_back( sensor );
         }    
@@ -67,17 +89,19 @@ double ComputeMeanForAnAttribute (double latitude, double longitude, Attributes 
     double moyenne = 0;
     for (Measurement m : listMeasurements) {
         time_t mesureTime = stringToTime(m.getDate());
-        if ( m.getAttributes() == attribute && difftime(mesureTime, startTime) > 0 && difftime(mesureTime, endTime) < 0) {
-            for (Sensor sensor: sensorsDansZone) {
-                if (m.getSensor() == sensor) {
-                    moyenne += m.getValue();
+        if ( m.getAttributes() == attribute) {
+            if ((difftime(mesureTime, startTime) > 0 && difftime(mesureTime, endTime) < 0) || (startTime == 0 && endTime == 0)) {
+                for (Sensor &sensor: sensorsDansZone) {
+                    if (m.getSensor() == sensor) {
+                        moyenne += m.getValue();
+                    }
                 }
             }
         }
     }
 }
 
-time_t stringToTime(string str_time) {
+static time_t stringToTime(string &str_time) {
     struct tm tm;
     int year, month, day, hour, minute, second;
     sscanf(str_time.c_str(), "%d-%d-%d %d:%d:%d", &year, &month, &day, &hour, &minute, &second);
@@ -92,7 +116,7 @@ time_t stringToTime(string str_time) {
     return time;
 }
 
-double calculateDistance(double lat1, double lon1, double lat2, double lon2) {
+static double calculateDistance(double lat1, double lon1, double lat2, double lon2) {
     double lat1_rad = toRadians(lat1);
     double lon1_rad = toRadians(lon1);
     double lat2_rad = toRadians(lat2);
@@ -105,7 +129,7 @@ double calculateDistance(double lat1, double lon1, double lat2, double lon2) {
     return RAYON_TERRE * c;
 }
 
-double toRadians(double degrees) {
+static double toRadians(double degrees) {
     return degrees * (PI / 180);
 }
 //----------------------------------------------------- Attributs protégés
