@@ -4,6 +4,11 @@
 
 //--------------------------------------------------- Interfaces utilisÃ©es
 #include <string>
+#include "Measurement.h"
+#include "Cleaner.h"
+#include "Sensor.h"
+#include "Attributes.h"
+#include <vector>
 using namespace std;
 //------------------------------------------------------------- Constantes
 
@@ -39,9 +44,11 @@ public:
 //------------------------------------------------------------------ PRIVE
 
 protected:
-//----------------------------------------------------- Méthodes protégées
-
 //----------------------------------------------------- Attributs protégés
+    vector<Measurement> listMeasurements;
+    vector<Cleaner> listCleaners;
+    vector<Sensor> listSensors;
+    vector<Attributes> listAttributes;
 
 };
 
