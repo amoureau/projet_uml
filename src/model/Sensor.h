@@ -24,6 +24,9 @@ public:
 
 //-------------------------------------------- Constructeurs - destructeur
 
+    
+
+
     Sensor ();
     Sensor(int id, double latitude, double longitude);
 

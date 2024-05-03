@@ -8,7 +8,7 @@ TARGET = airwatcher
 CXX = g++
 
 # Options de compilation
-CXXFLAGS = -ansi -pedantic -Wall -std=c++11 -g -DMAP
+CXXFLAGS = -ansi -pedantic -Wall -std=c++11 -g #-DMAP
 
 # Répertoire des fichiers sources
 SRC_DIR = $(CURDIR)/src
