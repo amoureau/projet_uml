@@ -16,6 +16,20 @@ using namespace std;
 
 //----------------------------------------------------- Méthodes publiques
 
+int Sensor::getId() const
+{
+    return id;
+}
+
+double Sensor::getLatitude() const
+{
+    return latitude;
+}
+
+double Sensor::getLongitude() const
+{
+    return longitude; // salut
+}
 
 
 //------------------------------------------------- Surcharge d'opérateurs
