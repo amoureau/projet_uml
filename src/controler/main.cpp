@@ -19,7 +19,7 @@ static vector<Sensor>& loadSensor(vector<Sensor>& sensors)
 {
 
     // chemins acces fichiers:
-    string fichierCSV = "/home/lsamain/Bureau/Home_INSA/Documents/3if/uml/v2/projet_uml/dataset/sensors.csv";
+    string fichierCSV = "dataset/sensors.csv";
     ifstream fichier(fichierCSV);
     if (!fichier) {
         cerr << "Erreur : impossible d'ouvrir le fichier " << fichierCSV <<  endl;
