@@ -2,5 +2,5 @@
 
 User::User()
 {
-    this.calculateur = ComputationAgent();
+    this->calculateur = ComputationAgent();
 }
