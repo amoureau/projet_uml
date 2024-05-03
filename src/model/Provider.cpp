@@ -29,8 +29,13 @@ Provider::Provider ()
 #ifdef MAP
     cout << "Appel au constructeur de <Provider>" << endl;
 #endif
-
 } //----- Fin de Provider
+
+Provider::Provider(int idProvider) : idProvider(idProvider) {
+#ifdef MAP
+    cout << "Appel au constructeur de <Provider>" << endl;
+#endif  
+}
 
 
 Provider::~Provider ( )

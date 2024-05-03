@@ -8,6 +8,10 @@ private:
 
 public:
     // Constructor
+    Timestamp() {
+        time_point = std::chrono::system_clock::now();
+    }
+
     Timestamp(const std::string& date_str) {
         std::tm tm = {};
         std::istringstream ss(date_str);

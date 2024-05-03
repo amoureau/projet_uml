@@ -29,7 +29,6 @@ void static loadSensor(ComputationAgent &calculateur)
     while (getline(fichier, ligne)) {
         istringstream iss(ligne);
         
-
         int id;
         double latitude;
         double longitude;

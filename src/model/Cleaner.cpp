@@ -4,10 +4,10 @@
 
 //-------------------------------------------------------- Include système
 #include <string>
-#include <iostream>
 using namespace std;
 
 //------------------------------------------------------ Include personnel
+#include "Timestamp.h"
 #include "Cleaner.h"
 
 //------------------------------------------------------------- Constantes
@@ -32,6 +32,13 @@ Cleaner::Cleaner ()
 
 } //----- Fin de Cleaner
 
+Cleaner::Cleaner(double latitude, double longitude, Timestamp dateStart, Timestamp dateEnd)
+{
+    this->latitude = latitude;
+    this->longitude = longitude;
+    this->dateStart = dateStart;
+    this->dateEnd = dateEnd;
+}
 
 Cleaner::~Cleaner ( )
 {

@@ -30,6 +30,12 @@ public:
     // Contrat :
     //
 
+    Measurement (double value, string date);
+    // Mode d'emploi : Constructeur par défaut
+    //
+    // Contrat :
+    //
+
     virtual ~Measurement ( );
     // Mode d'emploi : Destructeur
     //

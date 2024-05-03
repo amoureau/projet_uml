@@ -30,6 +30,8 @@ public:
     // Contrat :
     //
 
+    Attributes(int id, string unit, string description);
+
     virtual ~Attributes ( );
     // Mode d'emploi : Destructeur
     //
