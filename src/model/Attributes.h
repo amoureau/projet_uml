@@ -42,7 +42,9 @@ protected:
 //----------------------------------------------------- Méthodes protégées
 
 //----------------------------------------------------- Attributs protégés
-
+    int id;
+    string unit;
+    string description;
 };
 
 //-------------------------------- Autres définitions dépendantes
