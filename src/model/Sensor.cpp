@@ -27,6 +27,13 @@ using namespace std;
 Sensor::Sensor ()
 {
 #ifdef MAP
+    cout << "Appel au constructeur par défaut de <Sensor>" << endl;
+#endif
+} //----- Fin de Sensor
+
+Sensor::Sensor(int id, double latitude, double longitude) : id(id), latitude(latitude), longitude(longitude)
+{
+#ifdef MAP
     cout << "Appel au constructeur de <Sensor>" << endl;
 #endif
 
@@ -36,7 +43,7 @@ Sensor::Sensor ()
 Sensor::~Sensor ( )
 {
 #ifdef MAP
-    cout << "Appel au destructeur de <Sensor>" << endl;
+    cout << "Appel au destructeur par défaut de <Sensor>" << endl;
 #endif
 
 } //----- Fin de ~Sensor

@@ -3,6 +3,7 @@
 #include "../model/User.h"
 #include "../model/Admin.h"
 #include "../model/Sensor.h"
+#include "../model/ComputationAgent.h"
 
 #include <iostream>
 #include <fstream>
@@ -14,6 +15,39 @@ using namespace std;
 
 // Définition d'un objet "Personne" avec des attributs nom, prénom et âge
 
+void static loadSensor(ComputationAgent &calculateur)
+{
+    // chemins acces fichiers:
+    string fichierCSV = "../../dataset/sensors.csv";
+    ifstream fichier(fichierCSV);
+    if (!fichier) {
+        cerr << "Erreur : impossible d'ouvrir le fichier " << fichierCSV <<  endl;
+        return;
+    }
+
+    string ligne;
+    while (getline(fichier, ligne)) {
+        istringstream iss(ligne);
+        
+
+        int id;
+        double latitude;
+        double longitude;
+        string valeur;
+
+        // Lecture des valeurs séparées par des virgules
+        getline(iss, valeur, ';');
+        id = stoi(valeur[valeur.size()-1]);
+        getline(iss, valeur, ',');
+        latitude = stod(valeur);
+        getline(iss, valeur, ',');
+        longitude = stod(valeur);
+
+        Sensor sensor = Sensor(id, latitude, longitude);
+        user.ca
+
+    }
+}
 
 
 // Fonction pour charger un fichier CSV et le découper en objets "Personne"
@@ -51,7 +85,7 @@ void loadData(void) {
             personne.prenom = valeur;
             getline(iss, valeur, ',');
             personne.age =  stoi(valeur);
-
+qssdgsdgsgsdgsdgs
             personnes.push_back(personne);
         }
     }
@@ -65,7 +99,8 @@ void loadData(void) {
 
 int main(void)
 {
-    User currUser = Admin();
+    ComputationAgent calculateur = ComputationAgent();
+
 
     loadData();
 
