@@ -4,6 +4,9 @@
 
 //--------------------------------------------------- Interfaces utilisÃ©es
 #include <string>
+
+#include "ComputationAgent.h"
+
 using namespace std;
 //------------------------------------------------------------- Constantes
 
@@ -40,6 +43,7 @@ public:
 //------------------------------------------------------------------ PRIVE
 
 protected:
+    ComputationAgent calculateur;
 //----------------------------------------------------- Méthodes protégées
 
 //----------------------------------------------------- Attributs protégés
