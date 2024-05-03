@@ -46,6 +46,4 @@ $(OBJ_DIR)/%.o: $(SOURCES) $(HEADERS)
 	@echo "Fin de la création du fichier objet $@"
 
 # Nettoyage de tout
-clean:
-	rm -f $(OBJECTS) $(TARGET)
-	@echo "Nettoyage terminé!"
+

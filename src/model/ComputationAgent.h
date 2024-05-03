@@ -4,11 +4,13 @@
 
 //--------------------------------------------------- Interfaces utilisÃ©es
 #include <string>
+#include <vector>
+
 #include "Measurement.h"
 #include "Cleaner.h"
 #include "Sensor.h"
 #include "Attributes.h"
-#include <vector>
+
 using namespace std;
 //------------------------------------------------------------- Constantes
 

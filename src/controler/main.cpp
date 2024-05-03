@@ -46,7 +46,7 @@ static vector<Sensor>& loadSensor(void)
         getline(iss, valeur, ',');
         longitude = stod(valeur);
 
-        Sensor sensor = Sensor(id, latitude, longitude);
+        Sensor sensor(id, latitude, longitude);
         sensors.push_back(sensor);
 
     }

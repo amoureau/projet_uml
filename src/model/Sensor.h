@@ -36,8 +36,6 @@ public:
     // Contrat :
     //
 
-    Sensor(int id, double latitude, double longitude);
-
     virtual ~Sensor ( );
     // Mode d'emploi : Destructeur
     //

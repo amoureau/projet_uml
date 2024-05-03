@@ -7,8 +7,9 @@
 using namespace std;
 
 //------------------------------------------------------ Include personnel
-#include "Timestamp.h"
+
 #include "Cleaner.h"
+
 
 //------------------------------------------------------------- Constantes
 
