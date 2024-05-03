@@ -1,9 +1,12 @@
-//---------- Interface de la classe <Catalogue> (fichier Catalogue.h) ----------------
+//---------- Interface de la classe <User> (fichier User.h) ----------------
 #if ! defined ( USER_H )
 #define USER_H
 
 //--------------------------------------------------- Interfaces utilisÃ©es
 #include <string>
+
+#include "ComputationAgent.h"
+
 using namespace std;
 //------------------------------------------------------------- Constantes
 
@@ -20,10 +23,6 @@ class User
 public:
 //----------------------------------------------------- MÃ©thodes publiques
     double ComputeMeanQualityCircle(double latitude, double longitude, string start, string end);
-    // Mode d'emploi : Prend un paramètre de type Trajet * et l'ajoute à la fin de la liste de trajets
-    //
-    // Contrat :
-    //
 
 //------------------------------------------------- Surcharge d'opÃ©rateurs
 
@@ -44,11 +43,12 @@ public:
 //------------------------------------------------------------------ PRIVE
 
 protected:
+    ComputationAgent calculateur;
 //----------------------------------------------------- Méthodes protégées
 
 //----------------------------------------------------- Attributs protégés
 
 };
 
-//-------------------------------- Autres définitions dépendantes de <Catalogue>
-#endif // Catalogue_H
+//-------------------------------- Autres définitions dépendantes
+#endif 

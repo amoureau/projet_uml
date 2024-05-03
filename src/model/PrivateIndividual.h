@@ -1,6 +1,6 @@
-//---------- Interface de la classe <Admin> (fichier Admin.h)  ----------------
-#if ! defined ( ADMIN_H )
-#define ADMIN_H
+//---------- Interface de la classe <PrivateIndividual> (fichier PrivateIndividual.h) ----------------
+#if ! defined ( PRIVATEINDIVIDUAL_H )
+#define PRIVATEINDIVIDUAL_H
 
 //--------------------------------------------------- Interfaces utilisÃ©es
 #include <string>
@@ -13,7 +13,7 @@ using namespace std;
 // Rôle de la classe 
 //------------------------------------------------------------------------
 
-class Admin : public User
+class PrivateIndividual 
 {
 //----------------------------------------------------------------- PUBLIC
 
@@ -24,13 +24,13 @@ public:
 
 //-------------------------------------------- Constructeurs - destructeur
 
-    Admin ();
+    PrivateIndividual ();
     // Mode d'emploi : Constructeur par défaut
     //
     // Contrat :
     //
 
-    virtual ~Admin ( );
+    virtual ~PrivateIndividual ( );
     // Mode d'emploi : Destructeur
     //
     // Contrat :
