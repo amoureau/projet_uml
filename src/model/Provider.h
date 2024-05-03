@@ -30,6 +30,9 @@ public:
     // Contrat :
     //
 
+    Provider(int idProvider);
+    // Mode d'emploi : Constructeur
+    
     virtual ~Provider ( );
     // Mode d'emploi : Destructeur
     //
@@ -40,9 +43,8 @@ public:
 
 protected:
 //----------------------------------------------------- Méthodes protégées
-
 //----------------------------------------------------- Attributs protégés
-
+    int idProvider;
 };
 
 //-------------------------------- Autres définitions dépendantes

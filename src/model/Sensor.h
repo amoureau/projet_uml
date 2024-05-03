@@ -19,18 +19,24 @@ class Sensor
 
 public:
 //----------------------------------------------------- MÃ©thodes publiques
-    double getLatitude();
-    double getLongitude();
-    
+
 //------------------------------------------------- Surcharge d'opÃ©rateurs
 
 //-------------------------------------------- Constructeurs - destructeur
 
     Sensor ();
+    Sensor(int id, double latitude, double longitude);
+
+    int getId() const;
+    double getLatitude() const;
+    double getLongitude() const;
+
     // Mode d'emploi : Constructeur par défaut
     //
     // Contrat :
     //
+
+    Sensor(int id, double latitude, double longitude);
 
     virtual ~Sensor ( );
     // Mode d'emploi : Destructeur
@@ -41,12 +47,11 @@ public:
 //------------------------------------------------------------------ PRIVE
 
 protected:
-//----------------------------------------------------- Méthodes protégées
-
 //----------------------------------------------------- Attributs protégés
     int id;
     double latitude;
     double longitude;
+
 };
 
 //-------------------------------- Autres définitions dépendantes

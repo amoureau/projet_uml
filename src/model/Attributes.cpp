@@ -4,6 +4,7 @@
 
 //-------------------------------------------------------- Include système
 #include <string>
+#include <iostream>
 using namespace std;
 
 //------------------------------------------------------ Include personnel
@@ -31,6 +32,13 @@ Attributes::Attributes ()
 
 } //----- Fin de Attributes
 
+Attributes::Attributes (int id, string unit, string description) : id(id), unit(unit), description(description)
+{
+#ifdef MAP
+    cout << "Appel au constructeur de <Attributes>" << endl;
+#endif
+
+} 
 
 Attributes::~Attributes ( )
 {

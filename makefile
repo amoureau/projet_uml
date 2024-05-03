@@ -11,17 +11,17 @@ CXX = g++
 CXXFLAGS = -ansi -pedantic -Wall -std=c++11 -g -DMAP
 
 # Répertoire des fichiers sources
-SRC_DIR = $(CURDIR)/src/*
+SRC_DIR = $(CURDIR)/src
 
 # Répertoire pour les fichiers objets
 OBJ_DIR = $(CURDIR)/obj
 
 # Liste des fichiers source
-SOURCES = $(wildcard $(SRC_DIR)/*.cpp)
-HEADERS = $(wildcard $(SRC_DIR)/*.h)
+SOURCES = $(wildcard $(SRC_DIR)/*/*.cpp)
+HEADERS = $(wildcard $(SRC_DIR)/*/*.h)
 
 # Liste des fichiers objets générés à partir des fichiers source
-OBJECTS = $(patsubst $(SRC_DIR)/%.cpp, $(OBJ_DIR)/%.o, $(SOURCES))
+OBJECTS = $(patsubst $(SRC_DIR)/*/%.cpp, $(OBJ_DIR)/%.o, $(SOURCES))
 
 # ---------------------------------------------------------------------
 # ---------------------------------------------------------------------
@@ -36,17 +36,16 @@ $(TARGET): $(OBJECTS)
 	@echo "Compilation terminée executable créé: $@"
 
 # Règle spéciale pour le main qui n'a pas de .h
-$(OBJ_DIR)/main.o: $(SRC_DIR)/main.cpp $(HEADERS)
+$(OBJ_DIR)/main.o: $(SRC_DIR)/controler/main.cpp $(HEADERS)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 	@echo "Fin de la création du fichier objet $@"
 
 # Règle générique pour la création des fichiers objets
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp $(HEADERS)
+$(OBJ_DIR)/%.o: $(SOURCES) $(HEADERS)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 	@echo "Fin de la création du fichier objet $@"
 
 # Nettoyage de tout
 clean:
 	rm -f $(OBJECTS) $(TARGET)
-	rm -f ./sauvegarde.txt
 	@echo "Nettoyage terminé!"

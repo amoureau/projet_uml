@@ -5,7 +5,7 @@
 //--------------------------------------------------- Interfaces utilisÃ©es
 #include <string>
 #include <utility>
-#include <list>
+#include <vector>
 #include <cmath>
 #include <ctime>
 
@@ -31,7 +31,7 @@ class ComputationAgent
 public:
 //----------------------------------------------------- MÃ©thodes publiques
 
-static pair<bool, list<double>> ComputeSensorAnalysed() {
+static pair<bool, vector<double>> ComputeSensorAnalysed() {
 
 }
 
@@ -56,7 +56,7 @@ static pair<bool, list<double>> ComputeSensorAnalysed() {
 protected:
 //----------------------------------------------------- Méthodes protégées
 double ComputeMeanForAnAttribute (double latitude, double longitude, Attributes attribute, double radius, time_t startTime, time_t endTime) {
-    list<Sensor> sensorsDansZone;
+    vector<Sensor> sensorsDansZone;
 
     for (Sensor sensor: listSensors) {
         if (calculateDistance( latitude, longitude, sensor.getLatitude(), sensor.getLongitude() ) < radius) {
@@ -109,10 +109,10 @@ double toRadians(double degrees) {
     return degrees * (PI / 180);
 }
 //----------------------------------------------------- Attributs protégés
-    list<Measurement> listMeasurements;
-    list<Cleaner> listCleaners;
-    list<Sensor> listSensors;
-    list<Attributes> listAttributes;
+    vector<Measurement> listMeasurements;
+    vector<Cleaner> listCleaners;
+    vector<Sensor> listSensors;
+    vector<Attributes> listAttributes;
 };
 
 //-------------------------------- Autres définitions dépendantes

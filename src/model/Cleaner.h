@@ -30,6 +30,9 @@ public:
     // Contrat :
     //
 
+    Cleaner(double latitude, double longitude, Timestamp dateStart, Timestamp dateEnd);
+    // Mode d'emploi : Constructeur
+
     virtual ~Cleaner ( );
     // Mode d'emploi : Destructeur
     //
@@ -42,7 +45,10 @@ protected:
 //----------------------------------------------------- Méthodes protégées
 
 //----------------------------------------------------- Attributs protégés
-
+    double latitude;
+    double longitude;
+    Timestamp dateStart;
+    Timestamp dateEnd;
 };
 
 //-------------------------------- Autres définitions dépendantes

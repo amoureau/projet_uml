@@ -30,6 +30,8 @@ public:
     // Contrat :
     //
 
+    Attributes(int id, string unit, string description);
+
     virtual ~Attributes ( );
     // Mode d'emploi : Destructeur
     //
@@ -42,7 +44,9 @@ protected:
 //----------------------------------------------------- Méthodes protégées
 
 //----------------------------------------------------- Attributs protégés
-
+    int id;
+    string unit;
+    string description;
 };
 
 //-------------------------------- Autres définitions dépendantes

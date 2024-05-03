@@ -13,7 +13,7 @@ using namespace std;
 // Rôle de la classe 
 //------------------------------------------------------------------------
 
-class Measurement 
+class Measurement
 {
 //----------------------------------------------------------------- PUBLIC
 
@@ -33,6 +33,12 @@ public:
     // Contrat :
     //
 
+    Measurement (double value, string date);
+    // Mode d'emploi : Constructeur par défaut
+    //
+    // Contrat :
+    //
+
     virtual ~Measurement ( );
     // Mode d'emploi : Destructeur
     //
@@ -45,10 +51,7 @@ protected:
 //----------------------------------------------------- Méthodes protégées
 
 //----------------------------------------------------- Attributs protégés
-    double value;
-    string date;
-    Sensor sensor;
-    Attributes Attributes;
+
 };
 
 //-------------------------------- Autres définitions dépendantes

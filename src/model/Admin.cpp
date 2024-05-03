@@ -4,6 +4,7 @@
 
 //-------------------------------------------------------- Include système
 #include <string>
+#include <iostream>
 using namespace std;
 
 //------------------------------------------------------ Include personnel

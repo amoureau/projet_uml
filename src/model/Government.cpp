@@ -3,6 +3,8 @@
 //---------------------------------------------------------------- INCLUDE
 
 //-------------------------------------------------------- Include système
+#include <string>
+#include <iostream>
 using namespace std;
 
 //------------------------------------------------------ Include personnel
@@ -29,7 +31,7 @@ Government::Government ()
 } //----- Fin de Government
 
 
-Government::~Government ( )
+Government::~Government ()
 {
 #ifdef MAP
     cout << "Appel au destructeur de <Government>" << endl;

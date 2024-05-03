@@ -3,8 +3,6 @@
 #define GOVERNMENT_H
 
 //--------------------------------------------------- Interfaces utilisÃ©es
-#include <utility>
-#include <list>
 #include <string>
 using namespace std;
 //------------------------------------------------------------- Constantes
