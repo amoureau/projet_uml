@@ -24,26 +24,22 @@ using namespace std;
 //-------------------------------------------- Constructeurs - destructeur
 
 User::User ()
-// Algorithme :
-//
 {
 #ifdef MAP
     cout << "Appel au constructeur de <Catalogue>" << endl;
 #endif
 this->calculateur = ComputationAgent();
 
-} //----- Fin de Catalogue
+} //----- Fin de User
 
 
 User::~User ( )
-// Algorithme :
-//
 {
 #ifdef MAP
     cout << "Appel au destructeur de <Catalogue>" << endl;
 #endif
 
-} //----- Fin de ~Catalogue
+} //----- Fin de ~User
 
 
 //------------------------------------------------------------------ PRIVE
