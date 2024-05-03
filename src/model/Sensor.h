@@ -25,6 +25,12 @@ public:
 //-------------------------------------------- Constructeurs - destructeur
 
     Sensor ();
+    Sensor(int id, double latitude, double longitude);
+
+    int getId() const;
+    double getLatitude() const;
+    double getLongitude() const;
+
     // Mode d'emploi : Constructeur par défaut
     //
     // Contrat :
