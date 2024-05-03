@@ -17,11 +17,11 @@ SRC_DIR = $(CURDIR)/src
 OBJ_DIR = $(CURDIR)/obj
 
 # Liste des fichiers source
-SOURCES = $(wildcard $(SRC_DIR)/*/*.cpp)
-HEADERS = $(wildcard $(SRC_DIR)/*/*.h)
+SOURCES = $(wildcard $(SRC_DIR)/*.cpp)
+HEADERS = $(wildcard $(SRC_DIR)/*.h)
 
 # Liste des fichiers objets générés à partir des fichiers source
-OBJECTS = $(patsubst $(SRC_DIR)/*/%.cpp, $(OBJ_DIR)/%.o, $(SOURCES))
+OBJECTS = $(SOURCES:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
 
 # ---------------------------------------------------------------------
 # ---------------------------------------------------------------------
@@ -33,17 +33,14 @@ all: $(TARGET)
 # Règle pour générer le programme final
 $(TARGET): $(OBJECTS)
 	$(CXX) $(CXXFLAGS) -o $@ $^
-	@echo "Compilation terminée executable créé: $@"
-
-# Règle spéciale pour le main qui n'a pas de .h
-$(OBJ_DIR)/main.o: $(SRC_DIR)/controler/main.cpp $(HEADERS)
-	$(CXX) $(CXXFLAGS) -c $< -o $@
-	@echo "Fin de la création du fichier objet $@"
+	@echo "Compilation terminée, executable créé: $@"
 
 # Règle générique pour la création des fichiers objets
-$(OBJ_DIR)/%.o: $(SOURCES) $(HEADERS)
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp $(HEADERS) | $(OBJ_DIR)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 	@echo "Fin de la création du fichier objet $@"
 
-# Nettoyage de tout
 
+# Nettoyage de tout
+clean:
+	rm  $(OBJ_DIR)/%.o $(TARGET)

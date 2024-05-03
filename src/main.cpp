@@ -1,9 +1,9 @@
-#include "../view/Results.h"
+#include "Results.h"
 
-#include "../model/User.h"
-#include "../model/Admin.h"
-#include "../model/Sensor.h"
-#include "../model/ComputationAgent.h"
+#include "User.h"
+#include "Admin.h"
+#include "Sensor.h"
+#include "ComputationAgent.h"
 
 #include <iostream>
 #include <fstream>
