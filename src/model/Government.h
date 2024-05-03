@@ -21,7 +21,7 @@ class Government
 
 public:
 //----------------------------------------------------- MÃ©thodes publiques
-    pair<bool, list<double>> Government::ComputeSensorAnalysed();
+
 //------------------------------------------------- Surcharge d'opÃ©rateurs
 
 //-------------------------------------------- Constructeurs - destructeur

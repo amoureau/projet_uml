@@ -19,7 +19,9 @@ class Sensor
 
 public:
 //----------------------------------------------------- MÃ©thodes publiques
-
+    double getLatitude();
+    double getLongitude();
+    
 //------------------------------------------------- Surcharge d'opÃ©rateurs
 
 //-------------------------------------------- Constructeurs - destructeur
@@ -42,7 +44,9 @@ protected:
 //----------------------------------------------------- Méthodes protégées
 
 //----------------------------------------------------- Attributs protégés
-
+    int id;
+    double latitude;
+    double longitude;
 };
 
 //-------------------------------- Autres définitions dépendantes

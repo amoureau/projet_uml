@@ -19,7 +19,10 @@ class Measurement
 
 public:
 //----------------------------------------------------- MÃ©thodes publiques
-
+    double getValue() const;
+    string getDate() const;
+    Sensor getSensor() const;
+    Attributes getAttributes() const;
 //------------------------------------------------- Surcharge d'opÃ©rateurs
 
 //-------------------------------------------- Constructeurs - destructeur
@@ -42,7 +45,10 @@ protected:
 //----------------------------------------------------- Méthodes protégées
 
 //----------------------------------------------------- Attributs protégés
-
+    double value;
+    string date;
+    Sensor sensor;
+    Attributes Attributes;
 };
 
 //-------------------------------- Autres définitions dépendantes
