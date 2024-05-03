@@ -1,0 +1,176 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+skinparam linetype ortho
+
+skinparam BoxPadding 100
+
+
+
+
+
+package Model{
+
+Abstract User{
+# email
+# password
+
+'Communes
++double ComputeMeanQualityCircle(double lat, double long, string start, string end)
++double ComputeWorstQualityDate(string date)
++pair<double, double> ComputeMaxSurfaceQuality(void)
++double ComputeQualityLocDate(double lat, double long, string start, string end)
++ Map<int, pair<double, double>> ComputeRankedScoredSensor(int idSensor)
+}
+
+Class Government{
+'Gouvernement
++pair<bool, list<double>> ComputeSensorAnalysed(int idSensor)
++bool ComputeMaliciousPrivate(int idSensor)
+'Fournisseurs
++double ComputeCleanersSurface(void)
++list<pair<string, double>> ComputeCleanerImprovement(double lat, double long)
+}
+
+Class Provider{
+-int idProvider
+
+'Fournisseurs
++double ComputeCleanersSurface(void)
++list<pair<string, double>> ComputeCleanerImprovement(double lat, double long)
+}
+
+Class Private{
+-int idPrivate
+
+'Particuliers
++double ComputeAwardConsultation(int idPrivate)
+}
+
+Class Admin{
+'Admin
++bool LoadData(void)
+'Gouvernement
++pair<bool, list<double>> ComputeSensorAnalysed(int idSensor)
++bool ComputeMaliciousPrivate(int idSensor)
+'Fournisseurs
++double ComputeCleanersSurface(void)
++list<pair<string, double>> ComputeCleanerImprovement(double lat, double long)
+'Particuliers
++double ComputeAwardConsultation(int idPrivate)
+}
+
+Private--|> User
+Provider--|> User
+Admin--|> User
+Government--|> User
+
+
+
+Class Cleaner{
+-double latitude
+-double longitude
+-String dateStart
+-String dateEnd
+}
+
+
+
+Class Attributes{
+-int id
+-String unit
+-String description
+}
+
+Class Measurement{
+-Double value
+-String date
+}
+Class Sensor{
+-int id
+-double latitude
+-double longitude
+}
+
+
+
+Class ComputationAgent{
+-List<Measurement> listMeasurements
+-List<Cleaner> listCleaners
+-List<Sensor> listSensors
+-List<Attributes> listAttributes
+
+'Communes
++double ComputeMeanQualityCircle(double lat, double long, string start, string end)
++double ComputeWorstQualityDate(string date)
++list<double> ComputeMaxSurfaceQuality(void)
++double ComputeQualityLocDate(double lat, double long, string start, string end)
++ Map<int, pair<double, double>> ComputeRankedScoredSensor(int idSensor)
+'Admin
++bool LoadData(void)
+'Gouvernement
++pair<bool, list<double>> ComputeSensorAnalysed(int idSensor)
++bool ComputeMaliciousPrivate(int idSensor)
+'Fournisseurs
++double ComputeCleanersSurface(void)
++list<pair<string, double>> ComputeCleanerImprovement(double lat, double long)
+'Particuliers
++double ComputeAwardConsultation(int idPrivate)
+}
+
+
+
+
+
+
+
+}
+package View{
+
+Class Results{
+'Menu
++void DisplayMenu()
+'Communes
++void DisplayMeanQualityCircle(double mean, double lat, double long, string start, string end)
++void DisplayWorstQualityDate(double worstQuality, string date)
++void DisplayMaxSurfaceQuality(pair<double, double> maxSurfaceQuality)
++void DisplayQualityLocDate(double quality, double lat, double long, string start, string end)
++ void DisplayRankedScoredSensor(int idSensor, Map<int, pair<double, double>> scoreRankBoard)
+'Admin
++void LoadData(bool success)
+'Gouvernement
++void DisplaySensorAnalysed(int idSensor, pair<bool, list<double>>)
++void DisplayMaliciousPrivate(int idSensor, bool maliciousness)
+'Fournisseurs
++void DisplayCleanersSurface(double totalSurface)
++void DisplayCleanerImprovement(double lat, double long, list<pair<string, double>> arrayDateQuality)
+'Particuliers
++void DisplayAwardConsultation(int idPrivate, double award)
+}
+}
+
+
+package Controler{
+Class Orchestra{
++int main(void)
+}
+
+}
+
+
+Measurement "0.n" --> "1" Attributes : type of gaz (attributes id)
+Measurement "0.n" -->  "1" Sensor : is the result of
+Sensor "n" -->  "0.1" Private : is owned by
+Cleaner "0.n" --> "1" Provider : has been provide by
+
+User "1" --> "1" ComputationAgent : Uses
+Orchestra "1" --> "1" User : Is used by
+Orchestra "1" -- "1" Results: Use the view screen
+
+
+Controler --> View : Ask to display
+Controler --> Model : Make data or compute request
+View --> Controler : Notify user events
+
+
+@enduml

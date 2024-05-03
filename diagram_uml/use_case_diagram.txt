@@ -1,0 +1,130 @@
+@startuml
+skinparam linetype ortho
+top to bottom direction
+
+
+rectangle Extern_actors{
+actor data
+actor sensors.csv
+actor users.csv
+actor providers.csv
+actor attributes.csv
+actor measurements.csv
+actor cleaners.csv
+data <|-- sensors.csv
+data <|-- measurements.csv
+data <|-- attributes.csv
+data <|-- providers.csv
+data <|-- cleaners.csv
+data <|-- users.csv
+}
+
+rectangle Actors{
+actor user
+actor private_individual
+actor provider
+actor gov_agency
+actor admin
+
+
+
+user <|-- private_individual
+user <|-- provider
+user <|-- gov_agency
+user <|-- admin
+
+}
+
+
+
+rectangle App{
+usecase (verify sensor) as (vfs)
+usecase (award private individual) as (api)
+usecase (exclude sensor from queries) as (esq)
+usecase (dectect malicious action) as (dma)
+
+usecase (log in) as (login)
+usecase (sign up) as (signup)
+
+usecase (load data) as (ld)
+
+usecase (consult statistics) as (cs)
+usecase (make mean of quality of air) as (mmqa)
+usecase (worst quality at date) as (wqd)
+usecase (max surface and quality) as (msq)
+
+
+usecase (select sensor) as (ss)
+usecase (score and rank sensor) as (srs)
+usecase (value of air quality) as (cvaq)
+usecase (observe the impact of the cleaners) as (oic)
+usecase (prohibe private individual from gaining awards) as (ppiga)
+
+usecase (consult awards) as (cas)
+
+
+
+
+cs <|-- mmqa
+cs <|-- wqd
+cs <|-- msq
+
+
+oic <|-- (global radius of the cleaned zone)
+oic <|-- (improvement in air quality for a cleaner)
+
+
+
+
+
+
+}
+
+user --> login
+user --> signup
+
+/' award private individual '/
+cs <.. api : <<extend>>
+ss <.. api : <<extend>>
+cvaq <.. api : <<extend>>
+oic <.. api : <<extend>>
+
+
+
+/'dectect malicious action'/
+gov_agency --> dma
+dma <.. esq : <<extend>>
+dma ..> ppiga : <<include>>
+
+
+private_individual --> cas
+
+/' use case select sensor:'/
+user --> ss
+srs <.. ss : <<include>>
+
+/' consult value of air quality: '/
+user --> cvaq
+
+
+/' observe the impact of the cleaners '/
+gov_agency --> oic
+provider --> oic
+
+
+
+
+/' use case verify sensor:'/
+gov_agency --> vfs
+
+
+/' use case produce statistics:'/
+user --> cs
+
+
+
+
+
+
+
+@enduml
