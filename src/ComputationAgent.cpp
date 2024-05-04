@@ -27,10 +27,22 @@ using namespace std;
 ComputationAgent::ComputationAgent ()
 {
 #ifdef MAP
-    cout << "Appel au constructeur de <ComputationAgent>" << endl;
+    cout << "Appel au constructeur par défaut de <ComputationAgent>" << endl;
 #endif
 
+} //----- Fin de ComputationAgent défaut
+
+ComputationAgent::ComputationAgent (unordered_map<int, Sensor> &sensors, map<pair<double, double>, vector<Sensor>> &sensors2)
+{
+#ifdef MAP
+    cout << "Appel au constructeur de <ComputationAgent>" << endl;
+#endif
+    
+        hmapIdSensor = sensors;
+        mapCoordSensor = sensors2;
+    
 } //----- Fin de ComputationAgent
+
 
 
 ComputationAgent::~ComputationAgent ( )

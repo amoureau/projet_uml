@@ -32,6 +32,14 @@ Admin::Admin ()
 
 } //----- Fin de Admin
 
+Admin::Admin(string email, string password, ComputationAgent calculateur) : User(email, password, calculateur)
+{
+#ifdef MAP
+    cout << "Appel au constructeur de <Admin>" << endl;
+#endif
+    
+} //----- Fin de Admin
+
 
 Admin::~Admin ( )
 {

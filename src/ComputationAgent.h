@@ -5,6 +5,8 @@
 //--------------------------------------------------- Interfaces utilisÃ©es
 #include <string>
 #include <vector>
+#include <unordered_map>
+#include <map>
 
 #include "Measurement.h"
 #include "Cleaner.h"
@@ -32,25 +34,18 @@ public:
 //-------------------------------------------- Constructeurs - destructeur
 
     ComputationAgent ();
-    // Mode d'emploi : Constructeur par défaut
-    //
-    // Contrat :
-    //
+    ComputationAgent (unordered_map<int, Sensor> &sensors, map<pair<double, double>, vector<Sensor>> &sensors2);
+    
+
 
     virtual ~ComputationAgent ( );
-    // Mode d'emploi : Destructeur
-    //
-    // Contrat :
-    //
 
 //------------------------------------------------------------------ PRIVE
 
 protected:
 //----------------------------------------------------- Attributs protégés
-    vector<Measurement> listMeasurements;
-    vector<Cleaner> listCleaners;
-    vector<Sensor> listSensors;
-    vector<Attributes> listAttributes;
+    unordered_map<int, Sensor> hmapIdSensor;
+    map<pair<double, double>, vector<Sensor>> mapCoordSensor;
 
 };
 

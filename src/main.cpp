@@ -63,10 +63,12 @@ static void loadSensor(unordered_map<int, Sensor> &sensors, map<pair<double, dou
 
 int main(void)
 {
+    /* Création des structures de données */
     unordered_map<int, Sensor> sensors;
     map<pair<double, double>, vector<Sensor>> sensors2;
     loadSensor(sensors, sensors2);
 
+    /* Affichage des données récupérées */
     int nbSensors = sensors.size();
     cout << "Liste des capteurs : " << endl;
     for (auto sensor : sensors) {
@@ -82,7 +84,13 @@ int main(void)
         }
         cout << endl;
     }
+
+    /* Création de l'utilisateur avec son computer adgent */
+    ComputationAgent computationAgent(sensors, sensors2);
+    User admin = Admin("toto.samain@insa-lyon.fr", "password", computationAgent);
+
     
+
 
 
     return 0;

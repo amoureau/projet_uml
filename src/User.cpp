@@ -33,6 +33,17 @@ this->calculateur = ComputationAgent();
 
 } //----- Fin de User
 
+User::User(string email, string password, ComputationAgent calculateur)
+{
+#ifdef MAP
+    cout << "Appel au constructeur de <Catalogue>" << endl;
+#endif
+this->email = email;
+this->password = password;
+this->calculateur = calculateur;
+
+} //----- Fin de User
+
 
 User::~User ( )
 {

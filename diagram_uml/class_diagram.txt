@@ -95,10 +95,8 @@ Class Sensor{
 
 
 Class ComputationAgent{
--List<Measurement> listMeasurements
--List<Cleaner> listCleaners
--Hmap<idSensor, Sensor> listSensors
--List<Attributes> listAttributes
+-unordered_map<int, Sensor> Hmap id sensor;
+-map<pair<double, double>, vector<Sensor>> Map latlong vector sensor;
 
 'Communes
 +double ComputeMeanQualityCircle(double lat, double long, string start, string end)

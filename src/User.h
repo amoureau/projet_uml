@@ -4,8 +4,15 @@
 
 //--------------------------------------------------- Interfaces utilisÃ©es
 #include <string>
+#include <vector>
+#include <unordered_map>
+#include <map>
+#include <iostream>
+
 
 #include "ComputationAgent.h"
+#include "Sensor.h"
+#include "Timestamp.h"
 
 using namespace std;
 //------------------------------------------------------------- Constantes
@@ -23,16 +30,18 @@ class User
 public:
 //----------------------------------------------------- MÃ©thodes publiques
     double ComputeMeanQualityCircle(double latitude, double longitude, string start, string end);
+    double ComputeWorstQualityDate(Timestamp date);
+    pair<double, double>ComputeMaxSurfaceQuality(void);
+    double ComputeQualityLocDate(double latitude, double longitude, Timestamp start, Timestamp end);
+    map<int, pair<double,double>>ComputeRankedScoredSensor(int idSensor);
 
 //------------------------------------------------- Surcharge d'opÃ©rateurs
+
 
 //-------------------------------------------- Constructeurs - destructeur
 
     User ();
-    // Mode d'emploi : Constructeur par défaut
-    //
-    // Contrat :
-    //
+    User(string email, string password, ComputationAgent calculateur);
 
     virtual ~User ( );
     // Mode d'emploi : Destructeur
@@ -44,6 +53,8 @@ public:
 
 protected:
     ComputationAgent calculateur;
+    string email;
+    string password;
 //----------------------------------------------------- Méthodes protégées
 
 //----------------------------------------------------- Attributs protégés

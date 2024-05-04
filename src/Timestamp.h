@@ -4,6 +4,9 @@
 #include <chrono>
 #include <sstream>
 
+#if ! defined ( TIMESTAMP_H )
+#define TIMESTAMP_H
+
 class Timestamp {
 private:
     std::chrono::system_clock::time_point time_point;
@@ -45,3 +48,5 @@ public:
         return os;
     }
 };
+
+#endif // TIMESTAMP_H
