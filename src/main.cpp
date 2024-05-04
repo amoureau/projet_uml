@@ -10,12 +10,13 @@
 #include <sstream>
 #include <vector>
 #include <string>
+#include <unordered_map>
 
 using namespace std;
 
 // Définition d'un objet "Personne" avec des attributs nom, prénom et âge
 
-static vector<Sensor>& loadSensor(vector<Sensor>& sensors)
+static unordered_map<int, Sensor>& loadSensor(unordered_map<int, Sensor> &sensors)
 {
 
     // chemins acces fichiers:
@@ -46,7 +47,8 @@ static vector<Sensor>& loadSensor(vector<Sensor>& sensors)
         longitude = stod(valeur);
 
         Sensor sensor(id, latitude, longitude);
-        sensors.push_back(sensor);
+        
+        sensors[id] = sensor;
     }
 
     return sensors;
@@ -58,13 +60,13 @@ static vector<Sensor>& loadSensor(vector<Sensor>& sensors)
 
 int main(void)
 {
-    vector<Sensor> sensors;
-    sensors = loadSensor(sensors); //y
+    unordered_map<int, Sensor> sensors;
+    sensors = loadSensor(sensors);
 
     
     cout << "Liste des capteurs : " << endl;
-    for (Sensor sensor : sensors) {
-        cout << sensor.getId() << " : " << sensor.getLatitude() << " : " << sensor.getLongitude() << endl;
+    for (auto sensor : sensors) {
+        cout << sensor.second << endl;
     }
     
 

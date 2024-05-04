@@ -19,8 +19,18 @@ class Sensor
 
 public:
 //----------------------------------------------------- MÃ©thodes publiques
+    int getId() const;
+    double getLatitude() const;
+    double getLongitude() const;
+
 
 //------------------------------------------------- Surcharge d'opÃ©rateurs
+    friend ostream &operator<<(ostream &os, const Sensor &sensor)
+    {
+        os << "Sensor " << sensor.id << " : " << sensor.latitude << " " << sensor.longitude;
+        return os;
+    }
+    
 
 //-------------------------------------------- Constructeurs - destructeur
 
@@ -29,21 +39,8 @@ public:
 
     Sensor ();
     Sensor(int id, double latitude, double longitude);
-
-    int getId() const;
-    double getLatitude() const;
-    double getLongitude() const;
-
-    // Mode d'emploi : Constructeur par défaut
-    //
-    // Contrat :
-    //
-
     virtual ~Sensor ( );
-    // Mode d'emploi : Destructeur
-    //
-    // Contrat :
-    //
+
 
 //------------------------------------------------------------------ PRIVE
 
