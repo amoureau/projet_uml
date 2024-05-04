@@ -43,4 +43,4 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp $(HEADERS) | $(OBJ_DIR)
 
 # Nettoyage de tout
 clean:
-	rm  $(OBJ_DIR)/%.o $(TARGET)
+	rm  $(OBJ_DIR)/*.o $(TARGET)

@@ -97,7 +97,7 @@ Class Sensor{
 Class ComputationAgent{
 -List<Measurement> listMeasurements
 -List<Cleaner> listCleaners
--List<Sensor> listSensors
+-Hmap<idSensor, Sensor> listSensors
 -List<Attributes> listAttributes
 
 'Communes
