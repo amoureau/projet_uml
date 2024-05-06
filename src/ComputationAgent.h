@@ -66,6 +66,7 @@ protected:
     // stockage de base
     unordered_map<int, Sensor*> hmapIdSensor;
     unordered_map<int, PrivateIndividual*> hmapIdPrivateIndividual;
+    unordered_map<string, Attributes*> hmapAttributes;
 
     // lien - structure de données annexe
     map<pair<double, double>, vector<Sensor*>> mapCoordSensor; 
@@ -74,6 +75,7 @@ protected:
 private:
     void loadSensor(void);
     void loadPrivateIndividual(void);
+    void loadAttributes(void);
 
 };
 

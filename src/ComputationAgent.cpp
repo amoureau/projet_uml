@@ -19,6 +19,7 @@ void ComputationAgent::loadData(void)
 {
     loadSensor();
     loadPrivateIndividual();
+    loadAttributes();
 }
 
 
@@ -56,16 +57,23 @@ ComputationAgent::~ComputationAgent ( )
         delete privateInd.second;
     }
 
+    for(auto att : hmapAttributes)
+    {
+        delete att.second;
+    }
+
 
 
 
     // stockage de base
     hmapIdSensor.clear();
     hmapIdPrivateIndividual.clear();
+    hmapAttributes.clear();
 
     // lien - structure de données annexe
     mapCoordSensor.clear(); 
     hmapIdSensorPrivateIndividual.clear(); 
+
 
 } //----- Fin de ~ComputationAgent
 
@@ -151,4 +159,38 @@ void ComputationAgent::loadPrivateIndividual(void)
 
 
     }
+
 }
+
+void ComputationAgent::loadAttributes(void)
+    {
+        // chemins acces fichiers:
+        string fichierCSV = "dataset/attributes.csv";
+        ifstream fichier(fichierCSV);
+        if (!fichier) {
+            cerr << "Erreur : impossible d'ouvrir le fichier " << fichierCSV <<  endl;
+            exit(1);
+        }
+
+        string ligne;
+        getline(fichier, ligne); // skip first line
+        while (getline(fichier, ligne)) {
+            istringstream iss(ligne);
+            
+
+            string idAttribute;
+            string unit;
+            string description;
+            string valeur;
+
+            // Lecture des valeurs séparées par des points virgules
+            getline(iss, valeur, ';');
+            idAttribute = valeur;
+            getline(iss, valeur, ';');
+            unit = valeur;
+            getline(iss, valeur, ';');
+
+            Attributes *att = new Attributes(idAttribute, unit, description);
+            hmapAttributes[idAttribute] = att;
+        }
+    }
