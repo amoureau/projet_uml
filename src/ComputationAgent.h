@@ -7,6 +7,8 @@
 #include <vector>
 #include <unordered_map>
 #include <map>
+#include <fstream>
+#include <sstream>
 
 #include "Measurement.h"
 #include "Cleaner.h"
@@ -28,14 +30,24 @@ class ComputationAgent
 
 public:
 //----------------------------------------------------- MÃ©thodes publiques
+    void loadSensor(void);
+
+    // getter setter
+    unordered_map<int, Sensor>& getHmapIdSensor()
+    {
+        return hmapIdSensor;
+    }
+    map<pair<double, double>, vector<Sensor>>& getMapCoordSensor()
+    {
+        return mapCoordSensor;
+    }   
+
 
 //------------------------------------------------- Surcharge d'opÃ©rateurs
 
 //-------------------------------------------- Constructeurs - destructeur
 
-    ComputationAgent ();
-    ComputationAgent (unordered_map<int, Sensor> &sensors, map<pair<double, double>, vector<Sensor>> &sensors2);
-    
+    ComputationAgent ();    
 
 
     virtual ~ComputationAgent ( );

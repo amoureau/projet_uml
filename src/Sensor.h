@@ -38,6 +38,7 @@ public:
 
 
     Sensor ();
+    Sensor(const Sensor& unSensor); // constructeur de copie
     Sensor(int id, double latitude, double longitude);
     virtual ~Sensor ( );
 

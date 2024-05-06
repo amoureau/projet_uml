@@ -53,6 +53,14 @@ Sensor::Sensor(int id, double latitude, double longitude) : id(id), latitude(lat
 
 } //----- Fin de Sensor
 
+Sensor::Sensor(const Sensor& unSensor) : id(unSensor.id), latitude(unSensor.latitude), longitude(unSensor.longitude)
+{
+#ifdef MAP
+    cout << "Appel au constructeur de copie de <Sensor>" << endl;
+#endif
+    
+} //----- Fin de Sensor
+
 
 Sensor::~Sensor ( )
 {
