@@ -95,8 +95,10 @@ Class Sensor{
 
 
 Class ComputationAgent{
--unordered_map<int, Sensor> Hmap id sensor;
--map<pair<double, double>, vector<Sensor>> Map latlong vector sensor;
+-unordered_map<int, Sensor*> hmapIdSensor
+-unordered_map<int, PrivateIndividual*> hmapIdPrivateIndividual
+-map<pair<double, double>, vector<Sensor*>> mapCoordSensor
+-unordered_map<int, PrivateIndividual*> hmapIdSensorPrivateIndividual
 
 'Data loading
 +void loadData(void)

@@ -45,6 +45,7 @@ ComputationAgent::~ComputationAgent ( )
     cout << "Appel au destructeur de <ComputationAgent>" << endl;
 #endif
 
+    // free memory
     for(auto sensor : hmapIdSensor)
     {
         delete sensor.second;
@@ -55,13 +56,16 @@ ComputationAgent::~ComputationAgent ( )
         delete privateInd.second;
     }
 
+
+
+
     // stockage de base
     hmapIdSensor.clear();
     hmapIdPrivateIndividual.clear();
 
     // lien - structure de données annexe
     mapCoordSensor.clear(); 
-    hmapIdPrivateIndividualSensor.clear(); 
+    hmapIdSensorPrivateIndividual.clear(); 
 
 } //----- Fin de ~ComputationAgent
 
@@ -143,9 +147,8 @@ void ComputationAgent::loadPrivateIndividual(void)
         Sensor *sensor = hmapIdSensor[idSensor]; // ..?????p,sqfdsqf checker si c'est pas nul
         PrivateIndividual *privateIndividual = new PrivateIndividual(idPrivateIndividual, sensor);
         hmapIdPrivateIndividual[idPrivateIndividual] = privateIndividual;
-        hmapIdPrivateIndividualSensor[idPrivateIndividual] = sensor;
+        hmapIdSensorPrivateIndividual[idSensor] = privateIndividual;
 
 
-        
     }
 }

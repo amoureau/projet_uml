@@ -69,7 +69,7 @@ protected:
 
     // lien - structure de données annexe
     map<pair<double, double>, vector<Sensor*>> mapCoordSensor; 
-    unordered_map<int, Sensor*> hmapIdPrivateIndividualSensor; 
+    unordered_map<int, PrivateIndividual*> hmapIdSensorPrivateIndividual; 
 
 private:
     void loadSensor(void);
