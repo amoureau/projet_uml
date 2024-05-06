@@ -32,6 +32,21 @@ PrivateIndividual::PrivateIndividual ()
 
 } //----- Fin de PrivateIndividuals
 
+PrivateIndividual::PrivateIndividual(int id, Sensor *sensor) : id(id), sensor(sensor)
+{
+#ifdef MAP
+    cout << "Appel au constructeur de <PrivateIndividual>" << endl;
+#endif
+    
+} //----- Fin de PrivateIndividual
+
+PrivateIndividual::PrivateIndividual(const PrivateIndividual& unPrivateIndividual) : id(unPrivateIndividual.id), sensor(unPrivateIndividual.sensor)
+{
+#ifdef MAP
+    cout << "Appel au constructeur de copie de <PrivateIndividual>" << endl;
+#endif
+    
+} //----- Fin de PrivateIndividual
 
 PrivateIndividual::~PrivateIndividual ( )
 {

@@ -14,6 +14,9 @@
 #include "Cleaner.h"
 #include "Sensor.h"
 #include "Attributes.h"
+#include "PrivateIndividual.h"
+#include "Results.h"
+
 
 using namespace std;
 //------------------------------------------------------------- Constantes
@@ -30,14 +33,18 @@ class ComputationAgent
 
 public:
 //----------------------------------------------------- MÃ©thodes publiques
+    // chargement des données
     void loadSensor(void);
+    void loadPrivateIndividual(void);
+
+
 
     // getter setter
-    unordered_map<int, Sensor>& getHmapIdSensor()
+    unordered_map<int, Sensor*>& getHmapIdSensor()
     {
         return hmapIdSensor;
     }
-    map<pair<double, double>, vector<Sensor>>& getMapCoordSensor()
+    map<pair<double, double>, vector<Sensor*>>& getMapCoordSensor()
     {
         return mapCoordSensor;
     }   
@@ -56,8 +63,13 @@ public:
 
 protected:
 //----------------------------------------------------- Attributs protégés
-    unordered_map<int, Sensor> hmapIdSensor;
-    map<pair<double, double>, vector<Sensor>> mapCoordSensor;
+    // stockage de base
+    unordered_map<int, Sensor*> hmapIdSensor;
+    unordered_map<int, PrivateIndividual*> hmapIdPrivateIndividual;
+
+    // lien - structure de données annexe
+    map<pair<double, double>, vector<Sensor*>> mapCoordSensor; 
+    unordered_map<int, Sensor*> hmapIdPrivateIndividualSensor; 
 
 };
 

@@ -29,11 +29,10 @@ User::User ()
 #ifdef MAP
     cout << "Appel au constructeur de <Catalogue>" << endl;
 #endif
-this->calculateur = ComputationAgent();
 
 } //----- Fin de User
 
-User::User(string email, string password, ComputationAgent calculateur)
+User::User(string email, string password, ComputationAgent *calculateur)
 {
 #ifdef MAP
     cout << "Appel au constructeur de <Catalogue>" << endl;

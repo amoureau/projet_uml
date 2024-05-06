@@ -41,7 +41,7 @@ public:
 //-------------------------------------------- Constructeurs - destructeur
 
     User ();
-    User(string email, string password, ComputationAgent calculateur);
+    User(string email, string password, ComputationAgent *calculateur);
 
     virtual ~User ( );
     // Mode d'emploi : Destructeur
@@ -52,7 +52,7 @@ public:
 //------------------------------------------------------------------ PRIVE
 
 protected:
-    ComputationAgent calculateur;
+    ComputationAgent *calculateur;
     string email;
     string password;
 //----------------------------------------------------- Méthodes protégées

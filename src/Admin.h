@@ -26,7 +26,7 @@ public:
 //-------------------------------------------- Constructeurs - destructeur
 
     Admin ();
-    Admin(string email, string password, ComputationAgent calculateur);
+    Admin(string email, string password, ComputationAgent *calculateur);
 
     virtual ~Admin ( );
     // Mode d'emploi : Destructeur

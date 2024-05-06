@@ -21,19 +21,23 @@ int main(void)
     ComputationAgent calculateur;
 
     /* Création des structures de données */
+    // Sensor
     calculateur.loadSensor();
+    // Private individual
+
 
     /* Création de l'utilisateur */
-    User admin = Admin("toto.samain@insa-lyon.fr", "password", calculateur);
+    User admin = Admin("toto.samain@insa-lyon.fr", "password", &calculateur);
 
 
     /* Affichage des données récupérées */
-    unordered_map<int, Sensor> &sensors = calculateur.getHmapIdSensor();
-    map<pair<double, double>, vector<Sensor>> &sensors2 = calculateur.getMapCoordSensor();
+    // Sensor:
+    unordered_map<int, Sensor*> &sensors = calculateur.getHmapIdSensor();
+    map<pair<double, double>, vector<Sensor*>> &sensors2 = calculateur.getMapCoordSensor();
     int nbSensors = sensors.size();
     cout << "Liste des capteurs : " << endl;
     for (auto sensor : sensors) {
-        cout << "id: " << sensor.first << " Sensor: " << sensor.second << endl;
+        cout << "id: " << sensor.first << " Sensor: " << *sensor.second << endl;
     }
     cout << "Nombre de capteurs : " << nbSensors << endl;
 
@@ -41,7 +45,7 @@ int main(void)
     for (auto sensor : sensors2) {
         cout << "lat: " << sensor.first.first << " long: " << sensor.first.second << " Sensors: ";
         for (auto s : sensor.second) {
-            cout << s << " ";
+            cout << *s << " ";
         }
         cout << endl;
     }
