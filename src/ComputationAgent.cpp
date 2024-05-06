@@ -15,84 +15,10 @@ using namespace std;
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-void ComputationAgent::loadSensor(void)
+void ComputationAgent::loadData(void)
 {
-
-    // chemins acces fichiers:
-    string fichierCSV = "dataset/sensors.csv";
-    ifstream fichier(fichierCSV);
-    if (!fichier) {
-        cerr << "Erreur : impossible d'ouvrir le fichier " << fichierCSV <<  endl;
-        exit(1);
-    }
-
-    string ligne;
-    while (getline(fichier, ligne)) {
-        istringstream iss(ligne);
-        
-
-        int id;
-        double latitude;
-        double longitude;
-        string valeur;
-
-        // Lecture des valeurs séparées par des virgules
-        getline(iss, valeur, ';');
-
-        size_t pos = valeur.find_first_of("0123456789");
-        valeur = valeur.substr(pos, valeur.size());
-
-        id = stoi(valeur);
-        getline(iss, valeur, ';');
-        latitude = stod(valeur);
-        getline(iss, valeur, ';');
-        longitude = stod(valeur);
-
-        Sensor* sensor = new Sensor(id, latitude, longitude);
-        hmapIdSensor[id] = sensor;
-        mapCoordSensor[make_pair(latitude, longitude)].push_back(sensor);
-    }
-}
-
-void ComputationAgent::loadPrivateIndividual(void)
-{
-    // chemins acces fichiers:
-    string fichierCSV = "dataset/private_individuals.csv";
-    ifstream fichier(fichierCSV);
-    if (!fichier) {
-        cerr << "Erreur : impossible d'ouvrir le fichier " << fichierCSV <<  endl;
-        exit(1);
-    }
-
-    string ligne;
-    while (getline(fichier, ligne)) {
-        istringstream iss(ligne);
-        
-
-        int idPrivateIndividual;
-        int idSensor;
-        string valeur;
-
-        // Lecture des valeurs séparées par des virgules
-
-        getline(iss, valeur, ';');
-        size_t pos = valeur.find_first_of("0123456789");
-        valeur = valeur.substr(pos, valeur.size());
-        idPrivateIndividual = stoi(valeur);
-
-        getline(iss, valeur, ';');
-        pos = valeur.find_first_of("0123456789");
-        valeur = valeur.substr(pos, valeur.size());
-        idSensor = stoi(valeur);
-
-        Sensor *sensor = hmapIdSensor[idSensor]; // ..?????p,sqfdsqf checker si c'est pas nul
-        PrivateIndividual *privateIndividual = new PrivateIndividual(idPrivateIndividual, sensor);
-        hmapIdPrivateIndividual[idPrivateIndividual] = privateIndividual;
-        hmapIdPrivateIndividualSensor[idPrivateIndividual] = sensor;
-
-
-        
-    }
+    loadSensor();
+    loadPrivateIndividual();
 }
 
 
@@ -144,3 +70,82 @@ ComputationAgent::~ComputationAgent ( )
 
 //----------------------------------------------------- Méthodes protégées
 
+void ComputationAgent::loadSensor(void)
+{
+
+    // chemins acces fichiers:
+    string fichierCSV = "dataset/sensors.csv";
+    ifstream fichier(fichierCSV);
+    if (!fichier) {
+        cerr << "Erreur : impossible d'ouvrir le fichier " << fichierCSV <<  endl;
+        exit(1);
+    }
+
+    string ligne;
+    while (getline(fichier, ligne)) {
+        istringstream iss(ligne);
+        
+
+        int id;
+        double latitude;
+        double longitude;
+        string valeur;
+
+        // Lecture des valeurs séparées par des virgules
+        getline(iss, valeur, ';');
+
+        size_t pos = valeur.find_first_of("0123456789");
+        valeur = valeur.substr(pos, valeur.size());
+
+        id = stoi(valeur);
+        getline(iss, valeur, ';');
+        latitude = stod(valeur);
+        getline(iss, valeur, ';');
+        longitude = stod(valeur);
+
+        Sensor* sensor = new Sensor(id, latitude, longitude);
+        hmapIdSensor[id] = sensor;
+        mapCoordSensor[make_pair(latitude, longitude)].push_back(sensor);
+    }
+}
+
+void ComputationAgent::loadPrivateIndividual(void)
+{
+    // chemins acces fichiers:
+    string fichierCSV = "dataset/users.csv";
+    ifstream fichier(fichierCSV);
+    if (!fichier) {
+        cerr << "Erreur : impossible d'ouvrir le fichier " << fichierCSV <<  endl;
+        exit(1);
+    }
+
+    string ligne;
+    while (getline(fichier, ligne)) {
+        istringstream iss(ligne);
+        
+
+        int idPrivateIndividual;
+        int idSensor;
+        string valeur;
+
+        // Lecture des valeurs séparées par des virgules
+
+        getline(iss, valeur, ';');
+        size_t pos = valeur.find_first_of("0123456789");
+        valeur = valeur.substr(pos, valeur.size());
+        idPrivateIndividual = stoi(valeur);
+
+        getline(iss, valeur, ';');
+        pos = valeur.find_first_of("0123456789");
+        valeur = valeur.substr(pos, valeur.size());
+        idSensor = stoi(valeur);
+
+        Sensor *sensor = hmapIdSensor[idSensor]; // ..?????p,sqfdsqf checker si c'est pas nul
+        PrivateIndividual *privateIndividual = new PrivateIndividual(idPrivateIndividual, sensor);
+        hmapIdPrivateIndividual[idPrivateIndividual] = privateIndividual;
+        hmapIdPrivateIndividualSensor[idPrivateIndividual] = sensor;
+
+
+        
+    }
+}

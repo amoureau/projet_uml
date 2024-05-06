@@ -34,8 +34,8 @@ class ComputationAgent
 public:
 //----------------------------------------------------- MÃ©thodes publiques
     // chargement des données
-    void loadSensor(void);
-    void loadPrivateIndividual(void);
+    void loadData(void);
+    
 
 
 
@@ -70,6 +70,10 @@ protected:
     // lien - structure de données annexe
     map<pair<double, double>, vector<Sensor*>> mapCoordSensor; 
     unordered_map<int, Sensor*> hmapIdPrivateIndividualSensor; 
+
+private:
+    void loadSensor(void);
+    void loadPrivateIndividual(void);
 
 };
 

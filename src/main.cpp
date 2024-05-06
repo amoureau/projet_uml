@@ -21,9 +21,7 @@ int main(void)
     ComputationAgent calculateur;
 
     /* Création des structures de données */
-    // Sensor
-    calculateur.loadSensor();
-    // Private individual
+    calculateur.loadData();
 
 
     /* Création de l'utilisateur */
