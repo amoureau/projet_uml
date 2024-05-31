@@ -4,6 +4,7 @@
 
 //-------------------------------------------------------- Include système
 #include <string>
+#include <vector>
 #include <iostream>
 using namespace std;
 
@@ -22,7 +23,13 @@ void ComputationAgent::loadData(void)
     loadAttributes();
 }
 
+int ComputationAgent::ComputeMeanQuality(double latitude, double longitude, double radius, TimeStamp startTime, TimeStamp endTime)
+{
+    vector<string> listeAttributs = ["O3", "NO2", "PM10", "SO2"];
+    vector<int> listeMoyennes = [0, 0, 0, 0];
+    int indiceAtmo = 0;
 
+}
 
 //------------------------------------------------- Surcharge d'opérateurs
 
