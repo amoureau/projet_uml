@@ -33,7 +33,6 @@ public:
 
     Results ();
 
-    virtual ~Results ();
 
     virtual ~Results ( ){}
 
