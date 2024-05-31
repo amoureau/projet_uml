@@ -97,15 +97,21 @@ bool ComputationAgent::ComputeSensorAnalysed(int sensorId, double areaRadius) {
 double ComputationAgent::ComputeMeanForAnAttribute ( double latitude, double longitude, string &attribute, double radius, Timestamp startTime, Timestamp endTime) {
     double moyenne = 0;
     Attributes attributes = *(hmapAttributes[attribute]);
+
     for (Measurement *me : vecteurMeasurements) {
         Timestamp mesureTime = me->getDate();
         Sensor *sensor = me->getSensor();
+
+        cout << 123 << endl;
+        cout << me->getAttribute() << endl;
+        cout << attributes.getId() << endl;
 
         if ( me->getAttribute()->getId() == attributes.getId() ) {
             if ((( startTime < mesureTime  && mesureTime < endTime) || (startTime == 0 && endTime == 0))
                 && (calculateDistance(latitude, longitude, sensor->getLatitude(), sensor->getLongitude())))
             {
                 moyenne += me->getValue();
+                
             }
         }
     }
@@ -417,6 +423,7 @@ void ComputationAgent::loadAttributes(void)
             getline(iss, valeur, ';');
             unit = valeur;
             getline(iss, valeur, ';');
+            description = valeur;
 
             Attributes *att = new Attributes(idAttribute, unit, description);
             hmapAttributes[idAttribute] = att;
@@ -462,6 +469,9 @@ void ComputationAgent::loadMesurements(void)
 
         Sensor *sensor = hmapIdSensor[idSensor];
         Attributes *att = hmapDescriptionAttributes[description];
+
+        cout << hmapDescriptionAttributes[description]->getId() << endl;
+        
         Measurement *mes = new Measurement(value, date, sensor, att);
         vecteurMeasurements.push_back(mes);
     }

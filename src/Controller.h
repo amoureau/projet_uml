@@ -44,6 +44,8 @@ class Controller
 
         // fin affichage
 
+        void testComputeSensorAnalysed();
+
         Controller();
         virtual ~Controller ( );
 
