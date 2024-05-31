@@ -10,12 +10,17 @@ using namespace std;
 
 //------------------------------------------------------ Include personnel
 #include "Results.h"
-#include "Controller.h"
-#include "Timestamp.h"
 
 //------------------------------------------------------------- Constantes
 
 //----------------------------------------------------------------- PUBLIC
+void Results::GreetingsUser(User user) 
+{
+    string email = user.getEmail();
+    string prenom = email.substr(0, email.find('.'));
+    cout << "Bonjour " << prenom << " !" << endl;
+}
+
 Results::Results ()
 {
 #ifdef MAP
@@ -30,3 +35,4 @@ Results::~Results ()
     cout << "Appel au destructeur de <Results>" << endl;
 #endif
 }
+

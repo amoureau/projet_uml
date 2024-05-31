@@ -6,8 +6,9 @@
 #include <string>
 #include <iostream>
 #include "Controller.h"
+#include "Timestamp.h"
 
-
+class Controller;
 using namespace std;
 //------------------------------------------------------------- Constantes
 
