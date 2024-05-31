@@ -4,6 +4,9 @@
 
 //--------------------------------------------------- Interfaces utilisÃ©es
 #include <string>
+#include <iostream>
+#include "PrivateIndividual.h"
+
 using namespace std;
 //------------------------------------------------------------- Constantes
 
@@ -19,18 +22,24 @@ class Sensor
 
 public:
 //----------------------------------------------------- MÃ©thodes publiques
-    int getId() const;
-    double getLatitude() const;
-    double getLongitude() const;
+    // getter:
+    int getId() const { return id; }
+    double getLatitude() const { return latitude; }
+    double getLongitude() const { return longitude; }
+    const PrivateIndividual* getPrivateIndividual() const { return privateIndividual; }
+
+    // setter
+    void setPrivateIndividual(const PrivateIndividual* privateIndividual) { this->privateIndividual = privateIndividual; }
+
+
 
 
 //------------------------------------------------- Surcharge d'opÃ©rateurs
-    friend ostream &operator<<(ostream &os, const Sensor &sensor)
+    friend ostream& operator<<(ostream& os, const Sensor& sensor)
     {
-        os << "Sensor " << sensor.id << " : " << sensor.latitude << " " << sensor.longitude;
+        os << "Sensor " << sensor.id << " : " << sensor.latitude << " " << sensor.longitude << " " << sensor.privateIndividual->getId();
         return os;
     }
-    
 
 //-------------------------------------------- Constructeurs - destructeur
 
@@ -39,7 +48,7 @@ public:
 
     Sensor ();
     Sensor(const Sensor& unSensor); // constructeur de copie
-    Sensor(int id, double latitude, double longitude);
+    Sensor(int id, double latitude, double longitude, const PrivateIndividual* privateIndividual);
     virtual ~Sensor ( );
 
 
@@ -50,7 +59,7 @@ protected:
     int id;
     double latitude;
     double longitude;
-
+    const PrivateIndividual* privateIndividual;
 };
 
 //-------------------------------- Autres définitions dépendantes

@@ -5,8 +5,6 @@
 //--------------------------------------------------- Interfaces utilisÃ©es
 #include <string>
 
-#include "Sensor.h"
-
 using namespace std;
 //------------------------------------------------------------- Constantes
 
@@ -23,14 +21,24 @@ class PrivateIndividual
 public:
 //----------------------------------------------------- MÃ©thodes publiques
 
+// setter getter
+    int getId() const { return id; }
+    void setId(int id) { this->id = id; }
+
 //------------------------------------------------- Surcharge d'opÃ©rateurs
+
+    friend ostream& operator<<(ostream& os, const PrivateIndividual& privateIndividual)
+    {
+        os << "PrivateIndividual " << privateIndividual.id;
+        return os;
+    }
 
 //-------------------------------------------- Constructeurs - destructeur
 
     PrivateIndividual ();
     
     PrivateIndividual(const PrivateIndividual& unPrivateIndividual); // constructeur de copie
-    PrivateIndividual(int id, Sensor *sensor);
+    PrivateIndividual(int id);
 
     virtual ~PrivateIndividual ( );
     // Mode d'emploi : Destructeur
@@ -43,7 +51,6 @@ public:
 protected:
 //----------------------------------------------------- Méthodes protégées
     int id;
-    const Sensor* sensor;
 
 
 //----------------------------------------------------- Attributs protégés
