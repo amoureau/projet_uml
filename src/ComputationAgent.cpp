@@ -33,7 +33,7 @@ void ComputationAgent::loadData(void)
     loadProvider();
     loadCleaner();
 }
-/*
+
 int ComputationAgent::ComputeMeanQuality(double latitude, double longitude, double radius, Timestamp startTime, Timestamp endTime)
 {
      vector<string> listeAttributs = {"O3", "NO2", "PM10", "SO2"};
@@ -57,8 +57,126 @@ int ComputationAgent::ComputeMeanQuality(double latitude, double longitude, doub
 
     return indiceAtmo;
 }
-*/
 
+int ComputationAgent::indiceCorrespondingToMean(string attribut, double moyenne)
+{
+    if (attribut == "O3") {
+        if (moyenne <= 29) {
+            return 1;
+        }
+        else if (moyenne <= 54) {
+            return 2;
+        }
+        else if (moyenne <= 79) {
+            return 3;
+        }
+        else if (moyenne <= 104) {
+            return 4;
+        }
+        else if (moyenne <= 129) {
+            return 5;
+        }
+        else if (moyenne <= 149) {
+            return 6;
+        }
+        else if (moyenne <= 179) {
+            return 7;
+        }
+        else if (moyenne <= 209) {
+            return 8;
+        }
+        else if (moyenne <= 239) {
+            return 9;
+        }
+        else {
+            return 10;
+        }
+    }
+    else if (attribut == "NO2") {
+        if (moyenne <= 29) {
+            return 1;
+        }
+        else if (moyenne <= 54) {
+            return 2;
+        }
+        else if (moyenne <= 84) {
+            return 3;
+        }
+        else if (moyenne <= 109) {
+            return 4;
+        }
+        else if (moyenne <= 134) {
+            return 5;
+        }
+        else if (moyenne <= 164) {
+            return 6;
+        }
+        else if (moyenne <= 199) {
+            return 7;
+        }
+        else if (moyenne <= 274) {
+            return 8;
+        }
+        else if (moyenne <= 399) {
+            return 9;
+        }
+        else {
+            return 10;
+        }
+    }
+    else if (attribut == "PM10") {
+        if (moyenne <= 6) {
+            return 1;
+        }
+        else if (moyenne <= 13) {
+            return 2;
+        }
+        else if (moyenne <= 20) {
+            return 3;
+        }
+        else if (moyenne <= 27) {
+            return 4;
+        }
+        else if (moyenne <= 34) {
+            return 5;
+        }
+    }
+    else if (attribut == "SO2") {
+        if (moyenne <= 39) {
+            return 1;
+        }
+        else if (moyenne <= 79) {
+            return 2;
+        }
+        else if (moyenne <= 119) {
+            return 3;
+        }
+        else if (moyenne <= 159) {
+            return 4;
+        }
+        else if (moyenne <= 199) {
+            return 5;
+        }
+        else if (moyenne <= 249) {
+            return 6;
+        }
+        else if (moyenne <= 299) {
+            return 7;
+        }
+        else if (moyenne <= 399) {
+            return 8;
+        }
+        else if (moyenne <= 499) {
+            return 9;
+        }
+        else {
+            return 10;
+        }
+    }
+    else {
+        return 0;
+    }
+}
 
 //------------------------------------------------- Surcharge d'opérateurs
 
