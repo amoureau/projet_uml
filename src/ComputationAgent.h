@@ -16,7 +16,7 @@
 #include "Attributes.h"
 #include "PrivateIndividual.h"
 #include "Results.h"
-#include "TimeStamp.h"
+#include "Timestamp.h"
 
 using namespace std;
 //------------------------------------------------------------- Constantes
@@ -36,7 +36,7 @@ public:
     // chargement des données
     void loadData(void);
     
-    int ComputeMeanQuality(double latitude, double longitude, double radius, TimeStamp startTime, TimeStamp endTime);
+    int ComputeMeanQuality(double latitude, double longitude, double radius, Timestamp startTime, Timestamp endTime);
 
 
     // getter setter
