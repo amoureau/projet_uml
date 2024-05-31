@@ -4,11 +4,13 @@
 
 //-------------------------------------------------------- Include système
 #include <string>
+#include <vector>
 #include <iostream>
 using namespace std;
 
 //------------------------------------------------------ Include personnel
 #include "ComputationAgent.h"
+#include "Timestamp.h"
 
 //------------------------------------------------------------- Constantes
 
@@ -23,7 +25,13 @@ void ComputationAgent::loadData(void)
     loadMesurements();
 }
 
+int ComputationAgent::ComputeMeanQuality(double latitude, double longitude, double radius, Timestamp startTime, Timestamp endTime)
+{
+    vector<string> listeAttributs = {"O3", "NO2", "PM10", "SO2"};
+    vector<int> listeMoyennes = {0, 0, 0, 0};
+    int indiceAtmo = 0;
 
+}
 
 //------------------------------------------------- Surcharge d'opérateurs
 
