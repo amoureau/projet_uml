@@ -40,8 +40,8 @@ Class Provider{
 +list<pair<string, double>> ComputeCleanerImprovement(double lat, double long)
 }
 
-Class Private{
--int idPrivate
+Class PrivateIndividual{
+-int id
 
 'Particuliers
 +double ComputeAwardConsultation(int idPrivate)
@@ -60,7 +60,7 @@ Class Admin{
 +double ComputeAwardConsultation(int idPrivate)
 }
 
-Private--|> User
+PrivateIndividual--|> User
 Provider--|> User
 Admin--|> User
 Government--|> User
@@ -77,7 +77,7 @@ Class Cleaner{
 
 
 Class Attributes{
--int id
+-string id
 -String unit
 -String description
 }
@@ -95,10 +95,15 @@ Class Sensor{
 
 
 Class ComputationAgent{
--List<Measurement> listMeasurements
--List<Cleaner> listCleaners
--List<Sensor> listSensors
--List<Attributes> listAttributes
+-unordered_map<int, Sensor*> hmapIdSensor
+-unordered_map<int, PrivateIndividual*> hmapIdPrivateIndividual
+-map<pair<double, double>, vector<Sensor*>> mapCoordSensor
+-unordered_map<int, PrivateIndividual*> hmapIdSensorPrivateIndividual
+
+'Data loading
++void loadData(void)
+-void loadSensor(void)
+-void loadPrivateIndividual(void)
 
 'Communes
 +double ComputeMeanQualityCircle(double lat, double long, string start, string end)
@@ -160,7 +165,7 @@ Class Orchestra{
 
 Measurement "0.n" --> "1" Attributes : type of gaz (attributes id)
 Measurement "0.n" -->  "1" Sensor : is the result of
-Sensor "n" -->  "0.1" Private : is owned by
+Sensor "n" -->  "0.1" PrivateIndividual : is owned by
 Cleaner "0.n" --> "1" Provider : has been provide by
 
 User "1" --> "1" ComputationAgent : Uses

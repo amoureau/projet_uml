@@ -26,10 +26,7 @@ public:
 //-------------------------------------------- Constructeurs - destructeur
 
     Admin ();
-    // Mode d'emploi : Constructeur par défaut
-    //
-    // Contrat :
-    //
+    Admin(string email, string password, ComputationAgent *calculateur);
 
     virtual ~Admin ( );
     // Mode d'emploi : Destructeur

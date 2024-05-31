@@ -4,6 +4,9 @@
 
 //--------------------------------------------------- Interfaces utilisÃ©es
 #include <string>
+
+#include "Sensor.h"
+
 using namespace std;
 //------------------------------------------------------------- Constantes
 
@@ -25,10 +28,9 @@ public:
 //-------------------------------------------- Constructeurs - destructeur
 
     PrivateIndividual ();
-    // Mode d'emploi : Constructeur par défaut
-    //
-    // Contrat :
-    //
+    
+    PrivateIndividual(const PrivateIndividual& unPrivateIndividual); // constructeur de copie
+    PrivateIndividual(int id, Sensor *sensor);
 
     virtual ~PrivateIndividual ( );
     // Mode d'emploi : Destructeur
@@ -40,6 +42,9 @@ public:
 
 protected:
 //----------------------------------------------------- Méthodes protégées
+    int id;
+    const Sensor* sensor;
+
 
 //----------------------------------------------------- Attributs protégés
 

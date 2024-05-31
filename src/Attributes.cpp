@@ -1,4 +1,4 @@
-//---------- Réalisation de la classe <ComputationAgent> (fichier ComputationAgent.cpp) ------------
+//---------- Réalisation de la classe <Attributes> (fichier Attributes.cpp) ------------
 
 //---------------------------------------------------------------- INCLUDE
 
@@ -8,7 +8,7 @@
 using namespace std;
 
 //------------------------------------------------------ Include personnel
-#include "ComputationAgent.h"
+#include "Attributes.h"
 
 //------------------------------------------------------------- Constantes
 
@@ -24,22 +24,29 @@ using namespace std;
 
 //-------------------------------------------- Constructeurs - destructeur
 
-ComputationAgent::ComputationAgent ()
+Attributes::Attributes ()
 {
 #ifdef MAP
-    cout << "Appel au constructeur de <ComputationAgent>" << endl;
+    cout << "Appel au constructeur de <Attributes>" << endl;
 #endif
 
-} //----- Fin de ComputationAgent
+} //----- Fin de Attributes
 
-
-ComputationAgent::~ComputationAgent ( )
+Attributes::Attributes (string id, string unit, string description) : id(id), unit(unit), description(description)
 {
 #ifdef MAP
-    cout << "Appel au destructeur de <ComputationAgent>" << endl;
+    cout << "Appel au constructeur de <Attributes>" << endl;
 #endif
 
-} //----- Fin de ~ComputationAgent
+} 
+
+Attributes::~Attributes ( )
+{
+#ifdef MAP
+    cout << "Appel au destructeur de <Attributes>" << endl;
+#endif
+
+} //----- Fin de ~Attributes
 
 
 //------------------------------------------------------------------ PRIVE

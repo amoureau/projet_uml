@@ -1,12 +1,10 @@
-//---------- Interface de la classe <User> (fichier User.h) ----------------
-#if ! defined ( USER_H )
-#define USER_H
+//---------- Interface de la classe <Cleaner> (fichier Cleaner.h)  ----------------
+#if ! defined ( CLEANER_H )
+#define CLEANER_H
 
 //--------------------------------------------------- Interfaces utilisÃ©es
 #include <string>
-
-#include "ComputationAgent.h"
-
+#include "Timestamp.h"
 using namespace std;
 //------------------------------------------------------------- Constantes
 
@@ -16,25 +14,27 @@ using namespace std;
 // Rôle de la classe 
 //------------------------------------------------------------------------
 
-class User 
+class Cleaner 
 {
 //----------------------------------------------------------------- PUBLIC
 
 public:
 //----------------------------------------------------- MÃ©thodes publiques
-    double ComputeMeanQualityCircle(double latitude, double longitude, string start, string end);
 
 //------------------------------------------------- Surcharge d'opÃ©rateurs
 
 //-------------------------------------------- Constructeurs - destructeur
 
-    User ();
+    Cleaner ();
     // Mode d'emploi : Constructeur par défaut
     //
     // Contrat :
     //
 
-    virtual ~User ( );
+    Cleaner(double latitude, double longitude, Timestamp dateStart, Timestamp dateEnd);
+    // Mode d'emploi : Constructeur
+
+    virtual ~Cleaner ( );
     // Mode d'emploi : Destructeur
     //
     // Contrat :
@@ -43,11 +43,13 @@ public:
 //------------------------------------------------------------------ PRIVE
 
 protected:
-    ComputationAgent calculateur;
 //----------------------------------------------------- Méthodes protégées
 
 //----------------------------------------------------- Attributs protégés
-
+    double latitude;
+    double longitude;
+    Timestamp dateStart;
+    Timestamp dateEnd;
 };
 
 //-------------------------------- Autres définitions dépendantes

@@ -1,9 +1,19 @@
-//---------- Interface de la classe <Attributes> (fichier Attributes.h) ----------------
-#if ! defined ( ATTRIBUTES_H )
-#define ATTRIBUTES_H
+//---------- Interface de la classe <User> (fichier User.h) ----------------
+#if ! defined ( USER_H )
+#define USER_H
 
 //--------------------------------------------------- Interfaces utilisÃ©es
 #include <string>
+#include <vector>
+#include <unordered_map>
+#include <map>
+#include <iostream>
+
+
+#include "ComputationAgent.h"
+#include "Sensor.h"
+#include "Timestamp.h"
+
 using namespace std;
 //------------------------------------------------------------- Constantes
 
@@ -13,26 +23,27 @@ using namespace std;
 // Rôle de la classe 
 //------------------------------------------------------------------------
 
-class Attributes 
+class User 
 {
 //----------------------------------------------------------------- PUBLIC
 
 public:
 //----------------------------------------------------- MÃ©thodes publiques
+    double ComputeMeanQualityCircle(double latitude, double longitude, string start, string end);
+    double ComputeWorstQualityDate(Timestamp date);
+    pair<double, double>ComputeMaxSurfaceQuality(void);
+    double ComputeQualityLocDate(double latitude, double longitude, Timestamp start, Timestamp end);
+    map<int, pair<double,double>>ComputeRankedScoredSensor(int idSensor);
 
 //------------------------------------------------- Surcharge d'opÃ©rateurs
 
+
 //-------------------------------------------- Constructeurs - destructeur
 
-    Attributes ();
-    // Mode d'emploi : Constructeur par défaut
-    //
-    // Contrat :
-    //
+    User ();
+    User(string email, string password, ComputationAgent *calculateur);
 
-    Attributes(int id, string unit, string description);
-
-    virtual ~Attributes ( );
+    virtual ~User ( );
     // Mode d'emploi : Destructeur
     //
     // Contrat :
@@ -41,12 +52,13 @@ public:
 //------------------------------------------------------------------ PRIVE
 
 protected:
+    ComputationAgent *calculateur;
+    string email;
+    string password;
 //----------------------------------------------------- Méthodes protégées
 
 //----------------------------------------------------- Attributs protégés
-    int id;
-    string unit;
-    string description;
+
 };
 
 //-------------------------------- Autres définitions dépendantes

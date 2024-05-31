@@ -1,14 +1,15 @@
-//---------- Réalisation de la classe <Admin> (fichier Admin.cpp) ------------
+//---------- Réalisation de la classe <Cleaner> (fichier Cleaner.cpp) ------------
 
 //---------------------------------------------------------------- INCLUDE
 
 //-------------------------------------------------------- Include système
 #include <string>
-#include <iostream>
 using namespace std;
 
 //------------------------------------------------------ Include personnel
-#include "Admin.h"
+
+#include "Cleaner.h"
+
 
 //------------------------------------------------------------- Constantes
 
@@ -24,22 +25,29 @@ using namespace std;
 
 //-------------------------------------------- Constructeurs - destructeur
 
-Admin::Admin ()
+Cleaner::Cleaner ()
 {
 #ifdef MAP
-    cout << "Appel au constructeur de <Admin>" << endl;
+    cout << "Appel au constructeur de <Cleaner>" << endl;
 #endif
 
-} //----- Fin de Admin
+} //----- Fin de Cleaner
 
+Cleaner::Cleaner(double latitude, double longitude, Timestamp dateStart, Timestamp dateEnd)
+{
+    this->latitude = latitude;
+    this->longitude = longitude;
+    this->dateStart = dateStart;
+    this->dateEnd = dateEnd;
+}
 
-Admin::~Admin ( )
+Cleaner::~Cleaner ( )
 {
 #ifdef MAP
-    cout << "Appel au destructeur de <Admin>" << endl;
+    cout << "Appel au destructeur de <Cleaner>" << endl;
 #endif
 
-} //----- Fin de ~Admin
+} //----- Fin de ~Cleaner
 
 
 //------------------------------------------------------------------ PRIVE

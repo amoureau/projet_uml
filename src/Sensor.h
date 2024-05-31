@@ -1,6 +1,6 @@
-//---------- Interface de la classe <Measurement> (fichier Measurement.h) ----------------
-#if ! defined ( MEASUREMENT_H )
-#define MEASUREMENT_H
+//---------- Interface de la classe <Sensor> (fichier Sensor.h) ----------------
+#if ! defined ( SENSOR_H )
+#define SENSOR_H
 
 //--------------------------------------------------- Interfaces utilisÃ©es
 #include <string>
@@ -13,44 +13,43 @@ using namespace std;
 // Rôle de la classe 
 //------------------------------------------------------------------------
 
-class Measurement
+class Sensor 
 {
 //----------------------------------------------------------------- PUBLIC
 
 public:
 //----------------------------------------------------- MÃ©thodes publiques
-    double getValue() const;
-    string getDate() const;
-    Sensor getSensor() const;
-    Attributes getAttributes() const;
+    int getId() const;
+    double getLatitude() const;
+    double getLongitude() const;
+
+
 //------------------------------------------------- Surcharge d'opÃ©rateurs
+    friend ostream &operator<<(ostream &os, const Sensor &sensor)
+    {
+        os << "Sensor " << sensor.id << " : " << sensor.latitude << " " << sensor.longitude;
+        return os;
+    }
+    
 
 //-------------------------------------------- Constructeurs - destructeur
 
-    Measurement ();
-    // Mode d'emploi : Constructeur par défaut
-    //
-    // Contrat :
-    //
+    
 
-    Measurement (double value, string date);
-    // Mode d'emploi : Constructeur par défaut
-    //
-    // Contrat :
-    //
 
-    virtual ~Measurement ( );
-    // Mode d'emploi : Destructeur
-    //
-    // Contrat :
-    //
+    Sensor ();
+    Sensor(const Sensor& unSensor); // constructeur de copie
+    Sensor(int id, double latitude, double longitude);
+    virtual ~Sensor ( );
+
 
 //------------------------------------------------------------------ PRIVE
 
 protected:
-//----------------------------------------------------- Méthodes protégées
-
 //----------------------------------------------------- Attributs protégés
+    int id;
+    double latitude;
+    double longitude;
 
 };
 

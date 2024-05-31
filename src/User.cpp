@@ -1,4 +1,4 @@
-//---------- Réalisation de la classe <Attributes> (fichier Attributes.cpp) ------------
+//---------- RÃ©alisation de la classe <User> (fichier User.cpp) ------------
 
 //---------------------------------------------------------------- INCLUDE
 
@@ -8,7 +8,7 @@
 using namespace std;
 
 //------------------------------------------------------ Include personnel
-#include "Attributes.h"
+#include "User.h"
 
 //------------------------------------------------------------- Constantes
 
@@ -24,31 +24,35 @@ using namespace std;
 
 //-------------------------------------------- Constructeurs - destructeur
 
-Attributes::Attributes ()
+User::User ()
 {
 #ifdef MAP
-    cout << "Appel au constructeur de <Attributes>" << endl;
+    cout << "Appel au constructeur de <Catalogue>" << endl;
 #endif
 
-} //----- Fin de Attributes
+} //----- Fin de User
 
-Attributes::Attributes (int id, string unit, string description) : id(id), unit(unit), description(description)
+User::User(string email, string password, ComputationAgent *calculateur)
 {
 #ifdef MAP
-    cout << "Appel au constructeur de <Attributes>" << endl;
+    cout << "Appel au constructeur de <Catalogue>" << endl;
 #endif
+this->email = email;
+this->password = password;
+this->calculateur = calculateur;
 
-} 
+} //----- Fin de User
 
-Attributes::~Attributes ( )
+
+User::~User ( )
 {
 #ifdef MAP
-    cout << "Appel au destructeur de <Attributes>" << endl;
+    cout << "Appel au destructeur de <Catalogue>" << endl;
 #endif
 
-} //----- Fin de ~Attributes
+} //----- Fin de ~User
 
 
 //------------------------------------------------------------------ PRIVE
 
-//----------------------------------------------------- Méthodes protégées
+//----------------------------------------------------- MÃ©thodes protégées

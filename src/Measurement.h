@@ -1,9 +1,12 @@
-//---------- Interface de la classe <Sensor> (fichier Sensor.h) ----------------
-#if ! defined ( SENSOR_H )
-#define SENSOR_H
+//---------- Interface de la classe <Measurement> (fichier Measurement.h) ----------------
+#if ! defined ( MEASUREMENT_H )
+#define MEASUREMENT_H
 
 //--------------------------------------------------- Interfaces utilisÃ©es
 #include <string>
+#include "Timestamp.h"
+#include "Sensor.h"
+#include "Attributes.h"
 using namespace std;
 //------------------------------------------------------------- Constantes
 
@@ -13,32 +16,41 @@ using namespace std;
 // Rôle de la classe 
 //------------------------------------------------------------------------
 
-class Sensor 
+class Measurement
 {
 //----------------------------------------------------------------- PUBLIC
 
 public:
 //----------------------------------------------------- MÃ©thodes publiques
-
+    Timestamp getDate() const {
+        return date;
+    }
+    Attributes* getAttribute() const {
+        return attribute;
+    }
+    Sensor* getSensor() const {
+        return sensor;
+    }
+    double getValue() const {
+        return value;
+    }
 //------------------------------------------------- Surcharge d'opÃ©rateurs
 
 //-------------------------------------------- Constructeurs - destructeur
 
-    Sensor ();
-    Sensor(int id, double latitude, double longitude);
-
-    int getId() const;
-    double getLatitude() const;
-    double getLongitude() const;
-
+    Measurement ();
     // Mode d'emploi : Constructeur par défaut
     //
     // Contrat :
     //
 
-    Sensor(int id, double latitude, double longitude);
+    Measurement (double value, Timestamp date, Sensor* sensor, Attributes* attribute);
+    // Mode d'emploi : Constructeur par défaut
+    //
+    // Contrat :
+    //
 
-    virtual ~Sensor ( );
+    virtual ~Measurement ( );
     // Mode d'emploi : Destructeur
     //
     // Contrat :
@@ -47,11 +59,13 @@ public:
 //------------------------------------------------------------------ PRIVE
 
 protected:
-//----------------------------------------------------- Attributs protégés
-    int id;
-    double latitude;
-    double longitude;
+//----------------------------------------------------- Méthodes protégées
 
+//----------------------------------------------------- Attributs protégés
+    double value;
+    Timestamp date;
+    Sensor* sensor;
+    Attributes* attribute;
 };
 
 //-------------------------------- Autres définitions dépendantes

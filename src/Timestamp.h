@@ -1,6 +1,11 @@
 #include <iostream>
+#include <string>
 #include <iomanip>
 #include <chrono>
+#include <sstream>
+
+#if ! defined ( TIMESTAMP_H )
+#define TIMESTAMP_H
 
 class Timestamp {
 private:
@@ -17,6 +22,11 @@ public:
         std::istringstream ss(date_str);
         ss >> std::get_time(&tm, "%Y-%m-%d %H:%M:%S");
         std::time_t time = std::mktime(&tm);
+        time_point = std::chrono::system_clock::from_time_t(time);
+    }
+
+    Timestamp(const long long num) {
+        std::time_t time = num;
         time_point = std::chrono::system_clock::from_time_t(time);
     }
 
@@ -43,3 +53,5 @@ public:
         return os;
     }
 };
+
+#endif // TIMESTAMP_H

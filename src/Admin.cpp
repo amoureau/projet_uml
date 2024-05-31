@@ -1,4 +1,4 @@
-//---------- RÃ©alisation de la classe <User> (fichier User.cpp) ------------
+//---------- Réalisation de la classe <Admin> (fichier Admin.cpp) ------------
 
 //---------------------------------------------------------------- INCLUDE
 
@@ -8,7 +8,7 @@
 using namespace std;
 
 //------------------------------------------------------ Include personnel
-#include "User.h"
+#include "Admin.h"
 
 //------------------------------------------------------------- Constantes
 
@@ -24,25 +24,32 @@ using namespace std;
 
 //-------------------------------------------- Constructeurs - destructeur
 
-User::User ()
+Admin::Admin ()
 {
 #ifdef MAP
-    cout << "Appel au constructeur de <Catalogue>" << endl;
+    cout << "Appel au constructeur de <Admin>" << endl;
 #endif
-this->calculateur = ComputationAgent();
 
-} //----- Fin de User
+} //----- Fin de Admin
 
-
-User::~User ( )
+Admin::Admin(string email, string password, ComputationAgent *calculateur) : User(email, password, calculateur)
 {
 #ifdef MAP
-    cout << "Appel au destructeur de <Catalogue>" << endl;
+    cout << "Appel au constructeur de <Admin>" << endl;
+#endif
+    
+} //----- Fin de Admin
+
+
+Admin::~Admin ( )
+{
+#ifdef MAP
+    cout << "Appel au destructeur de <Admin>" << endl;
 #endif
 
-} //----- Fin de ~User
+} //----- Fin de ~Admin
 
 
 //------------------------------------------------------------------ PRIVE
 
-//----------------------------------------------------- MÃ©thodes protégées
+//----------------------------------------------------- Méthodes protégées
