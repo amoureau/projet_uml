@@ -130,26 +130,7 @@ ComputationAgent::~ComputationAgent ( )
 //------------------------------------------------------------------ PRIVE
 
 //----------------------------------------------------- Méthodes protégées
-double ComputationAgent::ComputeMeanQualityForAnAttribute(double latitude, double longitude, string attribute, double radius, Timestamp startTime, Timestamp endTime)
-{
-    double moyenne = 0;
-    for (Measurement* mesure:vecteurMeasurements)
-    {
-        if (mesure->getDate() > startTime && mesure->getTimestamp() < endTime)
-        {
-            if (mesure->getSensor()->getLatitude() == latitude && mesure->getSensor()->getLongitude() == longitude)
-            {
-                if (mesure->getAttribute()->getIdAttribute() == attribute)
-                {
-                    moyenne += mesure->getValue();
-                }
-            }
-        }
-    }
 
-    return sum / count;
-
-}
 
 void ComputationAgent::loadSensor(void)
 {

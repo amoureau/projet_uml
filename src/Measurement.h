@@ -37,13 +37,6 @@ public:
 //------------------------------------------------- Surcharge d'opÃ©rateurs
 
 //-------------------------------------------- Constructeurs - destructeur
-    double getValue() const;
-
-    Timestamp getDate() const;
-
-    Sensor* getSensor() const;
-
-    Attributes* getAttribute() const;
 
     Measurement ();
     // Mode d'emploi : Constructeur par défaut
