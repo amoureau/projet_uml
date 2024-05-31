@@ -25,18 +25,16 @@ class Results
 public:
 //----------------------------------------------------- MÃ©thodes publiques
 
- 
-
 //------------------------------------------------- Surcharge d'opÃ©rateurs
 
 //-------------------------------------------- Constructeurs - destructeur
+    void GreetingsUser(User user);
+
+    string UserInput();
 
     Results ();
 
     virtual ~Results ();
-
-    virtual ~Results ( ){}
-
 
 //------------------------------------------------------------------ PRIVE
 
