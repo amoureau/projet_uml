@@ -52,6 +52,45 @@ public:
         os << std::put_time(&tm_out, "%Y-%m-%d %H:%M:%S");
         return os;
     }
+
+    // getter day minute second month year hour
+    int getDay() const {
+        std::time_t ttp = std::chrono::system_clock::to_time_t(time_point);
+        std::tm tm_out = *std::localtime(&ttp);
+        return tm_out.tm_mday;
+    }
+
+    int getMinute() const {
+        std::time_t ttp = std::chrono::system_clock::to_time_t(time_point);
+        std::tm tm_out = *std::localtime(&ttp);
+        return tm_out.tm_min;
+    }
+
+    int getSecond() const {
+        std::time_t ttp = std::chrono::system_clock::to_time_t(time_point);
+        std::tm tm_out = *std::localtime(&ttp);
+        return tm_out.tm_sec;
+    }
+
+    int getMonth() const {
+        std::time_t ttp = std::chrono::system_clock::to_time_t(time_point);
+        std::tm tm_out = *std::localtime(&ttp);
+        return tm_out.tm_mon + 1;
+    }
+
+    int getYear() const {
+        std::time_t ttp = std::chrono::system_clock::to_time_t(time_point);
+        std::tm tm_out = *std::localtime(&ttp);
+        return tm_out.tm_year + 1900;
+    }
+
+    int getHour() const {
+        std::time_t ttp = std::chrono::system_clock::to_time_t(time_point);
+        std::tm tm_out = *std::localtime(&ttp);
+        return tm_out.tm_hour;
+    }
+
+
 };
 
 #endif // TIMESTAMP_H

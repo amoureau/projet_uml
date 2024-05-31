@@ -5,7 +5,6 @@
 //--------------------------------------------------- Interfaces utilisÃ©es
 #include <string>
 #include <iostream>
-#include "Cleaner.h"
 using namespace std;
 //------------------------------------------------------------- Constantes
 
@@ -32,7 +31,11 @@ public:
     // Contrat :
     //
 
-    Provider(int idProvider, const Cleaner* cleaner);
+    // getter:
+    int getIdProvider() const { return idProvider; }
+
+
+    Provider(int idProvider);
     // Mode d'emploi : Constructeur
     
     virtual ~Provider ( );
@@ -47,7 +50,6 @@ protected:
 //----------------------------------------------------- Méthodes protégées
 //----------------------------------------------------- Attributs protégés
     int idProvider;
-    const Cleaner* cleaner;
 };
 
 //-------------------------------- Autres définitions dépendantes

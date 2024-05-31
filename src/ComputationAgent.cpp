@@ -16,6 +16,13 @@ using namespace std;
 
 //----------------------------------------------------------------- PUBLIC
 
+
+
+// setter getter +
+
+
+
+
 //----------------------------------------------------- Méthodes publiques
 void ComputationAgent::loadData(void)
 {
@@ -23,8 +30,8 @@ void ComputationAgent::loadData(void)
     loadPrivateIndividual();
     loadAttributes();
     loadMesurements();
-    loadCleaner();
     loadProvider();
+    loadCleaner();
 }
 /*
 int ComputationAgent::ComputeMeanQuality(double latitude, double longitude, double radius, Timestamp startTime, Timestamp endTime)
@@ -147,7 +154,7 @@ void ComputationAgent::loadSensor(void)
         getline(iss, valeur, ';');
         longitude = stod(valeur);
 
-        Sensor* sensor = new Sensor(id, latitude, longitude);
+        Sensor* sensor = new Sensor(id, latitude, longitude, nullptr);
         hmapIdSensor[id] = sensor;
         mapCoordSensor[make_pair(latitude, longitude)].push_back(sensor);
     }
@@ -184,8 +191,9 @@ void ComputationAgent::loadPrivateIndividual(void)
         valeur = valeur.substr(pos, valeur.size());
         idSensor = stoi(valeur);
 
-        Sensor *sensor = hmapIdSensor[idSensor]; // ..?????p,sqfdsqf checker si c'est pas nul
-        PrivateIndividual *privateIndividual = new PrivateIndividual(idPrivateIndividual, sensor);
+        Sensor *sensor = hmapIdSensor[idSensor];
+        PrivateIndividual *privateIndividual = new PrivateIndividual(idPrivateIndividual);
+        sensor->setPrivateIndividual(privateIndividual); // imprtatnt
         hmapIdPrivateIndividual[idPrivateIndividual] = privateIndividual;
         hmapIdSensorPrivateIndividual[idSensor] = privateIndividual;
 
@@ -313,7 +321,7 @@ void ComputationAgent::loadCleaner(void)
         getline(iss, valeur, ';');
         dateEnd = Timestamp(valeur);
 
-        Cleaner *cleaner = new Cleaner(idCleaner, latitude, longitude, dateStart, dateEnd);
+        Cleaner *cleaner = new Cleaner(idCleaner, latitude, longitude, dateStart, dateEnd, nullptr);
         this->hmapIdCleaner[idCleaner] = cleaner;
     }
 }
@@ -348,8 +356,9 @@ void ComputationAgent::loadProvider(void)
         valeur = valeur.substr(pos, valeur.size());
         idCleaner = stoi(valeur);
 
-        Cleaner *cleaner = this->hmapIdCleaner[idCleaner];
-        Provider *provider = new Provider(idProvider, cleaner);
+        Cleaner *cleaner = hmapIdCleaner[idCleaner];
+        Provider *provider = new Provider(idProvider);
+        cleaner->setProvider(provider);
         hmapIdProvider[idProvider] = provider;
 
     }
