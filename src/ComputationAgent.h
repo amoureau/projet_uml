@@ -36,23 +36,61 @@ public:
 //----------------------------------------------------- MÃ©thodes publiques
     // chargement des données
     void loadData(void);
-    
-    int ComputeMeanQuality(double latitude, double longitude, double radius, Timestamp startTime, Timestamp endTime);
 
-    int ComputeMeanQualityForAnAttribute(double latitude, double longitude, string attribut, double radius, Timestamp startTime, Timestamp endTime);
-
-    int ComputeMeanQuality(double latitude, double longitude, double radius, Timestamp startTime, Timestamp endTime);
 
 
     // getter setter
+
+    // stockage de base
+
     unordered_map<int, Sensor*>& getHmapIdSensor()
     {
         return hmapIdSensor;
     }
+    
+
+    unordered_map<int, PrivateIndividual*>& getHmapIdPrivateIndividual()
+    {
+        return hmapIdPrivateIndividual;
+    }
+
+    unordered_map<string, Attributes*>& getHmapAttributes()
+    {
+        return hmapAttributes;
+    }
+
+    vector<Measurement*>& getVecteurMeasurements()
+    {
+        return vecteurMeasurements;
+    }
+
+    unordered_map<int, Cleaner*>& getHmapIdCleaner()
+    {
+        return hmapIdCleaner;
+    }
+
+    unordered_map<int, Provider*>& getHmapIdProvider()
+    {
+        return hmapIdProvider;
+    }
+
+    // lien - structure de données annexe
+
+    unordered_map<int, PrivateIndividual*>& getHmapIdSensorPrivateIndividual()
+    {
+        return hmapIdSensorPrivateIndividual;
+    }   
+
+    unordered_map<string, Attributes*>& getHmapDescriptionAttributes()
+    {
+        return hmapDescriptionAttributes;
+    }
+
     map<pair<double, double>, vector<Sensor*>>& getMapCoordSensor()
     {
         return mapCoordSensor;
-    }   
+    }
+
 
 
 //------------------------------------------------- Surcharge d'opÃ©rateurs
@@ -73,7 +111,8 @@ protected:
     unordered_map<int, PrivateIndividual*> hmapIdPrivateIndividual;
     unordered_map<string, Attributes*> hmapAttributes;
     vector<Measurement*> vecteurMeasurements;
-    unoredred_map<int, Cleaner*> hmapIdCleaner;
+    unordered_map<int, Cleaner*> hmapIdCleaner;
+    unordered_map<int, Provider*> hmapIdProvider;
 
     // lien - structure de données annexe
     map<pair<double, double>, vector<Sensor*>> mapCoordSensor; 
@@ -86,6 +125,7 @@ private:
     void loadAttributes(void);
     void loadMesurements(void);
     void loadCleaner(void);
+    void loadProvider(void);
 
 };
 

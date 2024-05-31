@@ -24,6 +24,7 @@ void ComputationAgent::loadData(void)
     loadAttributes();
     loadMesurements();
     loadCleaner();
+    loadProvider();
 }
 /*
 int ComputationAgent::ComputeMeanQuality(double latitude, double longitude, double radius, Timestamp startTime, Timestamp endTime)
@@ -78,6 +79,16 @@ ComputationAgent::~ComputationAgent ( )
         delete mes;
     }
 
+    for(auto cleaner : hmapIdCleaner)
+    {
+        delete cleaner.second;
+    }
+
+    for(auto provider : hmapIdProvider)
+    {
+        delete provider.second;
+    }
+
 
 
 
@@ -86,6 +97,8 @@ ComputationAgent::~ComputationAgent ( )
     hmapIdPrivateIndividual.clear();
     hmapAttributes.clear();
     vecteurMeasurements.clear();
+    hmapIdCleaner.clear();
+    hmapIdProvider.clear();
 
 
     // lien - structure de données annexe
@@ -301,6 +314,43 @@ void loadCleaner(void)
         dateEnd = Timestamp(valeur);
 
         Cleaner *cleaner = new Cleaner(idCleaner, latitude, longitude, dateStart, dateEnd);
-        hmapIdCleaner[idCleaner] = cleaner;
+        this->hmapIdCleaner[idCleaner] = cleaner;
+    }
+}
+
+void loadProvider(void)
+{
+    // chemins acces fichiers:
+    string fichierCSV = "dataset/providers.csv";
+    ifstream fichier(fichierCSV);
+    if (!fichier) {
+        cerr << "Erreur : impossible d'ouvrir le fichier " << fichierCSV <<  endl;
+        exit(1);
+    }
+
+    string ligne;
+    while (getline(fichier, ligne)) {
+        istringstream iss(ligne);
+
+        int idProvider;
+        int idCleaner;
+
+        string valeur;
+        
+        // Lecture des valeurs séparées par des points virgules
+        getline(iss, valeur, ';');
+        size_t pos = valeur.find_first_of("0123456789");
+        valeur = valeur.substr(pos, valeur.size());
+        idProvider = stoi(valeur);
+
+        getline(iss, valeur, ';');
+        pos = valeur.find_first_of("0123456789");
+        valeur = valeur.substr(pos, valeur.size());
+        idCleaner = stoi(valeur);
+
+        Cleaner *cleaner = this->hmapIdCleaner[idCleaner];
+        Provider *provider = new Provider(idProvider, cleaner);
+        hmapIdProvider[idProvider] = provider;
+
     }
 }

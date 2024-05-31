@@ -31,7 +31,10 @@ Provider::Provider ()
 #endif
 } //----- Fin de Provider
 
-Provider::Provider(int idProvider) : idProvider(idProvider) {
+Provider::Provider(int idProvider, const Cleaner* cleaner)
+{
+    this->idProvider = idProvider;
+    this->cleaner = cleaner;
 #ifdef MAP
     cout << "Appel au constructeur de <Provider>" << endl;
 #endif  
