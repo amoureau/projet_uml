@@ -25,6 +25,11 @@ public:
         time_point = std::chrono::system_clock::from_time_t(time);
     }
 
+    Timestamp(const long long num) {
+        std::time_t time = num;
+        time_point = std::chrono::system_clock::from_time_t(time);
+    }
+
     // Overloaded operator <
     bool operator<(const Timestamp& other) const {
         return time_point < other.time_point;

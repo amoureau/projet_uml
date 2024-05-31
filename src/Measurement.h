@@ -22,7 +22,18 @@ class Measurement
 
 public:
 //----------------------------------------------------- MÃ©thodes publiques
-
+    Timestamp getDate() const {
+        return date;
+    }
+    Attributes* getAttribute() const {
+        return attribute;
+    }
+    Sensor* getSensor() const {
+        return sensor;
+    }
+    double getValue() const {
+        return value;
+    }
 //------------------------------------------------- Surcharge d'opÃ©rateurs
 
 //-------------------------------------------- Constructeurs - destructeur

@@ -19,6 +19,12 @@ class Attributes
 
 public:
 //----------------------------------------------------- MÃ©thodes publiques
+    string getDescription() const {
+        return description;
+    }
+    string getId() const {
+        return id;
+    }
 
 //------------------------------------------------- Surcharge d'opÃ©rateurs
 

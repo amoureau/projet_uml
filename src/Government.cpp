@@ -16,8 +16,6 @@ using namespace std;
 
 //----------------------------------------------------- Méthodes publiques
 
-
-
 //------------------------------------------------- Surcharge d'opérateurs
 
 
@@ -33,7 +31,7 @@ Government::Government ()
 } //----- Fin de Government
 
 
-Government::~Government ( )
+Government::~Government ()
 {
 #ifdef MAP
     cout << "Appel au destructeur de <Government>" << endl;
