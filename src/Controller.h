@@ -6,6 +6,7 @@
 #include "User.h"
 #include "Admin.h"
 #include "Results.h"
+class Results;
 
 
 

@@ -1,4 +1,4 @@
-//---------- Interface de la classe <Provider> (fichier Provider.h) ----------------
+//---------- Interface de la classe <Results> (fichier Results.h) ----------------
 #if ! defined ( RESULTS_H )
 #define RESULTS_H
 
@@ -6,6 +6,7 @@
 #include <string>
 #include <iostream>
 #include "Controller.h"
+#include "Timestamp.h"
 
 class Controller;
 using namespace std;
@@ -30,7 +31,9 @@ public:
 
 //-------------------------------------------- Constructeurs - destructeur
 
-    Results (){}
+    Results ();
+
+    virtual ~Results ();
 
     virtual ~Results ( ){}
 
@@ -40,9 +43,8 @@ public:
 protected:
 //----------------------------------------------------- Méthodes protégées
 //----------------------------------------------------- Attributs protégés
-
     Controller *controller;
 };
 
 //-------------------------------- Autres définitions dépendantes
-#endif 
+#endif
