@@ -150,7 +150,6 @@ private:
     void loadCleaner(void);
     void loadProvider(void);
 
-    double ComputeMeanQualityForAnAttribute(double latitude, double longitude, string attribut, double radius, Timestamp startTime, Timestamp endTime);
     int indiceCorrespondingToMean(string attribut, double moyenne);
     double ComputeMeanForAnAttribute ( double latitude, double longitude, string& attribut, double radius, Timestamp startTime, Timestamp endTime);
 };

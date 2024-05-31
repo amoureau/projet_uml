@@ -41,7 +41,7 @@ int ComputationAgent::ComputeMeanQuality(double latitude, double longitude, doub
     int indiceAtmo = 0;
 
     for (string attribut : listeAttributs) {
-        double moyenne = ComputeMeanQualityForAnAttribute(latitude, longitude, attribut, radius, startTime, endTime);
+        double moyenne = ComputeMeanForAnAttribute(latitude, longitude, attribut, radius, startTime, endTime);
         if (moyenne != 0) {
             listeMoyennes.push_back(moyenne);
             int indice = indiceCorrespondingToMean(attribut, moyenne);
