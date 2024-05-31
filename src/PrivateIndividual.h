@@ -29,7 +29,7 @@ public:
 
     friend ostream& operator<<(ostream& os, const PrivateIndividual& privateIndividual)
     {
-        os << "PrivateIndividual " << privateIndividual.id;
+        os << "PrivateIndividual: " << privateIndividual.id;
         return os;
     }
 

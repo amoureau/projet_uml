@@ -23,6 +23,12 @@ public:
 
 //------------------------------------------------- Surcharge d'opÃ©rateurs
 
+    friend ostream& operator<<(ostream& os, const Provider& provider)
+    {
+        os << "Provider: idProvider:" << provider.idProvider;
+        return os;
+    }
+
 //-------------------------------------------- Constructeurs - destructeur
 
     Provider ();

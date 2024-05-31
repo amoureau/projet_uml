@@ -9,9 +9,82 @@ void Controller::displayHmapIdSensor()
 {
     for(auto it : this->calculateur->getHmapIdSensor())
     {
-        cout << "Id Sensor:" << *(it.second) << endl;
+        cout << "Id:" << it.first << ", Sensor:" << *(it.second) << endl;
     }
 }
+
+void Controller::displayHmapIdPrivateIndividual()
+{
+    for(auto it : this->calculateur->getHmapIdPrivateIndividual())
+    {
+        cout << "Id:" << it.first << ", PrivateIndividual:" << *(it.second) << endl;
+    }
+}
+
+void Controller::displayHmapAttributes()
+{
+    for(auto it : this->calculateur->getHmapAttributes())
+    {
+        cout << "Id:" << it.first << ", Attributes:" << *(it.second) << endl;
+    }
+}
+
+void Controller::displayHmapIdCleaner()
+{
+    for(auto it : this->calculateur->getHmapIdCleaner())
+    {
+        cout << "Id:" << it.first << ", Cleaner:" << *(it.second) << endl;
+    }
+}
+
+void Controller::displayHmapIdProvider()
+{
+    for(auto it : this->calculateur->getHmapIdProvider())
+    {
+        cout << "Id:" << it.first << ", Provider:" << *(it.second) << endl;
+    }
+}
+
+void Controller::displayHmapIdSensorPrivateIndividual()
+{
+    for(auto it : this->calculateur->getHmapIdSensorPrivateIndividual())
+    {
+        cout << "Id:" << it.first << ", sensor:" << *(it.second) << endl;
+    }
+}
+
+
+void Controller::displayHmapDescriptionAttributes()
+{
+    for(auto it : this->calculateur->getHmapDescriptionAttributes())
+    {
+        cout << "Description:" << it.first << ", Attributes:" << *(it.second) << endl;
+    }
+}
+void Controller::displayVecteurMeasurements()
+{
+    for(auto it : this->calculateur->getVecteurMeasurements())
+    {
+        cout << "Measurement:" << *it << endl;
+    }
+}
+
+
+void Controller::displayMapCoordSensor()
+{
+    for(auto it : this->calculateur->getMapCoordSensor())
+    {
+        cout << "CoordSensor:" << it.first.first << " " << it.first.second << endl;
+        for(auto it2 : it.second)
+        {
+            cout << "Sensor:" << *it2 << endl;
+        }
+    }
+}
+
+
+
+// - fin affichage
 
 
 
@@ -43,7 +116,16 @@ Controller::~Controller(){
 int Controller::mainController(void)
 {
     // Affichage des données
-    displayHmapIdSensor();
+    //displayHmapIdSensor();
+    //displayHmapIdPrivateIndividual();
+    //displayHmapAttributes();
+    //displayVecteurMeasurements();
+    //displayHmapIdCleaner();
+    //displayHmapIdProvider();
+    //displayMapCoordSensor();
+    //displayHmapIdSensorPrivateIndividual();
+    //displayHmapDescriptionAttributes();
+
 
     return 0;
 

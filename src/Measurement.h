@@ -36,6 +36,12 @@ public:
     }
 //------------------------------------------------- Surcharge d'opÃ©rateurs
 
+    friend ostream& operator<<(ostream& os, const Measurement& measurement)
+    {
+        os << "Measurement: value:" << measurement.value << " date:" << measurement.date << " sensor:" << *(measurement.sensor) << " attribute:" << *(measurement.attribute);
+        return os;
+    }
+
 //-------------------------------------------- Constructeurs - destructeur
 
     Measurement ();

@@ -39,11 +39,11 @@ public:
     {
         if(sensor.privateIndividual == nullptr)
         {
-            os << "Sensor " << sensor.id << " : " << sensor.latitude << " " << sensor.longitude << "  privateIndividual id:NULL";
+            os << "Sensor " << sensor.id << " : " << sensor.latitude << " " << sensor.longitude << "  privateIndividual :NULL";
             return os;
         }
         else
-            os << "Sensor " << sensor.id << " : " << sensor.latitude << " " << sensor.longitude << "  privateIndividual id:" << sensor.privateIndividual->getId();
+            os << "Sensor " << sensor.id << " : " << sensor.latitude << " " << sensor.longitude << " privateIndividual: " << *(sensor.privateIndividual);
         return os;
     }
 

@@ -24,6 +24,12 @@ public:
 
 //------------------------------------------------- Surcharge d'opÃ©rateurs
 
+    friend ostream& operator<<(ostream& os, const Cleaner& cleaner)
+    {
+        os << "Cleaner: idCleaner:" << cleaner.idCleaner << " latitude:" << cleaner.latitude << " longitude:" << cleaner.longitude << " dateStart:" << cleaner.dateStart << " dateEnd:" << cleaner.dateEnd << " provider:" << *(cleaner.provider);
+        return os;
+    }
+
 //-------------------------------------------- Constructeurs - destructeur
 
     Cleaner ();

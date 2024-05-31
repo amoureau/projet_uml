@@ -300,7 +300,7 @@ ComputationAgent::~ComputationAgent ( )
     mapCoordSensor.clear(); 
     hmapIdSensorPrivateIndividual.clear(); 
     hmapDescriptionAttributes.clear();
-
+    
 
 } //----- Fin de ~ComputationAgent
 
@@ -410,6 +410,7 @@ void ComputationAgent::loadAttributes(void)
             string idAttribute;
             string unit;
             string description;
+
             string valeur;
 
             // Lecture des valeurs séparées par des points virgules
@@ -418,6 +419,7 @@ void ComputationAgent::loadAttributes(void)
             getline(iss, valeur, ';');
             unit = valeur;
             getline(iss, valeur, ';');
+            description = valeur;
 
             Attributes *att = new Attributes(idAttribute, unit, description);
             hmapAttributes[idAttribute] = att;
@@ -455,14 +457,14 @@ void ComputationAgent::loadMesurements(void)
         int idSensor = stoi(valeur);
 
         getline(iss, valeur, ';');
-        string description = valeur;
+        string idAttributes = valeur;
 
 
         getline(iss, valeur, ';');
         double value = stod(valeur);
 
         Sensor *sensor = hmapIdSensor[idSensor];
-        Attributes *att = hmapDescriptionAttributes[description];
+        Attributes *att = hmapAttributes[idAttributes];
         Measurement *mes = new Measurement(value, date, sensor, att);
         vecteurMeasurements.push_back(mes);
     }

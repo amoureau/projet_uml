@@ -31,6 +31,12 @@ public:
 
 //------------------------------------------------- Surcharge d'opÃ©rateurs
 
+    friend ostream& operator<<(ostream& os, const Attributes& attributes)
+    {
+        os << "Attributes: id:" << attributes.id << " unit:" << attributes.unit << " description:" << attributes.description;
+        return os;
+    }
+
 //-------------------------------------------- Constructeurs - destructeur
 
     Attributes ();
