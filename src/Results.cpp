@@ -21,6 +21,13 @@ void Results::GreetingsUser(User user)
     cout << "Bonjour " << prenom << " !" << endl;
 }
 
+string Results::UserInput() {
+    string input;
+    cout << "Que souhaitez-vous faire ?" << endl;
+    cin >> input;
+    return input;
+} 
+
 Results::Results ()
 {
 #ifdef MAP
