@@ -21,7 +21,7 @@ void Results::GreetingsUser(User user)
     cout << "Bonjour " << prenom << " !" << endl;
 }
 
-string Results::UserInput() {
+string Results::GetUserInput() {
     string input;
     cout << "Que souhaitez-vous faire ?" << endl;
     cin >> input;

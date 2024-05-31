@@ -30,7 +30,7 @@ public:
 //-------------------------------------------- Constructeurs - destructeur
     void GreetingsUser(User user);
 
-    string UserInput();
+    string GetUserInput();
 
     Results ();
 
