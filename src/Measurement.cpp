@@ -32,7 +32,7 @@ Measurement::Measurement ()
 
 } //----- Fin de Measurement
 
-Measurement::Measurement (double value, string date) : value(value), date(date)
+Measurement::Measurement (double value, Timestamp date, Sensor* sensor, Attributes* attribute) : value(value), date(date), sensor(sensor), attribute(attribute)
 {
 #ifdef MAP
     cout << "Appel au constructeur de <Measurement>" << endl;

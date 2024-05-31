@@ -4,6 +4,9 @@
 
 //--------------------------------------------------- Interfaces utilisÃ©es
 #include <string>
+#include "Timestamp.h"
+#include "Sensor.h"
+#include "Attributes.h"
 using namespace std;
 //------------------------------------------------------------- Constantes
 
@@ -30,7 +33,7 @@ public:
     // Contrat :
     //
 
-    Measurement (double value, string date);
+    Measurement (double value, Timestamp date, Sensor* sensor, Attributes* attribute);
     // Mode d'emploi : Constructeur par défaut
     //
     // Contrat :
@@ -49,7 +52,9 @@ protected:
 
 //----------------------------------------------------- Attributs protégés
     double value;
-    string date;
+    Timestamp date;
+    Sensor* sensor;
+    Attributes* attribute;
 };
 
 //-------------------------------- Autres définitions dépendantes
