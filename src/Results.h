@@ -1,4 +1,4 @@
-//---------- Interface de la classe <Provider> (fichier Provider.h) ----------------
+//---------- Interface de la classe <Results> (fichier Results.h) ----------------
 #if ! defined ( RESULTS_H )
 #define RESULTS_H
 
@@ -7,7 +7,7 @@
 #include <iostream>
 #include "Controller.h"
 
-class Controller;
+
 using namespace std;
 //------------------------------------------------------------- Constantes
 
@@ -28,14 +28,15 @@ public:
 
 //-------------------------------------------- Constructeurs - destructeur
 
-    Results (){}
+    Results ();
+
+    virtual ~Results ();
 
 //------------------------------------------------------------------ PRIVE
 
 protected:
 //----------------------------------------------------- Méthodes protégées
 //----------------------------------------------------- Attributs protégés
-
     Controller *controller;
 };
 
