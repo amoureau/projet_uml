@@ -30,8 +30,9 @@ void ComputationAgent::loadData(void)
     loadPrivateIndividual();
     loadAttributes();
     loadMesurements();
-    loadProvider();
     loadCleaner();
+    loadProvider();
+    
 }
 /*
 int ComputationAgent::ComputeMeanQuality(double latitude, double longitude, double radius, Timestamp startTime, Timestamp endTime)
@@ -374,7 +375,7 @@ void ComputationAgent::loadProvider(void)
         valeur = valeur.substr(pos, valeur.size());
         idCleaner = stoi(valeur);
 
-        Cleaner *cleaner = hmapIdCleaner[idCleaner];
+        Cleaner *cleaner = hmapIdCleaner.at(idCleaner);
         Provider *provider = new Provider(idProvider);
         cleaner->setProvider(provider);
         hmapIdProvider[idProvider] = provider;

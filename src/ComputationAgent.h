@@ -16,7 +16,7 @@
 #include "Sensor.h"
 #include "Attributes.h"
 #include "PrivateIndividual.h"
-#include "Results.h"
+
 #include "Timestamp.h"
 #include "Provider.h"
 
