@@ -9,6 +9,7 @@
 #include <map>
 #include <fstream>
 #include <sstream>
+#include <cmath>
 
 #include "Measurement.h"
 #include "Cleaner.h"
@@ -42,9 +43,9 @@ public:
 
     int ComputeMeanQualityForAnAttribute(double latitude, double longitude, string attribut, double radius, Timestamp startTime, Timestamp endTime);
 
-    int ComputeMeanQuality(double latitude, double longitude, double radius, Timestamp startTime, Timestamp endTime);
+    //int ComputeMeanQuality(double latitude, double longitude, double radius, Timestamp startTime, Timestamp endTime);
 
-    bool ComputationAgent::ComputeSensorAnalysed(int sensorId, double areaRadius);
+    bool ComputeSensorAnalysed(int sensorId, double areaRadius);
 
     // getter setter
     unordered_map<int, Sensor*>& getHmapIdSensor()
