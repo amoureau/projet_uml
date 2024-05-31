@@ -256,3 +256,40 @@ void ComputationAgent::loadMesurements(void)
         vecteurMeasurements.push_back(mes);
     }
 }
+
+void loadCleaner(void)
+{
+    // chemins acces fichiers:
+    string fichierCSV = "dataset/cleaners.csv";
+    ifstream fichier(fichierCSV);
+    if (!fichier) {
+        cerr << "Erreur : impossible d'ouvrir le fichier " << fichierCSV <<  endl;
+        exit(1);
+    }
+
+    string ligne;
+    while (getline(fichier, ligne)) {
+        istringstream iss(ligne);
+        
+
+        int idCleaner;
+        int idSensor;
+        string valeur;
+
+        // Lecture des valeurs séparées par des virgules
+
+        getline(iss, valeur, ';');
+        size_t pos = valeur.find_first_of("0123456789");
+        valeur = valeur.substr(pos, valeur.size());
+        idCleaner = stoi(valeur);
+
+        getline(iss, valeur, ';');
+        pos = valeur.find_first_of("0123456789");
+        valeur = valeur.substr(pos, valeur.size());
+        idSensor = stoi(valeur);
+
+        Sensor *sensor = hmapIdSensor[idSensor]; // ..?????p,sqfdsqf checker si c'est pas nul
+        Cleaner *cleaner = new Cleaner(idCleaner, sensor);
+        hmapIdCleaner[idCleaner] = cleaner;
+    }
+}
