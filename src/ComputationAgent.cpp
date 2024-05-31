@@ -34,16 +34,16 @@ void ComputationAgent::loadData(void)
     loadProvider();
     
 }
-/*
+
 int ComputationAgent::ComputeMeanQuality(double latitude, double longitude, double radius, Timestamp startTime, Timestamp endTime)
 {
-     vector<string> listeAttributs = {"O3", "NO2", "PM10", "SO2"};
-    vector<int> listeMoyennes = {0, 0, 0, 0};
+    vector<string> listeAttributs = {"O3", "NO2", "PM10", "SO2"};
+
     vector<int> listeMoyennes;
     int indiceAtmo = 0;
 
     for (string attribut : listeAttributs) {
-        double moyenne = ComputeMeanQualityForAnAttribute(latitude, longitude, attribut, radius, startTime, endTime);
+        double moyenne = ComputeMeanForAnAttribute(latitude, longitude, attribut, radius, startTime, endTime);
         if (moyenne != 0) {
             listeMoyennes.push_back(moyenne);
             int indice = indiceCorrespondingToMean(attribut, moyenne);
@@ -58,8 +58,178 @@ int ComputationAgent::ComputeMeanQuality(double latitude, double longitude, doub
 
     return indiceAtmo;
 }
-*/
 
+bool ComputationAgent::ComputeSensorAnalysed(int sensorId, double areaRadius) {
+    Sensor *sensor = hmapIdSensor[sensorId];
+
+    bool anomalies = false;
+    unordered_map<string, int> dicoMeanCapteur, dicoMeanAll, dicoSumOfSquaresAll, dicoSdAll, dicoNbValueAll;
+    dicoMeanCapteur["O3"] = dicoMeanCapteur["NO2"] = dicoMeanCapteur["SO2"] = dicoMeanCapteur["PM10"] = 0;
+    string list_molec[] = { "O3", "NO2", "SO2", "PM10"};
+
+    for (string &molecule : list_molec) {
+        dicoMeanAll[molecule] = ComputeMeanForAnAttribute(sensor->getLatitude(), sensor->getLongitude(), molecule, areaRadius, 0, 0);
+    }
+
+    for (Measurement *me: vecteurMeasurements) {
+        string attributeDescription = me->getAttribute()->getDescription();
+        if (me->getSensor()->getId() == sensorId) {
+            dicoMeanCapteur[ attributeDescription ] += me->getValue();
+        }
+
+        dicoSumOfSquaresAll[ attributeDescription ] += ( me->getValue() - dicoMeanAll[ attributeDescription ])*( me->getValue() - dicoMeanAll[ attributeDescription ]);
+        dicoNbValueAll[ attributeDescription ] += 1;
+    }
+
+    //On exclue les données du capteur s'il y a un problème pour la moyenne d'une des molécules au moins
+    for (string &molecule : list_molec) {
+        dicoSdAll[ molecule ] = sqrt( (1/dicoNbValueAll[molecule]) * dicoSumOfSquaresAll[molecule] );
+        if ((dicoMeanCapteur[ molecule ] > dicoMeanAll[molecule] + 3*dicoSdAll[molecule] ) 
+            || (dicoMeanCapteur[ molecule ] < dicoMeanAll[molecule] - 3*dicoSdAll[molecule])) {
+                anomalies = true;
+        }
+    }
+
+    return anomalies;
+}
+
+double ComputationAgent::ComputeMeanForAnAttribute ( double latitude, double longitude, string &attribute, double radius, Timestamp startTime, Timestamp endTime) {
+    double moyenne = 0;
+    Attributes attributes = *(hmapAttributes[attribute]);
+    for (Measurement *me : vecteurMeasurements) {
+        Timestamp mesureTime = me->getDate();
+        Sensor *sensor = me->getSensor();
+
+        if ( me->getAttribute()->getId() == attributes.getId() ) {
+            if ((( startTime < mesureTime  && mesureTime < endTime) || (startTime == 0 && endTime == 0))
+                && (calculateDistance(latitude, longitude, sensor->getLatitude(), sensor->getLongitude())))
+            {
+                moyenne += me->getValue();
+            }
+        }
+    }
+    return moyenne;
+}
+
+int ComputationAgent::indiceCorrespondingToMean(string attribut, double moyenne)
+{
+    if (attribut == "O3") {
+        if (moyenne <= 29) {
+            return 1;
+        }
+        else if (moyenne <= 54) {
+            return 2;
+        }
+        else if (moyenne <= 79) {
+            return 3;
+        }
+        else if (moyenne <= 104) {
+            return 4;
+        }
+        else if (moyenne <= 129) {
+            return 5;
+        }
+        else if (moyenne <= 149) {
+            return 6;
+        }
+        else if (moyenne <= 179) {
+            return 7;
+        }
+        else if (moyenne <= 209) {
+            return 8;
+        }
+        else if (moyenne <= 239) {
+            return 9;
+        }
+        else {
+            return 10;
+        }
+    }
+    else if (attribut == "NO2") {
+        if (moyenne <= 29) {
+            return 1;
+        }
+        else if (moyenne <= 54) {
+            return 2;
+        }
+        else if (moyenne <= 84) {
+            return 3;
+        }
+        else if (moyenne <= 109) {
+            return 4;
+        }
+        else if (moyenne <= 134) {
+            return 5;
+        }
+        else if (moyenne <= 164) {
+            return 6;
+        }
+        else if (moyenne <= 199) {
+            return 7;
+        }
+        else if (moyenne <= 274) {
+            return 8;
+        }
+        else if (moyenne <= 399) {
+            return 9;
+        }
+        else {
+            return 10;
+        }
+    }
+    else if (attribut == "PM10") {
+        if (moyenne <= 6) {
+            return 1;
+        }
+        else if (moyenne <= 13) {
+            return 2;
+        }
+        else if (moyenne <= 20) {
+            return 3;
+        }
+        else if (moyenne <= 27) {
+            return 4;
+        }
+        else if (moyenne <= 34) {
+            return 5;
+        }
+    }
+    else if (attribut == "SO2") {
+        if (moyenne <= 39) {
+            return 1;
+        }
+        else if (moyenne <= 79) {
+            return 2;
+        }
+        else if (moyenne <= 119) {
+            return 3;
+        }
+        else if (moyenne <= 159) {
+            return 4;
+        }
+        else if (moyenne <= 199) {
+            return 5;
+        }
+        else if (moyenne <= 249) {
+            return 6;
+        }
+        else if (moyenne <= 299) {
+            return 7;
+        }
+        else if (moyenne <= 399) {
+            return 8;
+        }
+        else if (moyenne <= 499) {
+            return 9;
+        }
+        else {
+            return 10;
+        }
+    }
+    else {
+        return 0;
+    }
+}
 
 //------------------------------------------------- Surcharge d'opérateurs
 
