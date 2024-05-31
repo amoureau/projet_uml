@@ -4,6 +4,17 @@
 
 using namespace std;
 
+// Pour les affichages:
+void Controller::displayHmapIdSensor()
+{
+    for(auto it : this->calculateur->getHmapIdSensor())
+    {
+        cout << "Id Sensor:" << *(it.second) << endl;
+    }
+}
+
+
+
 
 Controller::Controller(){
     /* Création du calculateur */
@@ -31,6 +42,8 @@ Controller::~Controller(){
 
 int Controller::mainController(void)
 {
+    // Affichage des données
+    displayHmapIdSensor();
 
     return 0;
 
@@ -41,6 +54,7 @@ int Controller::mainController(void)
 int main(void)
 {
     Controller *controller = new Controller();
+    controller->mainController();
     delete controller;
     return 0;
 }

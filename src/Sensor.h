@@ -37,7 +37,13 @@ public:
 //------------------------------------------------- Surcharge d'opÃ©rateurs
     friend ostream& operator<<(ostream& os, const Sensor& sensor)
     {
-        os << "Sensor " << sensor.id << " : " << sensor.latitude << " " << sensor.longitude << " " << sensor.privateIndividual->getId();
+        if(sensor.privateIndividual == nullptr)
+        {
+            os << "Sensor " << sensor.id << " : " << sensor.latitude << " " << sensor.longitude << "  privateIndividual id:NULL";
+            return os;
+        }
+        else
+            os << "Sensor " << sensor.id << " : " << sensor.latitude << " " << sensor.longitude << "  privateIndividual id:" << sensor.privateIndividual->getId();
         return os;
     }
 
