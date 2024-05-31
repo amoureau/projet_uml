@@ -31,6 +31,11 @@ int ComputationAgent::ComputeMeanQuality(double latitude, double longitude, doub
     vector<int> listeMoyennes = {0, 0, 0, 0};
     int indiceAtmo = 0;
 
+    for (string attribut : listeAttributs) {
+        int moyenne = ComputeMeanQualityForAttribute(latitude, longitude, radius, startTime, endTime, attribut);
+    }
+
+    return indiceAtmo;
 }
 
 //------------------------------------------------- Surcharge d'opérateurs
