@@ -68,6 +68,7 @@ Government--|> User
 
 
 Class Cleaner{
+-int idCleaner
 -double latitude
 -double longitude
 -String dateStart
@@ -101,6 +102,8 @@ Class ComputationAgent{
 -unordered_map<int, PrivateIndividual*> hmapIdSensorPrivateIndividual
 -vector<Measurement*> vecteurMeasurements;
 -unordered_map<string, Attributes*> hmapDescriptionAttributes;
+-unordered_map<int, Provider*> hmapIdProvider;
+-unordered_map<int, Cleaner*> hmapIdCleaner;
 
 'Data loading
 +void loadData(void)

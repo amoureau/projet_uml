@@ -33,13 +33,19 @@ Cleaner::Cleaner ()
 
 } //----- Fin de Cleaner
 
-Cleaner::Cleaner(double latitude, double longitude, Timestamp dateStart, Timestamp dateEnd)
+Cleaner::Cleaner(int idCleaner, double latitude, double longitude, Timestamp dateStart, Timestamp dateEnd)
 {
-    this->latitude = latitude;
-    this->longitude = longitude;
-    this->dateStart = dateStart;
-    this->dateEnd = dateEnd;
-}
+#ifdef MAP
+    cout << "Appel au constructeur de <Cleaner>" << endl;
+#endif
+    
+        this->idCleaner = idCleaner;
+        this->latitude = latitude;
+        this->longitude = longitude;
+        this->dateStart = dateStart;
+        this->dateEnd = dateEnd;
+} //----- Fin de Cleaner
+
 
 Cleaner::~Cleaner ( )
 {

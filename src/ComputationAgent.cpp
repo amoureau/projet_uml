@@ -24,8 +24,9 @@ void ComputationAgent::loadData(void)
     loadAttributes();
     loadMesurements();
     loadCleaner();
+    loadProvider();
 }
-
+/*
 int ComputationAgent::ComputeMeanQuality(double latitude, double longitude, double radius, Timestamp startTime, Timestamp endTime)
 {
     vector<string> listeAttributs = {"O3", "NO2", "PM10", "SO2"};
@@ -33,6 +34,7 @@ int ComputationAgent::ComputeMeanQuality(double latitude, double longitude, doub
     int indiceAtmo = 0;
 
 }
+*/
 
 bool ComputationAgent::ComputeSensorAnalysed(int sensorId, double areaRadius) {
     Sensor *sensor = hmapIdSensor[sensorId];
@@ -129,6 +131,16 @@ ComputationAgent::~ComputationAgent ( )
         delete mes;
     }
 
+    for(auto cleaner : hmapIdCleaner)
+    {
+        delete cleaner.second;
+    }
+
+    for(auto provider : hmapIdProvider)
+    {
+        delete provider.second;
+    }
+
 
 
 
@@ -137,6 +149,8 @@ ComputationAgent::~ComputationAgent ( )
     hmapIdPrivateIndividual.clear();
     hmapAttributes.clear();
     vecteurMeasurements.clear();
+    hmapIdCleaner.clear();
+    hmapIdProvider.clear();
 
 
     // lien - structure de données annexe
@@ -325,7 +339,11 @@ void ComputationAgent::loadCleaner(void)
         
 
         int idCleaner;
-        int idSensor;
+        double latitude;
+        double longitude;
+        Timestamp dateStart;
+        Timestamp dateEnd;
+
         string valeur;
 
         // Lecture des valeurs séparées par des virgules
@@ -336,12 +354,55 @@ void ComputationAgent::loadCleaner(void)
         idCleaner = stoi(valeur);
 
         getline(iss, valeur, ';');
+        latitude = stod(valeur);
+
+        getline(iss, valeur, ';');
+        longitude = stod(valeur);
+
+        getline(iss, valeur, ';');
+        dateStart = Timestamp(valeur);
+
+        getline(iss, valeur, ';');
+        dateEnd = Timestamp(valeur);
+
+        Cleaner *cleaner = new Cleaner(idCleaner, latitude, longitude, dateStart, dateEnd);
+        this->hmapIdCleaner[idCleaner] = cleaner;
+    }
+}
+
+void ComputationAgent::loadProvider(void)
+{
+    // chemins acces fichiers:
+    string fichierCSV = "dataset/providers.csv";
+    ifstream fichier(fichierCSV);
+    if (!fichier) {
+        cerr << "Erreur : impossible d'ouvrir le fichier " << fichierCSV <<  endl;
+        exit(1);
+    }
+
+    string ligne;
+    while (getline(fichier, ligne)) {
+        istringstream iss(ligne);
+
+        int idProvider;
+        int idCleaner;
+
+        string valeur;
+        
+        // Lecture des valeurs séparées par des points virgules
+        getline(iss, valeur, ';');
+        size_t pos = valeur.find_first_of("0123456789");
+        valeur = valeur.substr(pos, valeur.size());
+        idProvider = stoi(valeur);
+
+        getline(iss, valeur, ';');
         pos = valeur.find_first_of("0123456789");
         valeur = valeur.substr(pos, valeur.size());
-        idSensor = stoi(valeur);
+        idCleaner = stoi(valeur);
 
-        Sensor *sensor = hmapIdSensor[idSensor]; // ..?????p,sqfdsqf checker si c'est pas nul
-        Cleaner *cleaner = new Cleaner(idCleaner, sensor);
-        hmapIdCleaner[idCleaner] = cleaner;
+        Cleaner *cleaner = this->hmapIdCleaner[idCleaner];
+        Provider *provider = new Provider(idProvider, cleaner);
+        hmapIdProvider[idProvider] = provider;
+
     }
 }
