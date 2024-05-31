@@ -23,6 +23,7 @@ void ComputationAgent::loadData(void)
     loadPrivateIndividual();
     loadAttributes();
     loadMesurements();
+    loadCleaner();
 }
 
 int ComputationAgent::ComputeMeanQuality(double latitude, double longitude, double radius, Timestamp startTime, Timestamp endTime)
