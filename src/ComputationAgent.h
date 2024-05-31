@@ -38,6 +38,11 @@ public:
 //----------------------------------------------------- MÃ©thodes publiques
     // chargement des données
     void loadData(void);
+    
+    int ComputeMeanQuality(double latitude, double longitude, double radius, Timestamp startTime, Timestamp endTime);
+
+    
+
 
 
     bool ComputationAgent::ComputeSensorAnalysed(int sensorId, double areaRadius);
@@ -150,6 +155,8 @@ private:
     void loadProvider(void);
 
     double ComputeMeanForAnAttribute ( Attributes &attribute, double latitude, double longitude, double radius, Timestamp startTime, Timestamp endTime);
+    double ComputeMeanQualityForAnAttribute(double latitude, double longitude, string attribut, double radius, Timestamp startTime, Timestamp endTime);
+    int indiceCorrespondingToMean(string attribut, double moyenne);
 
 };
 
