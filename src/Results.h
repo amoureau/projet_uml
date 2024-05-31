@@ -35,8 +35,12 @@ public:
     string Print(string message);
 
     string DisplayMeanAirQuality(double mean);
-    
-    Results ();
+
+    string DisplaySensorAnalysed(bool anomalie);
+
+    Results();
+
+    virtual ~Results ( );
 
 
 //------------------------------------------------------------------ PRIVE

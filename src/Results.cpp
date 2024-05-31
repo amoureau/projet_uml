@@ -36,7 +36,15 @@ string Results::DisplayMeanAirQuality(double mean) {
     cout << "La qualité de l'air moyenne est de " << mean << endl;
 }
 
-Results::Results ()
+string Results::DisplaySensorAnalysed(bool anomalie) {
+    if(anomalie) {
+        cout << "Il y a une anomalie sur le capteur analysé" << endl;
+    } else {
+        cout << "Il n'y a pas d'anomalie sur le capteur analysé" << endl;
+    }
+}
+
+Results::Results()
 {
 #ifdef MAP
     cout << "Appel au constructeur par défaut de <Results>" << endl;
@@ -44,7 +52,7 @@ Results::Results ()
 
 }
 
-Results::~Results ()
+Results::~Results()
 {
 #ifdef MAP
     cout << "Appel au destructeur de <Results>" << endl;
