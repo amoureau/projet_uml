@@ -17,7 +17,11 @@
 #include "PrivateIndividual.h"
 #include "Results.h"
 #include "Timestamp.h"
+<<<<<<< HEAD
 
+=======
+#include "Provider.h"
+>>>>>>> 48724fcb7892bdfdcd180656dacbd3851330caea
 
 using namespace std;
 //------------------------------------------------------------- Constantes
@@ -38,6 +42,11 @@ public:
     // chargement des données
     void loadData(void);
     
+    int ComputeMeanQuality(double latitude, double longitude, double radius, Timestamp startTime, Timestamp endTime);
+
+    int ComputeMeanQualityForAnAttribute(double latitude, double longitude, string attribut, double radius, Timestamp startTime, Timestamp endTime);
+
+    int ComputeMeanQuality(double latitude, double longitude, double radius, Timestamp startTime, Timestamp endTime);
 
     // getter setter
     unordered_map<int, Sensor*>& getHmapIdSensor()
@@ -154,6 +163,7 @@ protected:
     unordered_map<int, PrivateIndividual*> hmapIdPrivateIndividual;
     unordered_map<string, Attributes*> hmapAttributes;
     vector<Measurement*> vecteurMeasurements;
+    unordered_map<int, Cleaner*> hmapIdCleaner;
 
     // lien - structure de données annexe
     map<pair<double, double>, vector<Sensor*>> mapCoordSensor; 
@@ -165,6 +175,7 @@ private:
     void loadPrivateIndividual(void);
     void loadAttributes(void);
     void loadMesurements(void);
+    void loadCleaner(void);
 };
 
 //-------------------------------- Autres définitions dépendantes

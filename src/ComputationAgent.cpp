@@ -4,11 +4,13 @@
 
 //-------------------------------------------------------- Include système
 #include <string>
+#include <vector>
 #include <iostream>
 using namespace std;
 
 //------------------------------------------------------ Include personnel
 #include "ComputationAgent.h"
+#include "Timestamp.h"
 
 //------------------------------------------------------------- Constantes
 
@@ -20,9 +22,17 @@ void ComputationAgent::loadData(void)
     loadSensor();
     loadPrivateIndividual();
     loadAttributes();
+    loadMesurements();
+    loadCleaner();
 }
 
+int ComputationAgent::ComputeMeanQuality(double latitude, double longitude, double radius, Timestamp startTime, Timestamp endTime)
+{
+    vector<string> listeAttributs = {"O3", "NO2", "PM10", "SO2"};
+    vector<int> listeMoyennes = {0, 0, 0, 0};
+    int indiceAtmo = 0;
 
+}
 
 //------------------------------------------------- Surcharge d'opérateurs
 
@@ -62,6 +72,11 @@ ComputationAgent::~ComputationAgent ( )
         delete att.second;
     }
 
+    for(auto mes : vecteurMeasurements)
+    {
+        delete mes;
+    }
+
 
 
 
@@ -69,10 +84,13 @@ ComputationAgent::~ComputationAgent ( )
     hmapIdSensor.clear();
     hmapIdPrivateIndividual.clear();
     hmapAttributes.clear();
+    vecteurMeasurements.clear();
+
 
     // lien - structure de données annexe
     mapCoordSensor.clear(); 
     hmapIdSensorPrivateIndividual.clear(); 
+    hmapDescriptionAttributes.clear();
 
 
 } //----- Fin de ~ComputationAgent
@@ -192,5 +210,86 @@ void ComputationAgent::loadAttributes(void)
 
             Attributes *att = new Attributes(idAttribute, unit, description);
             hmapAttributes[idAttribute] = att;
+            hmapDescriptionAttributes[description] = att;
         }
     }
+
+void ComputationAgent::loadMesurements(void)
+{
+    // chemins acces fichiers:
+    string fichierCSV = "dataset/measurements.csv";
+    ifstream fichier(fichierCSV);
+    if (!fichier) {
+        cerr << "Erreur : impossible d'ouvrir le fichier " << fichierCSV <<  endl;
+        exit(1);
+    }
+
+    string ligne;
+    while (getline(fichier, ligne)) {
+        istringstream iss(ligne);
+        
+
+        
+        string valeur;
+
+        // Lecture des valeurs séparées par des points virgules
+        getline(iss, valeur, ';');
+        string dateString = valeur;
+        Timestamp date(dateString);
+
+
+        getline(iss, valeur, ';');
+        size_t pos = valeur.find_first_of("0123456789");
+        valeur = valeur.substr(pos, valeur.size());
+        int idSensor = stoi(valeur);
+
+        getline(iss, valeur, ';');
+        string description = valeur;
+
+
+        getline(iss, valeur, ';');
+        double value = stod(valeur);
+
+        Sensor *sensor = hmapIdSensor[idSensor];
+        Attributes *att = hmapDescriptionAttributes[description];
+        Measurement *mes = new Measurement(value, date, sensor, att);
+        vecteurMeasurements.push_back(mes);
+    }
+}
+
+void loadCleaner(void)
+{
+    // chemins acces fichiers:
+    string fichierCSV = "dataset/cleaners.csv";
+    ifstream fichier(fichierCSV);
+    if (!fichier) {
+        cerr << "Erreur : impossible d'ouvrir le fichier " << fichierCSV <<  endl;
+        exit(1);
+    }
+
+    string ligne;
+    while (getline(fichier, ligne)) {
+        istringstream iss(ligne);
+        
+
+        int idCleaner;
+        int idSensor;
+        string valeur;
+
+        // Lecture des valeurs séparées par des virgules
+
+        getline(iss, valeur, ';');
+        size_t pos = valeur.find_first_of("0123456789");
+        valeur = valeur.substr(pos, valeur.size());
+        idCleaner = stoi(valeur);
+
+        getline(iss, valeur, ';');
+        pos = valeur.find_first_of("0123456789");
+        valeur = valeur.substr(pos, valeur.size());
+        idSensor = stoi(valeur);
+
+        Sensor *sensor = hmapIdSensor[idSensor]; // ..?????p,sqfdsqf checker si c'est pas nul
+        Cleaner *cleaner = new Cleaner(idCleaner, sensor);
+        hmapIdCleaner[idCleaner] = cleaner;
+    }
+}
