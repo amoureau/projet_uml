@@ -14,22 +14,8 @@ using namespace std;
 
 //----------------------------------------------------------------- PUBLIC
 
+
 //----------------------------------------------------- Méthodes publiques
-
-int Sensor::getId() const
-{
-    return id;
-}
-
-double Sensor::getLatitude() const
-{
-    return latitude;
-}
-
-double Sensor::getLongitude() const
-{
-    return longitude; // salut
-}
 
 
 //------------------------------------------------- Surcharge d'opérateurs
@@ -45,7 +31,7 @@ Sensor::Sensor ()
 #endif
 } //----- Fin de Sensor
 
-Sensor::Sensor(int id, double latitude, double longitude) : id(id), latitude(latitude), longitude(longitude)
+Sensor::Sensor(int id, double latitude, double longitude, const PrivateIndividual* PrivateIndividual ) : id(id), latitude(latitude), longitude(longitude), privateIndividual(privateIndividual)
 {
 #ifdef MAP
     cout << "Appel au constructeur de <Sensor>" << endl;
@@ -53,7 +39,7 @@ Sensor::Sensor(int id, double latitude, double longitude) : id(id), latitude(lat
 
 } //----- Fin de Sensor
 
-Sensor::Sensor(const Sensor& unSensor) : id(unSensor.id), latitude(unSensor.latitude), longitude(unSensor.longitude)
+Sensor::Sensor(const Sensor& unSensor) : id(unSensor.id), latitude(unSensor.latitude), longitude(unSensor.longitude), privateIndividual(unSensor.privateIndividual)
 {
 #ifdef MAP
     cout << "Appel au constructeur de copie de <Sensor>" << endl;

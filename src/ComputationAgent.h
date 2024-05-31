@@ -16,7 +16,7 @@
 #include "Sensor.h"
 #include "Attributes.h"
 #include "PrivateIndividual.h"
-#include "Results.h"
+
 #include "Timestamp.h"
 #include "Provider.h"
 
@@ -41,11 +41,7 @@ public:
     
     int ComputeMeanQuality(double latitude, double longitude, double radius, Timestamp startTime, Timestamp endTime);
 
-    
-
-
-
-    bool ComputationAgent::ComputeSensorAnalysed(int sensorId, double areaRadius);
+    bool ComputeSensorAnalysed(int sensorId, double areaRadius);
 
     // getter setter
 
@@ -154,10 +150,8 @@ private:
     void loadCleaner(void);
     void loadProvider(void);
 
-    double ComputeMeanForAnAttribute ( Attributes &attribute, double latitude, double longitude, double radius, Timestamp startTime, Timestamp endTime);
-    double ComputeMeanQualityForAnAttribute(double latitude, double longitude, string attribut, double radius, Timestamp startTime, Timestamp endTime);
     int indiceCorrespondingToMean(string attribut, double moyenne);
-
+    double ComputeMeanForAnAttribute ( double latitude, double longitude, string& attribut, double radius, Timestamp startTime, Timestamp endTime);
 };
 
 //-------------------------------- Autres définitions dépendantes

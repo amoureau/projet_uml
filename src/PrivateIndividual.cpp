@@ -32,7 +32,7 @@ PrivateIndividual::PrivateIndividual ()
 
 } //----- Fin de PrivateIndividuals
 
-PrivateIndividual::PrivateIndividual(int id, Sensor *sensor) : id(id), sensor(sensor)
+PrivateIndividual::PrivateIndividual(int id) : id(id)
 {
 #ifdef MAP
     cout << "Appel au constructeur de <PrivateIndividual>" << endl;
@@ -40,7 +40,7 @@ PrivateIndividual::PrivateIndividual(int id, Sensor *sensor) : id(id), sensor(se
     
 } //----- Fin de PrivateIndividual
 
-PrivateIndividual::PrivateIndividual(const PrivateIndividual& unPrivateIndividual) : id(unPrivateIndividual.id), sensor(unPrivateIndividual.sensor)
+PrivateIndividual::PrivateIndividual(const PrivateIndividual& unPrivateIndividual) : id(unPrivateIndividual.id)
 {
 #ifdef MAP
     cout << "Appel au constructeur de copie de <PrivateIndividual>" << endl;

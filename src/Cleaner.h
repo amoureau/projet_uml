@@ -5,6 +5,7 @@
 //--------------------------------------------------- Interfaces utilisÃ©es
 #include <string>
 #include "Timestamp.h"
+#include "Provider.h"
 using namespace std;
 //------------------------------------------------------------- Constantes
 
@@ -31,7 +32,21 @@ public:
     // Contrat :
     //
 
-    Cleaner(int idCleaner, double latitude, double longitude, Timestamp dateStart, Timestamp dateEnd);
+    // getter:
+    int getIdCleaner() const { return idCleaner; }
+    double getLatitude() const { return latitude; }
+    double getLongitude() const { return longitude; }
+    Timestamp getDateStart() const { return dateStart; }
+    Timestamp getDateEnd() const { return dateEnd; }
+    const Provider* getProvider() const { return provider; }
+
+    // setter 
+    void setProvider(const Provider* provider);
+
+
+
+
+    Cleaner(int idCleaner, double latitude, double longitude, Timestamp dateStart, Timestamp dateEnd, const Provider* provider);
     // Mode d'emploi : Constructeur
 
     virtual ~Cleaner ( );
@@ -51,6 +66,7 @@ protected:
     double longitude;
     Timestamp dateStart;
     Timestamp dateEnd;
+    const Provider * provider;
 };
 
 //-------------------------------- Autres définitions dépendantes

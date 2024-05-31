@@ -17,7 +17,11 @@ using namespace std;
 
 //----------------------------------------------------- Méthodes publiques
 
-
+// setter:
+void Cleaner::setProvider(const Provider* provider)
+{
+    this->provider = provider;
+}
 
 //------------------------------------------------- Surcharge d'opérateurs
 
@@ -33,7 +37,7 @@ Cleaner::Cleaner ()
 
 } //----- Fin de Cleaner
 
-Cleaner::Cleaner(int idCleaner, double latitude, double longitude, Timestamp dateStart, Timestamp dateEnd)
+Cleaner::Cleaner(int idCleaner, double latitude, double longitude, Timestamp dateStart, Timestamp dateEnd, const Provider* provider)
 {
 #ifdef MAP
     cout << "Appel au constructeur de <Cleaner>" << endl;
@@ -44,6 +48,7 @@ Cleaner::Cleaner(int idCleaner, double latitude, double longitude, Timestamp dat
         this->longitude = longitude;
         this->dateStart = dateStart;
         this->dateEnd = dateEnd;
+        this->provider = provider;
 } //----- Fin de Cleaner
 
 

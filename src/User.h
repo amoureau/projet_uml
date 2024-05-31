@@ -11,7 +11,6 @@
 
 
 #include "ComputationAgent.h"
-#include "Sensor.h"
 #include "Timestamp.h"
 
 using namespace std;

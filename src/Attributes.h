@@ -25,6 +25,9 @@ public:
     string getId() const {
         return id;
     }
+    string getUnit() const {
+        return unit;
+    }
 
 //------------------------------------------------- Surcharge d'opÃ©rateurs
 

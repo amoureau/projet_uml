@@ -16,6 +16,13 @@ using namespace std;
 
 //----------------------------------------------------------------- PUBLIC
 
+
+
+// setter getter +
+
+
+
+
 //----------------------------------------------------- Méthodes publiques
 void ComputationAgent::loadData(void)
 {
@@ -25,17 +32,18 @@ void ComputationAgent::loadData(void)
     loadMesurements();
     loadCleaner();
     loadProvider();
+    
 }
-/*
+
 int ComputationAgent::ComputeMeanQuality(double latitude, double longitude, double radius, Timestamp startTime, Timestamp endTime)
 {
-     vector<string> listeAttributs = {"O3", "NO2", "PM10", "SO2"};
-    vector<int> listeMoyennes = {0, 0, 0, 0};
+    vector<string> listeAttributs = {"O3", "NO2", "PM10", "SO2"};
+
     vector<int> listeMoyennes;
     int indiceAtmo = 0;
 
     for (string attribut : listeAttributs) {
-        double moyenne = ComputeMeanQualityForAnAttribute(latitude, longitude, attribut, radius, startTime, endTime);
+        double moyenne = ComputeMeanForAnAttribute(latitude, longitude, attribut, radius, startTime, endTime);
         if (moyenne != 0) {
             listeMoyennes.push_back(moyenne);
             int indice = indiceCorrespondingToMean(attribut, moyenne);
@@ -50,7 +58,6 @@ int ComputationAgent::ComputeMeanQuality(double latitude, double longitude, doub
 
     return indiceAtmo;
 }
-*/
 
 bool ComputationAgent::ComputeSensorAnalysed(int sensorId, double areaRadius) {
     Sensor *sensor = hmapIdSensor[sensorId];
@@ -61,8 +68,7 @@ bool ComputationAgent::ComputeSensorAnalysed(int sensorId, double areaRadius) {
     string list_molec[] = { "O3", "NO2", "SO2", "PM10"};
 
     for (string &molecule : list_molec) {
-        Attributes *attributes = hmapAttributes[molecule];
-        dicoMeanAll[molecule] = ComputeMeanForAnAttribute(*attributes, sensor->getLatitude(), sensor->getLongitude(), areaRadius, 0, 0);
+        dicoMeanAll[molecule] = ComputeMeanForAnAttribute(sensor->getLatitude(), sensor->getLongitude(), molecule, areaRadius, 0, 0);
     }
 
     for (Measurement *me: vecteurMeasurements) {
@@ -84,9 +90,147 @@ bool ComputationAgent::ComputeSensorAnalysed(int sensorId, double areaRadius) {
         }
     }
 
-    return true;
+    return anomalies;
 }
 
+
+double ComputationAgent::ComputeMeanForAnAttribute ( double latitude, double longitude, string &attribute, double radius, Timestamp startTime, Timestamp endTime) {
+    double moyenne = 0;
+    Attributes attributes = *(hmapAttributes[attribute]);
+    for (Measurement *me : vecteurMeasurements) {
+        Timestamp mesureTime = me->getDate();
+        Sensor *sensor = me->getSensor();
+
+        if ( me->getAttribute()->getId() == attributes.getId() ) {
+            if ((( startTime < mesureTime  && mesureTime < endTime) || (startTime == 0 && endTime == 0))
+                && (calculateDistance(latitude, longitude, sensor->getLatitude(), sensor->getLongitude())))
+            {
+                moyenne += me->getValue();
+            }
+        }
+    }
+    return moyenne;
+}
+
+int ComputationAgent::indiceCorrespondingToMean(string attribut, double moyenne)
+{
+    if (attribut == "O3") {
+        if (moyenne <= 29) {
+            return 1;
+        }
+        else if (moyenne <= 54) {
+            return 2;
+        }
+        else if (moyenne <= 79) {
+            return 3;
+        }
+        else if (moyenne <= 104) {
+            return 4;
+        }
+        else if (moyenne <= 129) {
+            return 5;
+        }
+        else if (moyenne <= 149) {
+            return 6;
+        }
+        else if (moyenne <= 179) {
+            return 7;
+        }
+        else if (moyenne <= 209) {
+            return 8;
+        }
+        else if (moyenne <= 239) {
+            return 9;
+        }
+        else {
+            return 10;
+        }
+    }
+    else if (attribut == "NO2") {
+        if (moyenne <= 29) {
+            return 1;
+        }
+        else if (moyenne <= 54) {
+            return 2;
+        }
+        else if (moyenne <= 84) {
+            return 3;
+        }
+        else if (moyenne <= 109) {
+            return 4;
+        }
+        else if (moyenne <= 134) {
+            return 5;
+        }
+        else if (moyenne <= 164) {
+            return 6;
+        }
+        else if (moyenne <= 199) {
+            return 7;
+        }
+        else if (moyenne <= 274) {
+            return 8;
+        }
+        else if (moyenne <= 399) {
+            return 9;
+        }
+        else {
+            return 10;
+        }
+    }
+    else if (attribut == "PM10") {
+        if (moyenne <= 6) {
+            return 1;
+        }
+        else if (moyenne <= 13) {
+            return 2;
+        }
+        else if (moyenne <= 20) {
+            return 3;
+        }
+        else if (moyenne <= 27) {
+            return 4;
+        }
+        else if (moyenne <= 34) {
+            return 5;
+        }
+    }
+    else if (attribut == "SO2") {
+        if (moyenne <= 39) {
+            return 1;
+        }
+        else if (moyenne <= 79) {
+            return 2;
+        }
+        else if (moyenne <= 119) {
+            return 3;
+        }
+        else if (moyenne <= 159) {
+            return 4;
+        }
+        else if (moyenne <= 199) {
+            return 5;
+        }
+        else if (moyenne <= 249) {
+            return 6;
+        }
+        else if (moyenne <= 299) {
+            return 7;
+        }
+        else if (moyenne <= 399) {
+            return 8;
+        }
+        else if (moyenne <= 499) {
+            return 9;
+        }
+        else {
+            return 10;
+        }
+    }
+    else {
+        return 0;
+    }
+}
 //------------------------------------------------- Surcharge d'opérateurs
 
 
@@ -165,23 +309,6 @@ ComputationAgent::~ComputationAgent ( )
 
 //----------------------------------------------------- Méthodes protégées
 
-double ComputationAgent::ComputeMeanForAnAttribute ( Attributes &attribute, double latitude, double longitude, double radius, Timestamp startTime, Timestamp endTime) {
-    double moyenne = 0;
-    for (Measurement *me : vecteurMeasurements) {
-        Timestamp mesureTime = me->getDate();
-        Sensor *sensor = me->getSensor();
-
-        if ( me->getAttribute()->getId() == attribute.getId() ) {
-            if ((( startTime < mesureTime  && mesureTime < endTime) || (startTime == 0 && endTime == 0))
-                && (calculateDistance(latitude, longitude, sensor->getLatitude(), sensor->getLongitude())))
-            {
-                moyenne += me->getValue();
-            }
-        }
-    }
-    return moyenne;
-}
-
 void ComputationAgent::loadSensor(void)
 {
 
@@ -215,7 +342,7 @@ void ComputationAgent::loadSensor(void)
         getline(iss, valeur, ';');
         longitude = stod(valeur);
 
-        Sensor* sensor = new Sensor(id, latitude, longitude);
+        Sensor* sensor = new Sensor(id, latitude, longitude, nullptr);
         hmapIdSensor[id] = sensor;
         mapCoordSensor[make_pair(latitude, longitude)].push_back(sensor);
     }
@@ -252,8 +379,9 @@ void ComputationAgent::loadPrivateIndividual(void)
         valeur = valeur.substr(pos, valeur.size());
         idSensor = stoi(valeur);
 
-        Sensor *sensor = hmapIdSensor[idSensor]; // ..?????p,sqfdsqf checker si c'est pas nul
-        PrivateIndividual *privateIndividual = new PrivateIndividual(idPrivateIndividual, sensor);
+        Sensor *sensor = hmapIdSensor[idSensor];
+        PrivateIndividual *privateIndividual = new PrivateIndividual(idPrivateIndividual);
+        sensor->setPrivateIndividual(privateIndividual); // imprtatnt
         hmapIdPrivateIndividual[idPrivateIndividual] = privateIndividual;
         hmapIdSensorPrivateIndividual[idSensor] = privateIndividual;
 
@@ -381,7 +509,7 @@ void ComputationAgent::loadCleaner(void)
         getline(iss, valeur, ';');
         dateEnd = Timestamp(valeur);
 
-        Cleaner *cleaner = new Cleaner(idCleaner, latitude, longitude, dateStart, dateEnd);
+        Cleaner *cleaner = new Cleaner(idCleaner, latitude, longitude, dateStart, dateEnd, nullptr);
         this->hmapIdCleaner[idCleaner] = cleaner;
     }
 }
@@ -416,8 +544,9 @@ void ComputationAgent::loadProvider(void)
         valeur = valeur.substr(pos, valeur.size());
         idCleaner = stoi(valeur);
 
-        Cleaner *cleaner = this->hmapIdCleaner[idCleaner];
-        Provider *provider = new Provider(idProvider, cleaner);
+        Cleaner *cleaner = hmapIdCleaner.at(idCleaner);
+        Provider *provider = new Provider(idProvider);
+        cleaner->setProvider(provider);
         hmapIdProvider[idProvider] = provider;
 
     }
