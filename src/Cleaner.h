@@ -31,7 +31,7 @@ public:
     // Contrat :
     //
 
-    Cleaner(double latitude, double longitude, Timestamp dateStart, Timestamp dateEnd);
+    Cleaner(int idCleaner, double latitude, double longitude, Timestamp dateStart, Timestamp dateEnd);
     // Mode d'emploi : Constructeur
 
     virtual ~Cleaner ( );
@@ -46,6 +46,7 @@ protected:
 //----------------------------------------------------- Méthodes protégées
 
 //----------------------------------------------------- Attributs protégés
+    int idCleaner;
     double latitude;
     double longitude;
     Timestamp dateStart;

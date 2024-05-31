@@ -68,6 +68,7 @@ Government--|> User
 
 
 Class Cleaner{
+-int idCleaner
 -double latitude
 -double longitude
 -String dateStart
