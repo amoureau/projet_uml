@@ -28,6 +28,10 @@ string Results::GetUserInput() {
     return input;
 } 
 
+string Results::Print(string message) {
+    cout << message << endl;
+}
+
 Results::Results ()
 {
 #ifdef MAP

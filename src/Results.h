@@ -32,6 +32,8 @@ public:
 
     string GetUserInput();
 
+    string Print(string message);
+    
     Results ();
 
 
