@@ -36,9 +36,8 @@ void ComputationAgent::loadData(void)
 
 int ComputationAgent::ComputeMeanQuality(double latitude, double longitude, double radius, Timestamp startTime, Timestamp endTime)
 {
-     vector<string> listeAttributs = {"O3", "NO2", "PM10", "SO2"};
+    vector<string> listeAttributs = {"O3", "NO2", "PM10", "SO2"};
     vector<int> listeMoyennes = {0, 0, 0, 0};
-    vector<int> listeMoyennes;
     int indiceAtmo = 0;
 
     for (string attribut : listeAttributs) {
@@ -187,8 +186,7 @@ bool ComputationAgent::ComputeSensorAnalysed(int sensorId, double areaRadius) {
     string list_molec[] = { "O3", "NO2", "SO2", "PM10"};
 
     for (string &molecule : list_molec) {
-        Attributes *attributes = hmapAttributes[molecule];
-        dicoMeanAll[molecule] = ComputeMeanForAnAttribute(*attributes, sensor->getLatitude(), sensor->getLongitude(), areaRadius, 0, 0);
+        dicoMeanAll[molecule] = ComputeMeanForAnAttribute(sensor->getLatitude(), sensor->getLongitude(), molecule, areaRadius, 0, 0);
     }
 
     for (Measurement *me: vecteurMeasurements) {
@@ -213,13 +211,14 @@ bool ComputationAgent::ComputeSensorAnalysed(int sensorId, double areaRadius) {
     return anomalies;
 }
 
-double ComputationAgent::ComputeMeanForAnAttribute ( Attributes &attribute, double latitude, double longitude, double radius, Timestamp startTime, Timestamp endTime) {
+double ComputationAgent::ComputeMeanForAnAttribute ( double latitude, double longitude, string &attribute, double radius, Timestamp startTime, Timestamp endTime) {
     double moyenne = 0;
+    Attributes attributes = *(hmapAttributes[attribute]);
     for (Measurement *me : vecteurMeasurements) {
         Timestamp mesureTime = me->getDate();
         Sensor *sensor = me->getSensor();
 
-        if ( me->getAttribute()->getId() == attribute.getId() ) {
+        if ( me->getAttribute()->getId() == attributes.getId() ) {
             if ((( startTime < mesureTime  && mesureTime < endTime) || (startTime == 0 && endTime == 0))
                 && (calculateDistance(latitude, longitude, sensor->getLatitude(), sensor->getLongitude())))
             {
