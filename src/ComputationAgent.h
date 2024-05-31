@@ -39,6 +39,10 @@ public:
     
     int ComputeMeanQuality(double latitude, double longitude, double radius, Timestamp startTime, Timestamp endTime);
 
+    int ComputeMeanQualityForAnAttribute(double latitude, double longitude, string attribut, double radius, Timestamp startTime, Timestamp endTime);
+
+    int ComputeMeanQuality(double latitude, double longitude, double radius, Timestamp startTime, Timestamp endTime);
+
 
     // getter setter
     unordered_map<int, Sensor*>& getHmapIdSensor()

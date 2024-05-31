@@ -22,22 +22,31 @@ void ComputationAgent::loadData(void)
     loadSensor();
     loadPrivateIndividual();
     loadAttributes();
-    loadMesurements();
 }
 
 int ComputationAgent::ComputeMeanQuality(double latitude, double longitude, double radius, Timestamp startTime, Timestamp endTime)
 {
     vector<string> listeAttributs = {"O3", "NO2", "PM10", "SO2"};
-    vector<int> listeMoyennes = {0, 0, 0, 0};
+    vector<int> listeMoyennes;
     int indiceAtmo = 0;
 
     for (string attribut : listeAttributs) {
-        int moyenne = ComputeMeanQualityForAttribute(latitude, longitude, radius, startTime, endTime, attribut);
+        double moyenne = ComputeMeanQualityForAnAttribute(latitude, longitude, attribut, radius, startTime, endTime);
+        if (moyenne != 0) {
+            listeMoyennes.push_back(moyenne);
+            int indice = indiceCorrespondingToMean(attribut, moyenne);
+            if (indice > indiceAtmo) {
+                indiceAtmo = indice;
+            }
+            else {
+                printf("Erreur : imposssible de calculer l'indice Atmo\n"); 
+            }
+        }
     }
-
     return indiceAtmo;
 }
 
+double ComputationAgent::ComputeMeanQualityF
 //------------------------------------------------- Surcharge d'opérateurs
 
 
@@ -76,11 +85,6 @@ ComputationAgent::~ComputationAgent ( )
         delete att.second;
     }
 
-    for(auto mes : vecteurMeasurements)
-    {
-        delete mes;
-    }
-
 
 
 
@@ -88,13 +92,10 @@ ComputationAgent::~ComputationAgent ( )
     hmapIdSensor.clear();
     hmapIdPrivateIndividual.clear();
     hmapAttributes.clear();
-    vecteurMeasurements.clear();
-
 
     // lien - structure de données annexe
     mapCoordSensor.clear(); 
     hmapIdSensorPrivateIndividual.clear(); 
-    hmapDescriptionAttributes.clear();
 
 
 } //----- Fin de ~ComputationAgent
@@ -214,49 +215,5 @@ void ComputationAgent::loadAttributes(void)
 
             Attributes *att = new Attributes(idAttribute, unit, description);
             hmapAttributes[idAttribute] = att;
-            hmapDescriptionAttributes[description] = att;
         }
     }
-
-void ComputationAgent::loadMesurements(void)
-{
-    // chemins acces fichiers:
-    string fichierCSV = "dataset/measurements.csv";
-    ifstream fichier(fichierCSV);
-    if (!fichier) {
-        cerr << "Erreur : impossible d'ouvrir le fichier " << fichierCSV <<  endl;
-        exit(1);
-    }
-
-    string ligne;
-    while (getline(fichier, ligne)) {
-        istringstream iss(ligne);
-        
-
-        
-        string valeur;
-
-        // Lecture des valeurs séparées par des points virgules
-        getline(iss, valeur, ';');
-        string dateString = valeur;
-        Timestamp date(dateString);
-
-
-        getline(iss, valeur, ';');
-        size_t pos = valeur.find_first_of("0123456789");
-        valeur = valeur.substr(pos, valeur.size());
-        int idSensor = stoi(valeur);
-
-        getline(iss, valeur, ';');
-        string description = valeur;
-
-
-        getline(iss, valeur, ';');
-        double value = stod(valeur);
-
-        Sensor *sensor = hmapIdSensor[idSensor];
-        Attributes *att = hmapDescriptionAttributes[description];
-        Measurement *mes = new Measurement(value, date, sensor, att);
-        vecteurMeasurements.push_back(mes);
-    }
-}
