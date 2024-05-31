@@ -17,6 +17,7 @@
 #include "PrivateIndividual.h"
 #include "Results.h"
 #include "Timestamp.h"
+#include "Provider.h"
 
 using namespace std;
 //------------------------------------------------------------- Constantes
@@ -68,6 +69,7 @@ protected:
     unordered_map<int, PrivateIndividual*> hmapIdPrivateIndividual;
     unordered_map<string, Attributes*> hmapAttributes;
     vector<Measurement*> vecteurMeasurements;
+    unoredred_map<int, Cleaner*> hmapIdCleaner;
 
     // lien - structure de données annexe
     map<pair<double, double>, vector<Sensor*>> mapCoordSensor; 
@@ -79,6 +81,7 @@ private:
     void loadPrivateIndividual(void);
     void loadAttributes(void);
     void loadMesurements(void);
+    void loadCleaner(void);
 
 };
 
