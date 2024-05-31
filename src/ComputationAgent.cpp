@@ -271,7 +271,7 @@ void ComputationAgent::loadMesurements(void)
     }
 }
 
-void loadCleaner(void)
+void ComputationAgent::loadCleaner(void)
 {
     // chemins acces fichiers:
     string fichierCSV = "dataset/cleaners.csv";
@@ -318,7 +318,7 @@ void loadCleaner(void)
     }
 }
 
-void loadProvider(void)
+void ComputationAgent::loadProvider(void)
 {
     // chemins acces fichiers:
     string fichierCSV = "dataset/providers.csv";

@@ -8,7 +8,7 @@ TARGET = airwatcher
 CXX = g++
 
 # Options de compilation
-CXXFLAGS = -ansi -pedantic -Wall -std=c++11 -g -DMAP
+CXXFLAGS = -ansi -pedantic -Wall -std=c++11 -g -DMAP 
 
 # Répertoire des fichiers sources
 SRC_DIR = $(CURDIR)/src
@@ -32,7 +32,7 @@ all: $(TARGET)
 
 # Règle pour générer le programme final
 $(TARGET): $(OBJECTS)
-	$(CXX) $(CXXFLAGS) -o $@ $^
+	$(CXX) $(CXXFLAGS) -o $@ $^ -lm
 	@echo "Compilation terminée, executable créé: $@"
 
 # Règle générique pour la création des fichiers objets

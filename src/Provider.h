@@ -4,6 +4,8 @@
 
 //--------------------------------------------------- Interfaces utilisÃ©es
 #include <string>
+#include <iostream>
+#include "Cleaner.h"
 using namespace std;
 //------------------------------------------------------------- Constantes
 

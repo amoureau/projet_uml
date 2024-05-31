@@ -9,6 +9,7 @@
 #include <map>
 #include <fstream>
 #include <sstream>
+#include <cmath>
 
 #include "Measurement.h"
 #include "Cleaner.h"
@@ -17,11 +18,7 @@
 #include "PrivateIndividual.h"
 #include "Results.h"
 #include "Timestamp.h"
-<<<<<<< HEAD
-
-=======
 #include "Provider.h"
->>>>>>> 48724fcb7892bdfdcd180656dacbd3851330caea
 
 using namespace std;
 //------------------------------------------------------------- Constantes
@@ -197,10 +194,8 @@ protected:
     unordered_map<string, Attributes*> hmapAttributes;
     vector<Measurement*> vecteurMeasurements;
     unordered_map<int, Cleaner*> hmapIdCleaner;
-<<<<<<< HEAD
     unordered_map<int, Provider*> hmapIdProvider;
-=======
->>>>>>> 2a19feae0f7f9e06cf0b4f9fd2843efd74338dc7
+
 
     // lien - structure de données annexe
     map<pair<double, double>, vector<Sensor*>> mapCoordSensor; 
@@ -213,11 +208,8 @@ private:
     void loadAttributes(void);
     void loadMesurements(void);
     void loadCleaner(void);
-<<<<<<< HEAD
     void loadProvider(void);
 
-=======
->>>>>>> 2a19feae0f7f9e06cf0b4f9fd2843efd74338dc7
 };
 
 //-------------------------------- Autres définitions dépendantes
