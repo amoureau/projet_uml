@@ -48,6 +48,7 @@ int main(void)
         cout << endl;
     }
 
+    cout << "Test ComputeSensorAnalysed: " << calculateur.ComputeSensorAnalysed(14, 4.0);
 
     return 0;
 }
