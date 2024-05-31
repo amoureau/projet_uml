@@ -48,7 +48,6 @@ class Controller
         virtual ~Controller ( );
 
     private:
-        ComputationAgent *calculateur;
         User *user;
         Results *result;
 };

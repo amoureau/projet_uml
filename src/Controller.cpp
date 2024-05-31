@@ -7,7 +7,7 @@ using namespace std;
 // Pour les affichages:
 void Controller::displayHmapIdSensor()
 {
-    for(auto it : this->calculateur->getHmapIdSensor())
+    for(auto it : this->user->getCalculateur()->getHmapIdSensor())
     {
         cout << "Id:" << it.first << ", Sensor:" << *(it.second) << endl;
     }
@@ -15,7 +15,7 @@ void Controller::displayHmapIdSensor()
 
 void Controller::displayHmapIdPrivateIndividual()
 {
-    for(auto it : this->calculateur->getHmapIdPrivateIndividual())
+    for(auto it : this->user->getCalculateur()->getHmapIdPrivateIndividual())
     {
         cout << "Id:" << it.first << ", PrivateIndividual:" << *(it.second) << endl;
     }
@@ -23,7 +23,7 @@ void Controller::displayHmapIdPrivateIndividual()
 
 void Controller::displayHmapAttributes()
 {
-    for(auto it : this->calculateur->getHmapAttributes())
+    for(auto it : this->user->getCalculateur()->getHmapAttributes())
     {
         cout << "Id:" << it.first << ", Attributes:" << *(it.second) << endl;
     }
@@ -31,7 +31,7 @@ void Controller::displayHmapAttributes()
 
 void Controller::displayHmapIdCleaner()
 {
-    for(auto it : this->calculateur->getHmapIdCleaner())
+    for(auto it : this->user->getCalculateur()->getHmapIdCleaner())
     {
         cout << "Id:" << it.first << ", Cleaner:" << *(it.second) << endl;
     }
@@ -39,7 +39,7 @@ void Controller::displayHmapIdCleaner()
 
 void Controller::displayHmapIdProvider()
 {
-    for(auto it : this->calculateur->getHmapIdProvider())
+    for(auto it : this->user->getCalculateur()->getHmapIdProvider())
     {
         cout << "Id:" << it.first << ", Provider:" << *(it.second) << endl;
     }
@@ -47,7 +47,7 @@ void Controller::displayHmapIdProvider()
 
 void Controller::displayHmapIdSensorPrivateIndividual()
 {
-    for(auto it : this->calculateur->getHmapIdSensorPrivateIndividual())
+    for(auto it : this->user->getCalculateur()->getHmapIdSensorPrivateIndividual())
     {
         cout << "Id:" << it.first << ", sensor:" << *(it.second) << endl;
     }
@@ -56,14 +56,14 @@ void Controller::displayHmapIdSensorPrivateIndividual()
 
 void Controller::displayHmapDescriptionAttributes()
 {
-    for(auto it : this->calculateur->getHmapDescriptionAttributes())
+    for(auto it : this->user->getCalculateur()->getHmapDescriptionAttributes())
     {
         cout << "Description:" << it.first << ", Attributes:" << *(it.second) << endl;
     }
 }
 void Controller::displayVecteurMeasurements()
 {
-    for(auto it : this->calculateur->getVecteurMeasurements())
+    for(auto it : this->user->getCalculateur()->getVecteurMeasurements())
     {
         cout << "Measurement:" << *it << endl;
     }
@@ -72,7 +72,7 @@ void Controller::displayVecteurMeasurements()
 
 void Controller::displayMapCoordSensor()
 {
-    for(auto it : this->calculateur->getMapCoordSensor())
+    for(auto it : this->user->getCalculateur()->getMapCoordSensor())
     {
         cout << "CoordSensor:" << it.first.first << " " << it.first.second << endl;
         for(auto it2 : it.second)
@@ -102,13 +102,11 @@ Controller::Controller(){
     /* Création du résultat */
     Results *result = new Results();
 
-    this->calculateur = calculateur;
     this->user = admin;
     this->result = result;
 }
 
 Controller::~Controller(){
-    delete calculateur;
     delete user;
     delete result;
 }
@@ -126,6 +124,19 @@ int Controller::mainController(void)
     //displayHmapIdSensorPrivateIndividual();
     //displayHmapDescriptionAttributes();
 
+
+    string userInput = "";
+    while(userInput != "exit")
+    {
+        result->GreetingUser(user);
+        userInput = result->GetUserInput();
+        switch(userInput)
+        {
+            case "DisplayMeanQuality":
+                user
+                break;
+        }
+    }
 
     return 0;
 

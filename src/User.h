@@ -34,6 +34,26 @@ public:
     double ComputeQualityLocDate(double latitude, double longitude, Timestamp start, Timestamp end);
     map<int, pair<double,double>>ComputeRankedScoredSensor(int idSensor);
 
+    // getter setter
+    string getEmail() const {
+        return email;
+    }
+    string getPassword() const {
+        return password;
+    }
+    ComputationAgent* getCalculateur() const {
+        return calculateur;
+    }
+    void setEmail(string email) {
+        this->email = email;
+    }
+    void setPassword(string password) {
+        this->password = password;
+    }
+    void setCalculateur(ComputationAgent* calculateur) {
+        this->calculateur = calculateur;
+    }
+
 //------------------------------------------------- Surcharge d'opÃ©rateurs
 
 
