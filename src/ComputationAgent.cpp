@@ -37,7 +37,12 @@ void ComputationAgent::loadData(void)
 int ComputationAgent::ComputeMeanQuality(double latitude, double longitude, double radius, Timestamp startTime, Timestamp endTime)
 {
     vector<string> listeAttributs = {"O3", "NO2", "PM10", "SO2"};
+<<<<<<< HEAD
     vector<int> listeMoyennes = {0, 0, 0, 0};
+=======
+
+    vector<int> listeMoyennes;
+>>>>>>> 6f024f2 (zearezz)
     int indiceAtmo = 0;
 
     for (string attribut : listeAttributs) {
