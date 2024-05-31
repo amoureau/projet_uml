@@ -33,6 +33,8 @@ public:
     string GetUserInput();
 
     string Print(string message);
+
+    string DisplayMeanAirQuality(double mean);
     
     Results ();
 

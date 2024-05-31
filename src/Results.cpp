@@ -32,6 +32,10 @@ string Results::Print(string message) {
     cout << message << endl;
 }
 
+string Results::DisplayMeanAirQuality(double mean) {
+    cout << "La qualité de l'air moyenne est de " << mean << endl;
+}
+
 Results::Results ()
 {
 #ifdef MAP
