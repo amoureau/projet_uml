@@ -29,12 +29,29 @@ void ComputationAgent::loadData(void)
 /*
 int ComputationAgent::ComputeMeanQuality(double latitude, double longitude, double radius, Timestamp startTime, Timestamp endTime)
 {
-    vector<string> listeAttributs = {"O3", "NO2", "PM10", "SO2"};
+     vector<string> listeAttributs = {"O3", "NO2", "PM10", "SO2"};
     vector<int> listeMoyennes = {0, 0, 0, 0};
+    vector<int> listeMoyennes;
     int indiceAtmo = 0;
 
+    for (string attribut : listeAttributs) {
+        double moyenne = ComputeMeanQualityForAnAttribute(latitude, longitude, attribut, radius, startTime, endTime);
+        if (moyenne != 0) {
+            listeMoyennes.push_back(moyenne);
+            int indice = indiceCorrespondingToMean(attribut, moyenne);
+            if (indice > indiceAtmo) {
+                indiceAtmo = indice;
+            }
+            else {
+                printf("Erreur : imposssible de calculer l'indice Atmo\n"); 
+            }
+        }
+    }
+
+    return indiceAtmo;
 }
 */
+
 
 //------------------------------------------------- Surcharge d'opérateurs
 
@@ -113,6 +130,26 @@ ComputationAgent::~ComputationAgent ( )
 //------------------------------------------------------------------ PRIVE
 
 //----------------------------------------------------- Méthodes protégées
+double ComputationAgent::ComputeMeanQualityForAnAttribute(double latitude, double longitude, string attribute, double radius, Timestamp startTime, Timestamp endTime)
+{
+    double moyenne = 0;
+    for (Measurement* mesure:vecteurMeasurements)
+    {
+        if (mesure->getDate() > startTime && mesure->getTimestamp() < endTime)
+        {
+            if (mesure->getSensor()->getLatitude() == latitude && mesure->getSensor()->getLongitude() == longitude)
+            {
+                if (mesure->getAttribute()->getIdAttribute() == attribute)
+                {
+                    moyenne += mesure->getValue();
+                }
+            }
+        }
+    }
+
+    return sum / count;
+
+}
 
 void ComputationAgent::loadSensor(void)
 {

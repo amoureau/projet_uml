@@ -38,6 +38,11 @@ public:
 //----------------------------------------------------- MÃ©thodes publiques
     // chargement des données
     void loadData(void);
+    
+    int ComputeMeanQuality(double latitude, double longitude, double radius, Timestamp startTime, Timestamp endTime);
+
+    
+
 
 
     // getter setter
@@ -209,6 +214,9 @@ private:
     void loadMesurements(void);
     void loadCleaner(void);
     void loadProvider(void);
+
+    double ComputeMeanQualityForAnAttribute(double latitude, double longitude, string attribut, double radius, Timestamp startTime, Timestamp endTime);
+    int indiceCorrespondingToMean(string attribut, double moyenne);
 
 };
 

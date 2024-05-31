@@ -15,7 +15,25 @@ using namespace std;
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
+double Measurement::getValue() const
+{
+    return value;
+}
 
+Timestamp Measurement::getDate() const
+{
+    return date;
+}
+
+Sensor* Measurement::getSensor() const
+{
+    return sensor;
+}
+
+Attributes* Measurement::getAttribute() const
+{
+    return attribute;
+}
 
 
 //------------------------------------------------- Surcharge d'opérateurs
