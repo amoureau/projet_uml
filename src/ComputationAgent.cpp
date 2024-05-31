@@ -37,12 +37,8 @@ void ComputationAgent::loadData(void)
 int ComputationAgent::ComputeMeanQuality(double latitude, double longitude, double radius, Timestamp startTime, Timestamp endTime)
 {
     vector<string> listeAttributs = {"O3", "NO2", "PM10", "SO2"};
-<<<<<<< HEAD
-    vector<int> listeMoyennes = {0, 0, 0, 0};
-=======
 
     vector<int> listeMoyennes;
->>>>>>> 6f024f2 (zearezz)
     int indiceAtmo = 0;
 
     for (string attribut : listeAttributs) {
@@ -180,58 +176,6 @@ int ComputationAgent::indiceCorrespondingToMean(string attribut, double moyenne)
     else {
         return 0;
     }
-}
-
-bool ComputationAgent::ComputeSensorAnalysed(int sensorId, double areaRadius) {
-    Sensor *sensor = hmapIdSensor[sensorId];
-
-    bool anomalies = false;
-    unordered_map<string, int> dicoMeanCapteur, dicoMeanAll, dicoSumOfSquaresAll, dicoSdAll, dicoNbValueAll;
-    dicoMeanCapteur["O3"] = dicoMeanCapteur["NO2"] = dicoMeanCapteur["SO2"] = dicoMeanCapteur["PM10"] = 0;
-    string list_molec[] = { "O3", "NO2", "SO2", "PM10"};
-
-    for (string &molecule : list_molec) {
-        dicoMeanAll[molecule] = ComputeMeanForAnAttribute(sensor->getLatitude(), sensor->getLongitude(), molecule, areaRadius, 0, 0);
-    }
-
-    for (Measurement *me: vecteurMeasurements) {
-        string attributeDescription = me->getAttribute()->getDescription();
-        if (me->getSensor()->getId() == sensorId) {
-            dicoMeanCapteur[ attributeDescription ] += me->getValue();
-        }
-
-        dicoSumOfSquaresAll[ attributeDescription ] += ( me->getValue() - dicoMeanAll[ attributeDescription ])*( me->getValue() - dicoMeanAll[ attributeDescription ]);
-        dicoNbValueAll[ attributeDescription ] += 1;
-    }
-
-    //On exclue les données du capteur s'il y a un problème pour la moyenne d'une des molécules au moins
-    for (string &molecule : list_molec) {
-        dicoSdAll[ molecule ] = sqrt( (1/dicoNbValueAll[molecule]) * dicoSumOfSquaresAll[molecule] );
-        if ((dicoMeanCapteur[ molecule ] > dicoMeanAll[molecule] + 3*dicoSdAll[molecule] ) 
-            || (dicoMeanCapteur[ molecule ] < dicoMeanAll[molecule] - 3*dicoSdAll[molecule])) {
-                anomalies = true;
-        }
-    }
-
-    return anomalies;
-}
-
-double ComputationAgent::ComputeMeanForAnAttribute ( double latitude, double longitude, string &attribute, double radius, Timestamp startTime, Timestamp endTime) {
-    double moyenne = 0;
-    Attributes attributes = *(hmapAttributes[attribute]);
-    for (Measurement *me : vecteurMeasurements) {
-        Timestamp mesureTime = me->getDate();
-        Sensor *sensor = me->getSensor();
-
-        if ( me->getAttribute()->getId() == attributes.getId() ) {
-            if ((( startTime < mesureTime  && mesureTime < endTime) || (startTime == 0 && endTime == 0))
-                && (calculateDistance(latitude, longitude, sensor->getLatitude(), sensor->getLongitude())))
-            {
-                moyenne += me->getValue();
-            }
-        }
-    }
-    return moyenne;
 }
 
 //------------------------------------------------- Surcharge d'opérateurs
