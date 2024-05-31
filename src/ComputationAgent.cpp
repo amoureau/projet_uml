@@ -71,23 +71,6 @@ bool ComputationAgent::ComputeSensorAnalysed(int sensorId, double areaRadius) {
     return true;
 }
 
-double ComputationAgent::ComputeMeanForAnAttribute ( Attributes &attribute, double latitude, double longitude, double radius, Timestamp startTime, Timestamp endTime) {
-    double moyenne = 0;
-    for (Measurement *me : vecteurMeasurements) {
-        Timestamp mesureTime = me->getDate();
-        Sensor *sensor = me->getSensor();
-
-        if ( me->getAttribute()->getId() == attribute.getId() ) {
-            if ((( startTime < mesureTime  && mesureTime < endTime) || (startTime == 0 && endTime == 0))
-                && (calculateDistance(latitude, longitude, sensor->getLatitude(), sensor->getLongitude())))
-            {
-                moyenne += me->getValue();
-            }
-        }
-    }
-    return moyenne;
-}
-
 //------------------------------------------------- Surcharge d'opérateurs
 
 
@@ -165,6 +148,23 @@ ComputationAgent::~ComputationAgent ( )
 //------------------------------------------------------------------ PRIVE
 
 //----------------------------------------------------- Méthodes protégées
+
+double ComputationAgent::ComputeMeanForAnAttribute ( Attributes &attribute, double latitude, double longitude, double radius, Timestamp startTime, Timestamp endTime) {
+    double moyenne = 0;
+    for (Measurement *me : vecteurMeasurements) {
+        Timestamp mesureTime = me->getDate();
+        Sensor *sensor = me->getSensor();
+
+        if ( me->getAttribute()->getId() == attribute.getId() ) {
+            if ((( startTime < mesureTime  && mesureTime < endTime) || (startTime == 0 && endTime == 0))
+                && (calculateDistance(latitude, longitude, sensor->getLatitude(), sensor->getLongitude())))
+            {
+                moyenne += me->getValue();
+            }
+        }
+    }
+    return moyenne;
+}
 
 void ComputationAgent::loadSensor(void)
 {
