@@ -10,6 +10,7 @@ using namespace std;
 
 //------------------------------------------------------ Include personnel
 #include "Results.h"
+#include "Controller.h"
 #include "Timestamp.h"
 
 //------------------------------------------------------------- Constantes

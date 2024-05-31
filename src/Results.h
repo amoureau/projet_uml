@@ -41,4 +41,4 @@ protected:
 };
 
 //-------------------------------- Autres définitions dépendantes
-#endif 
+#endif
