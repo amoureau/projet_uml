@@ -22,7 +22,7 @@ void Results::GreetingsUser(User user)  // Fonction pour saluer l'utilisateur
 }
 
 string Results::GetUserInput() { // Fonction générale pour récupérer l'input de l'utilisateur
-    string input;                // On peut l'utiliser pour récupérer n'importe quel input mais préférable d'utiliser les fonctions spécifiques 
+    string input;                // préférable d'utiliser les fonctions spécifiques ci-dessous
     cout << "Que souhaitez-vous faire ?" << endl;
     cin >> input;
     return input;
