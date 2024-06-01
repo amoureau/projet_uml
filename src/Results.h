@@ -32,6 +32,16 @@ public:
 
     string GetUserInput();
 
+    string GetInputFonctionnalite();
+
+    string GetInputIdSensor();
+
+    string GetInputTimeChoice();
+
+    string GetInputStartTime();
+
+    string GetInputEndTime();
+
     string Print(string message);
 
     string DisplayMeanAirQuality(double mean);
