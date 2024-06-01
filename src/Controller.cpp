@@ -128,7 +128,7 @@ int Controller::mainController(void)
     string userInput = "";
     while(userInput != "exit")
     {
-        result->GreetingUser(user);
+        result->GreetingsUser(user);
         userInput = result->GetUserInput();
         switch(userInput)
         {
