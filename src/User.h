@@ -28,8 +28,6 @@ class User
 
 public:
 //----------------------------------------------------- MÃ©thodes publiques
-    string getEmail() const { return email; }
-    string getPassword() const { return password; }
     
     double ComputeMeanQualityCircle(double latitude, double longitude, string start, string end);
     double ComputeWorstQualityDate(Timestamp date);

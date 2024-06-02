@@ -125,15 +125,27 @@ int Controller::mainController(void)
     //displayHmapDescriptionAttributes();
 
 
-    string userInput = "";
-    while(userInput != "exit")
+    int userInput = -1;
+    while(userInput != 0)
     {
-        result->GreetingsUser(user);
-        userInput = result->GetUserInput();
+        result->GreetingsUser(*user);
+        userInput = result->GetInputFonctionnalite();
         switch(userInput)
         {
-            case "DisplayMeanQuality":
-                user
+            case 0:
+                // Quitter
+                cout << "Au revoir !" << endl;
+                break;
+            case 1:
+                // Analyser la qualité de l'air
+                //result->DisplayMeanAirQuality(user->getCalculateur()->ComputeMeanQuality(/*foutre les paramètres*/));
+                break;
+            case 2:
+                // Analyser un capteur
+                int idSensor = result->GetInputIdSensor(); 
+                int radius = result->GetInputAreaRadiusSensor();
+                bool anomalie = user->getCalculateur()->ComputeSensorAnalysed(idSensor, radius);
+                result->DisplaySensorAnalysed(anomalie);
                 break;
         }
     }

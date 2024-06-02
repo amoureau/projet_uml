@@ -23,36 +23,45 @@ void Results::GreetingsUser(User user)  // Fonction pour saluer l'utilisateur
 
 string Results::GetUserInput() { // Fonction générale pour récupérer l'input de l'utilisateur
     string input;                // préférable d'utiliser les fonctions spécifiques ci-dessous
-    cout << "Que souhaitez-vous faire ?" << endl;
+    cout << "Que souhaitez-vous faire ? " << endl;
     cin >> input;
     return input;
 } 
 
-string Results::GetInputFonctionnalite() { // Fonction pour récupérer l'input de la fonctionnalité souhaitée
-    string fonctionnalite;
+int Results::GetInputFonctionnalite() { // Fonction pour récupérer l'input de la fonctionnalité souhaitée
+    int fonctionnalite;
     cout << "Quelle fonctionnalité souhaitez-vous utiliser ?" << endl;
+    cout << "0. Quitter" << endl;
     cout << "1. Analyser la qualité de l'air" << endl;
     cout << "2. Analyser un capteur" << endl;
-    cout << "Entrer le numéro correspondant à la fonctionnalité souhaitée :";
+    cout << "Entrer le numéro correspondant à la fonctionnalité souhaitée : ";
     cin >> fonctionnalite;
     return fonctionnalite;
 }
 
-string Results::GetInputIdSensor() { // Fonction pour récupérer l'input de l'identifiant du capteur
-    string idSensor;
+int Results::GetInputIdSensor() { // Fonction pour récupérer l'input de l'identifiant du capteur
+    int idSensor;
     cout << "Quel est l'identifiant du capteur que vous souhaitez analyser ?" << endl;
-    cout << "Entrer l'identifiant du capteur :";
+    cout << "Entrer l'identifiant du capteur : ";
     cin >> idSensor;
     return idSensor;
 }
 
-string Results::GetInputTimeChoice() { // Fonction pour récupérer si l'utilisateur souhaite analyser la qualité de l'air sur une période précise ou non
-    string time;
+int Results::GetInputAreaRadiusSensor() { // Fonction pour récupérer l'input du rayon de la zone à analyser
+    int radius;
+    cout << "Quel est le rayon de la zone que vous souhaitez analyser ?" << endl;
+    cout << "Entrer le rayon de la zone : ";
+    cin >> radius;
+    return radius;
+}
+
+int Results::GetInputTimeChoice() { // Fonction pour récupérer si l'utilisateur souhaite analyser la qualité de l'air sur une période précise ou non
+    int choice;
     cout << "Souhaitez vous analyser la qualité de l'air sur une période précise ?" << endl;
-    cout << "Si oui, veuillez entrer 1" << endl;
-    cout << "Si non, veuillez entrer 0" << endl;
-    cin >> time;
-    return time;
+    cout << "Si oui, veuillez entrer 1 " << endl;
+    cout << "Si non, veuillez entrer 0 " << endl;
+    cin >> choice;
+    return choice;
 }
 
 string Results::GetInputStartTime() { // Fonction pour récupérer l'input de la date de début de la période
@@ -71,15 +80,15 @@ string Results::GetInputEndTime() { // Fonction pour récupérer l'input de la d
     return date;
 }
 
-string Results::Print(string message) { // Fonction pour afficher un message
+void Results::Print(string message) { // Fonction pour afficher un message
     cout << message << endl;
 }
 
-string Results::DisplayMeanAirQuality(double mean) { // Fonction pour afficher la qualité de l'air moyenne
+void Results::DisplayMeanAirQuality(double mean) { // Fonction pour afficher la qualité de l'air moyenne
     cout << "La qualité de l'air moyenne est de " << mean << endl;
 }
 
-string Results::DisplaySensorAnalysed(bool anomalie) { // Fonction pour afficher si un capteur est anormal ou non
+void Results::DisplaySensorAnalysed(bool anomalie) { // Fonction pour afficher si un capteur est anormal ou non
     if(anomalie) {
         cout << "Il y a une anomalie sur le capteur analysé" << endl;
     } else {

@@ -32,21 +32,23 @@ public:
 
     string GetUserInput();
 
-    string GetInputFonctionnalite();
+    int GetInputFonctionnalite();
 
-    string GetInputIdSensor();
+    int GetInputIdSensor();
 
-    string GetInputTimeChoice();
+    int GetInputAreaRadiusSensor();
+
+    int GetInputTimeChoice();
 
     string GetInputStartTime();
 
     string GetInputEndTime();
 
-    string Print(string message);
+    void Print(string message);
 
-    string DisplayMeanAirQuality(double mean);
+    void DisplayMeanAirQuality(double mean);
 
-    string DisplaySensorAnalysed(bool anomalie);
+    void DisplaySensorAnalysed(bool anomalie);
 
     Results();
 
