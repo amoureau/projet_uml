@@ -63,22 +63,25 @@ bool ComputationAgent::ComputeSensorAnalysed(int sensorId, double areaRadius) {
     Sensor *sensor = hmapIdSensor[sensorId];
 
     bool anomalies = false;
-    unordered_map<string, int> dicoMeanCapteur, dicoMeanAll, dicoSumOfSquaresAll, dicoSdAll, dicoNbValueAll;
+    unordered_map<string, int> dicoNbValueAll;
+    unordered_map<string, double> dicoMeanAll, dicoMeanCapteur, dicoSumOfSquaresAll, dicoSdAll;
     dicoMeanCapteur["O3"] = dicoMeanCapteur["NO2"] = dicoMeanCapteur["SO2"] = dicoMeanCapteur["PM10"] = 0;
     string list_molec[] = { "O3", "NO2", "SO2", "PM10"};
 
     for (string &molecule : list_molec) {
+        cout << molecule << ": ";
         dicoMeanAll[molecule] = ComputeMeanForAnAttribute(sensor->getLatitude(), sensor->getLongitude(), molecule, areaRadius, 0, 0);
+        cout << dicoMeanAll[molecule] << endl;
     }
 
     for (Measurement *me: vecteurMeasurements) {
-        string attributeDescription = me->getAttribute()->getDescription();
+        string attrId= me->getAttribute()->getId();
         if (me->getSensor()->getId() == sensorId) {
-            dicoMeanCapteur[ attributeDescription ] += me->getValue();
+            dicoMeanCapteur[ attrId ] += me->getValue();
         }
 
-        dicoSumOfSquaresAll[ attributeDescription ] += ( me->getValue() - dicoMeanAll[ attributeDescription ])*( me->getValue() - dicoMeanAll[ attributeDescription ]);
-        dicoNbValueAll[ attributeDescription ] += 1;
+        dicoSumOfSquaresAll[ attrId ] += ( me->getValue() - dicoMeanAll[ attrId ])*( me->getValue() - dicoMeanAll[ attrId ]);
+        dicoNbValueAll[ attrId ] += 1;
     }
 
     //On exclue les données du capteur s'il y a un problème pour la moyenne d'une des molécules au moins
@@ -98,17 +101,17 @@ double ComputationAgent::ComputeMeanForAnAttribute ( double latitude, double lon
     double moyenne = 0;
     Attributes attributes = *(hmapAttributes[attribute]);
 
+    int i = -1;
+
     for (Measurement *me : vecteurMeasurements) {
+        i++;
         Timestamp mesureTime = me->getDate();
         Sensor *sensor = me->getSensor();
 
-        cout << 123 << endl;
-        cout << me->getAttribute() << endl;
-        cout << attributes.getId() << endl;
-
         if ( me->getAttribute()->getId() == attributes.getId() ) {
+            //cout << calculateDistance(latitude, longitude, sensor->getLatitude(), sensor->getLongitude()) << endl;
             if ((( startTime < mesureTime  && mesureTime < endTime) || (startTime == 0 && endTime == 0))
-                && (calculateDistance(latitude, longitude, sensor->getLatitude(), sensor->getLongitude())))
+                && (calculateDistance(latitude, longitude, sensor->getLatitude(), sensor->getLongitude()) <= radius))
             {
                 moyenne += me->getValue();
                 
@@ -468,9 +471,7 @@ void ComputationAgent::loadMesurements(void)
         double value = stod(valeur);
 
         Sensor *sensor = hmapIdSensor[idSensor];
-        Attributes *att = hmapDescriptionAttributes[description];
-
-        cout << hmapDescriptionAttributes[description]->getId() << endl;
+        Attributes *att = hmapAttributes[description];
         
         Measurement *mes = new Measurement(value, date, sensor, att);
         vecteurMeasurements.push_back(mes);

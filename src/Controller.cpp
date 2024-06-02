@@ -16,7 +16,7 @@ void Controller::displayHmapIdSensor()
 void Controller::displayVecteurMeasurements()   {
     vector<Measurement*> measurements = this->calculateur->getVecteurMeasurements();
     for(auto measurement : measurements){
-        cout << "Measurement: " << *measurement << endl;
+        cout << "Measurement: " << (*measurement) << endl;
     }
 }
 
@@ -63,15 +63,8 @@ int Controller::mainController(void)
     // Affichage des données
     //displayHmapIdSensor();
     //displayHmapAttributes();
-    //testComputeSensorAnalysed();
-
-    unordered_map<string, int> test;
-    //string t = "ab";
-    test["ab"] = 123;
-    for (auto t : test) {
-        cout << t.first << endl;
-        cout << t.second << endl;
-    }
+    //displayVecteurMeasurements();
+    testComputeSensorAnalysed();
 
     return 0;
 

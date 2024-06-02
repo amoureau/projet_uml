@@ -37,7 +37,8 @@ public:
 //------------------------------------------------- Surcharge d'opÃ©rateurs
     friend ostream& operator<<(ostream& os, const Measurement& me)
     {
-        os << me.getDate() << " " << me.getSensor()->getId() << " " << me.getAttribute() << " " << me.getValue();
+        os << me.getDate() << " " << me.getSensor()->getId() << " " << me.getAttribute()->getId() << " " << me.getValue();
+        return os;
     }
 
 //-------------------------------------------- Constructeurs - destructeur
