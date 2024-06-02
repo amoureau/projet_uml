@@ -126,9 +126,9 @@ int Controller::mainController(void)
 
 
     int userInput = -1;
+    result->GreetingsUser(*user);
     while(userInput != 0)
     {
-        result->GreetingsUser(*user);
         userInput = result->GetInputFonctionnalite();
         switch(userInput)
         {

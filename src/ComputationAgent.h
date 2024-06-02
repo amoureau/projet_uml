@@ -22,7 +22,7 @@
 
 using namespace std;
 //------------------------------------------------------------- Constantes
-const double RAYON_TERRE = 63710.0; //km
+const double RAYON_TERRE = 6371.0; //km
 const double PI = 3.1415926;
 //------------------------------------------------------------------ Types
 
@@ -103,8 +103,8 @@ public:
 
         double dlon = lon2_rad - lon1_rad;
         double dlat = lat2_rad - lat1_rad;
-        double a = sin( dlat / 2 ) * sin( dlat / 2) + cos(lat1) * cos (lat2) * sin(dlon / 2) * sin( dlon / 2);
-        double c = 2 * atan2( sqrt(a), sqrt(1-a));
+        double a = sin(dlat / 2) * sin(dlat / 2) + cos(lat1_rad) * cos(lat2_rad) * sin(dlon / 2) * sin(dlon / 2);
+        double c = 2 * atan2(sqrt(a), sqrt(1 - a));
         return RAYON_TERRE * c;
     }
 
