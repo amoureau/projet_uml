@@ -1,4 +1,5 @@
 #include "Controller.h"
+#include "Test.h"
 
 
 
@@ -113,15 +114,15 @@ Controller::~Controller(){
 int Controller::mainController(void)
 {
     // Affichage des données
-    //displayHmapIdSensor();
-    //displayHmapIdPrivateIndividual();
-    //displayHmapAttributes();
-    //displayVecteurMeasurements();
-    //displayHmapIdCleaner();
-    //displayHmapIdProvider();
-    //displayMapCoordSensor();
-    //displayHmapIdSensorPrivateIndividual();
-    //displayHmapDescriptionAttributes();
+    // displayHmapIdSensor();
+    // displayHmapIdPrivateIndividual();
+    // displayHmapAttributes();
+    // displayVecteurMeasurements();
+    // displayHmapIdCleaner();
+    // displayHmapIdProvider();
+    // displayMapCoordSensor();
+    // displayHmapIdSensorPrivateIndividual();
+    // displayHmapDescriptionAttributes();
 
 
     // string userInput = "";
@@ -145,8 +146,9 @@ int Controller::mainController(void)
 
 int main(void)
 {
-    Controller *controller = new Controller();
-    controller->mainController();
-    delete controller;
+    // Controller *controller = new Controller();
+    // controller->mainController();
+    // delete controller;
+    Test::testComputeSensorAnalysed();
     return 0;
 }

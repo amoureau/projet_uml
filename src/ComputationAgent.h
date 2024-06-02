@@ -38,6 +38,8 @@ public:
 //----------------------------------------------------- MÃ©thodes publiques
     // chargement des données
     void loadData(void);
+
+    void loadTestData(string chemin);
     
     int ComputeMeanQuality(double latitude, double longitude, double radius, Timestamp startTime, Timestamp endTime);
 
@@ -138,12 +140,12 @@ protected:
     unordered_map<string, Attributes*> hmapDescriptionAttributes;
 
 private:
-    void loadSensor(void);
-    void loadPrivateIndividual(void);
-    void loadAttributes(void);
-    void loadMesurements(void);
-    void loadCleaner(void);
-    void loadProvider(void);
+    void loadSensor(string chemin = "");
+    void loadPrivateIndividual(string chemin = "");
+    void loadAttributes(string chemin = "") ;
+    void loadMesurements(string chemin = "");
+    void loadCleaner(string chemin = "");
+    void loadProvider(string chemin = "");
 
     int indiceCorrespondingToMean(string attribut, double moyenne);
     double ComputeMeanForAnAttribute ( double latitude, double longitude, string& attribut, double radius, Timestamp startTime, Timestamp endTime);

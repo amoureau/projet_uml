@@ -35,6 +35,15 @@ void ComputationAgent::loadData(void)
     
 }
 
+void ComputationAgent::loadTestData(string chemin) {
+    loadSensor(chemin + "/sensors.csv");
+    loadPrivateIndividual(chemin + "/users.csv");
+    loadAttributes(chemin + "/attributes.csv");
+    loadMesurements(chemin + "/measurements.csv");
+    loadCleaner(chemin + "/cleaners.csv");
+    loadProvider(chemin + "/providers.csv");
+}
+
 int ComputationAgent::ComputeMeanQuality(double latitude, double longitude, double radius, Timestamp startTime, Timestamp endTime)
 {
     vector<string> listeAttributs = {"O3", "NO2", "PM10", "SO2"};
@@ -65,13 +74,16 @@ bool ComputationAgent::ComputeSensorAnalysed(int sensorId, double areaRadius) {
     bool anomalies = false;
     unordered_map<string, int> dicoNbValueAll;
     unordered_map<string, double> dicoMeanAll, dicoMeanCapteur, dicoSumOfSquaresAll, dicoSdAll;
-    dicoMeanCapteur["O3"] = dicoMeanCapteur["NO2"] = dicoMeanCapteur["SO2"] = dicoMeanCapteur["PM10"] = 0;
     string list_molec[] = { "O3", "NO2", "SO2", "PM10"};
 
     for (string &molecule : list_molec) {
-        cout << molecule << ": ";
+        dicoMeanCapteur[molecule] = 0;
+        dicoNbValueAll[molecule] = 0;
+        dicoSumOfSquaresAll[molecule] = 0;
+    }
+
+    for (string &molecule : list_molec) {
         dicoMeanAll[molecule] = ComputeMeanForAnAttribute(sensor->getLatitude(), sensor->getLongitude(), molecule, areaRadius, 0, 0);
-        cout << dicoMeanAll[molecule] << endl;
     }
 
     for (Measurement *me: vecteurMeasurements) {
@@ -86,6 +98,7 @@ bool ComputationAgent::ComputeSensorAnalysed(int sensorId, double areaRadius) {
 
     //On exclue les données du capteur s'il y a un problème pour la moyenne d'une des molécules au moins
     for (string &molecule : list_molec) {
+        if (dicoNbValueAll[molecule] == 0) {continue;}
         dicoSdAll[ molecule ] = sqrt( (1/dicoNbValueAll[molecule]) * dicoSumOfSquaresAll[molecule] );
         if ((dicoMeanCapteur[ molecule ] > dicoMeanAll[molecule] + 3*dicoSdAll[molecule] ) 
             || (dicoMeanCapteur[ molecule ] < dicoMeanAll[molecule] - 3*dicoSdAll[molecule])) {
@@ -318,11 +331,11 @@ ComputationAgent::~ComputationAgent ( )
 
 //----------------------------------------------------- Méthodes protégées
 
-void ComputationAgent::loadSensor(void)
+void ComputationAgent::loadSensor(string chemin)
 {
 
     // chemins acces fichiers:
-    string fichierCSV = "dataset/sensors.csv";
+    string fichierCSV = (chemin == "") ? "dataset/sensors.csv" : chemin;
     ifstream fichier(fichierCSV);
     if (!fichier) {
         cerr << "Erreur : impossible d'ouvrir le fichier " << fichierCSV <<  endl;
@@ -357,10 +370,10 @@ void ComputationAgent::loadSensor(void)
     }
 }
 
-void ComputationAgent::loadPrivateIndividual(void)
+void ComputationAgent::loadPrivateIndividual(string chemin)
 {
     // chemins acces fichiers:
-    string fichierCSV = "dataset/users.csv";
+    string fichierCSV = (chemin == "") ? "dataset/users.csv" : chemin;
     ifstream fichier(fichierCSV);
     if (!fichier) {
         cerr << "Erreur : impossible d'ouvrir le fichier " << fichierCSV <<  endl;
@@ -399,10 +412,10 @@ void ComputationAgent::loadPrivateIndividual(void)
 
 }
 
-void ComputationAgent::loadAttributes(void)
+void ComputationAgent::loadAttributes(string chemin)
     {
         // chemins acces fichiers:
-        string fichierCSV = "dataset/attributes.csv";
+        string fichierCSV = (chemin == "") ? "dataset/attributes.csv" : chemin;
         ifstream fichier(fichierCSV);
         if (!fichier) {
             cerr << "Erreur : impossible d'ouvrir le fichier " << fichierCSV <<  endl;
@@ -435,10 +448,10 @@ void ComputationAgent::loadAttributes(void)
         }
     }
 
-void ComputationAgent::loadMesurements(void)
+void ComputationAgent::loadMesurements(string chemin)
 {
     // chemins acces fichiers:
-    string fichierCSV = "dataset/measurements.csv";
+    string fichierCSV = (chemin == "") ? "dataset/measurements.csv" : chemin;
     ifstream fichier(fichierCSV);
     if (!fichier) {
         cerr << "Erreur : impossible d'ouvrir le fichier " << fichierCSV <<  endl;
@@ -472,21 +485,17 @@ void ComputationAgent::loadMesurements(void)
         double value = stod(valeur);
 
         Sensor *sensor = hmapIdSensor[idSensor];
-<<<<<<< HEAD
         Attributes *att = hmapAttributes[idAttributes];
-=======
-        Attributes *att = hmapAttributes[description];
-        
->>>>>>> test-son
+
         Measurement *mes = new Measurement(value, date, sensor, att);
         vecteurMeasurements.push_back(mes);
     }
 }
 
-void ComputationAgent::loadCleaner(void)
+void ComputationAgent::loadCleaner(string chemin)
 {
     // chemins acces fichiers:
-    string fichierCSV = "dataset/cleaners.csv";
+    string fichierCSV = (chemin == "") ? "dataset/cleaners.csv" : chemin;
     ifstream fichier(fichierCSV);
     if (!fichier) {
         cerr << "Erreur : impossible d'ouvrir le fichier " << fichierCSV <<  endl;
@@ -530,10 +539,10 @@ void ComputationAgent::loadCleaner(void)
     }
 }
 
-void ComputationAgent::loadProvider(void)
+void ComputationAgent::loadProvider(string chemin)
 {
     // chemins acces fichiers:
-    string fichierCSV = "dataset/providers.csv";
+    string fichierCSV = (chemin == "") ? "dataset/providers.csv" : chemin;
     ifstream fichier(fichierCSV);
     if (!fichier) {
         cerr << "Erreur : impossible d'ouvrir le fichier " << fichierCSV <<  endl;
