@@ -15,6 +15,29 @@ using namespace std;
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
+void Test::testCalculateDistance() {
+    cout << "Test fonction: CalculateDistance( lat1, lng1, lat2, lng2 )" << endl;
+    int nbTest = 5;
+    int testPassed = 0;
+
+    if (CD_cas1_entree_valide()) testPassed++;
+    if (CD_cas2_entree_valide()) testPassed++;
+    if (CD_cas3_entree_valide_2_points_egaux()) testPassed++;
+    if (CD_cas4_entree_lat_invalide()) testPassed++;
+    if (CD_cas5_entree_lng_invalide()) testPassed++;
+
+    cout << testPassed << "/" << nbTest << " tests réussis!" << endl;
+}
+
+void Test::testComputeSensorAnalyse() {
+    cout << "Test fonction: testComputeSensorAnalyse( idSensor, areaRadius )" << endl;
+    int nbTest = 12;
+    int testPassed = 0;
+
+    if (CSA_cas1_meme_molecule()) testPassed++;
+
+    cout << testPassed << "/" << nbTest << " tests réussis!" << endl;
+}
 
 //------------------------------------------------- Surcharge d'opérateurs
 

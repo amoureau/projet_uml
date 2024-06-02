@@ -35,15 +35,6 @@ void ComputationAgent::loadData(void)
     
 }
 
-void ComputationAgent::loadTestData(string chemin) {
-    loadSensor(chemin + "/sensors.csv");
-    loadPrivateIndividual(chemin + "/users.csv");
-    loadAttributes(chemin + "/attributes.csv");
-    loadMesurements(chemin + "/measurements.csv");
-    loadCleaner(chemin + "/cleaners.csv");
-    loadProvider(chemin + "/providers.csv");
-}
-
 int ComputationAgent::ComputeMeanQuality(double latitude, double longitude, double radius, Timestamp startTime, Timestamp endTime)
 {
     vector<string> listeAttributs = {"O3", "NO2", "PM10", "SO2"};
@@ -114,10 +105,7 @@ double ComputationAgent::ComputeMeanForAnAttribute ( double latitude, double lon
     double moyenne = 0;
     Attributes attributes = *(hmapAttributes[attribute]);
 
-    int i = -1;
-
     for (Measurement *me : vecteurMeasurements) {
-        i++;
         Timestamp mesureTime = me->getDate();
         Sensor *sensor = me->getSensor();
 
@@ -331,11 +319,11 @@ ComputationAgent::~ComputationAgent ( )
 
 //----------------------------------------------------- Méthodes protégées
 
-void ComputationAgent::loadSensor(string chemin)
+void ComputationAgent::loadSensor(void)
 {
 
     // chemins acces fichiers:
-    string fichierCSV = (chemin == "") ? "dataset/sensors.csv" : chemin;
+    string fichierCSV = "dataset/sensors.csv";
     ifstream fichier(fichierCSV);
     if (!fichier) {
         cerr << "Erreur : impossible d'ouvrir le fichier " << fichierCSV <<  endl;
@@ -370,10 +358,10 @@ void ComputationAgent::loadSensor(string chemin)
     }
 }
 
-void ComputationAgent::loadPrivateIndividual(string chemin)
+void ComputationAgent::loadPrivateIndividual(void)
 {
     // chemins acces fichiers:
-    string fichierCSV = (chemin == "") ? "dataset/users.csv" : chemin;
+    string fichierCSV = "dataset/users.csv";
     ifstream fichier(fichierCSV);
     if (!fichier) {
         cerr << "Erreur : impossible d'ouvrir le fichier " << fichierCSV <<  endl;
@@ -412,10 +400,10 @@ void ComputationAgent::loadPrivateIndividual(string chemin)
 
 }
 
-void ComputationAgent::loadAttributes(string chemin)
+void ComputationAgent::loadAttributes(void)
     {
         // chemins acces fichiers:
-        string fichierCSV = (chemin == "") ? "dataset/attributes.csv" : chemin;
+        string fichierCSV = "dataset/attributes.csv";
         ifstream fichier(fichierCSV);
         if (!fichier) {
             cerr << "Erreur : impossible d'ouvrir le fichier " << fichierCSV <<  endl;
@@ -448,10 +436,10 @@ void ComputationAgent::loadAttributes(string chemin)
         }
     }
 
-void ComputationAgent::loadMesurements(string chemin)
+void ComputationAgent::loadMesurements(void)
 {
     // chemins acces fichiers:
-    string fichierCSV = (chemin == "") ? "dataset/measurements.csv" : chemin;
+    string fichierCSV = "dataset/measurements.csv";
     ifstream fichier(fichierCSV);
     if (!fichier) {
         cerr << "Erreur : impossible d'ouvrir le fichier " << fichierCSV <<  endl;
@@ -492,10 +480,10 @@ void ComputationAgent::loadMesurements(string chemin)
     }
 }
 
-void ComputationAgent::loadCleaner(string chemin)
+void ComputationAgent::loadCleaner(void)
 {
     // chemins acces fichiers:
-    string fichierCSV = (chemin == "") ? "dataset/cleaners.csv" : chemin;
+    string fichierCSV = "dataset/cleaners.csv";
     ifstream fichier(fichierCSV);
     if (!fichier) {
         cerr << "Erreur : impossible d'ouvrir le fichier " << fichierCSV <<  endl;
@@ -539,10 +527,10 @@ void ComputationAgent::loadCleaner(string chemin)
     }
 }
 
-void ComputationAgent::loadProvider(string chemin)
+void ComputationAgent::loadProvider(void)
 {
     // chemins acces fichiers:
-    string fichierCSV = (chemin == "") ? "dataset/providers.csv" : chemin;
+    string fichierCSV = "dataset/providers.csv";
     ifstream fichier(fichierCSV);
     if (!fichier) {
         cerr << "Erreur : impossible d'ouvrir le fichier " << fichierCSV <<  endl;

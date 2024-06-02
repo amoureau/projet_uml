@@ -10,13 +10,13 @@
 #include <fstream>
 #include <sstream>
 #include <cmath>
+#include <stdexcept>
 
 #include "Measurement.h"
 #include "Cleaner.h"
 #include "Sensor.h"
 #include "Attributes.h"
 #include "PrivateIndividual.h"
-
 #include "Timestamp.h"
 #include "Provider.h"
 
@@ -25,7 +25,7 @@ using namespace std;
 const double RAYON_TERRE = 6371.0; //km
 const double PI = 3.1415926;
 //------------------------------------------------------------------ Types
-
+class Test;
 //------------------------------------------------------------------------
 // Rôle de la classe 
 //------------------------------------------------------------------------
@@ -38,8 +38,6 @@ public:
 //----------------------------------------------------- MÃ©thodes publiques
     // chargement des données
     void loadData(void);
-
-    void loadTestData(string chemin);
     
     int ComputeMeanQuality(double latitude, double longitude, double radius, Timestamp startTime, Timestamp endTime);
 
@@ -98,6 +96,14 @@ public:
     }
 
     static double calculateDistance(double lat1, double lon1, double lat2, double lon2) {
+        if ((lat1 > 90) || (lat2 > 90) || (lat1 < -90) || (lat2 < -90)) {
+            throw invalid_argument("La latitude doit être comprise entre -90° et 90°");
+        }
+
+        if ((lon1 > 180) || (lon2 > 180) || (lon2 < -180) || (lon2 < -180)) {
+            throw invalid_argument("La longitude doit être comprise entre -180° et 180°");
+        }
+
         double dlon = toRadians(lon2 - lon1);
         double dlat = toRadians(lat2 - lat1);
         double a = sin( dlat / 2 ) * sin( dlat / 2) + cos(toRadians(lat1)) * cos (toRadians(lat2)) * sin(dlon / 2) * sin( dlon / 2);
@@ -109,13 +115,13 @@ public:
         return degrees * (PI / 180);
     }
 
+    friend class Test;
+
 //------------------------------------------------- Surcharge d'opÃ©rateurs
 
 //-------------------------------------------- Constructeurs - destructeur
 
     ComputationAgent ();    
-
-
     virtual ~ComputationAgent ( );
 
 //------------------------------------------------------------------ PRIVE
@@ -140,12 +146,12 @@ protected:
     unordered_map<string, Attributes*> hmapDescriptionAttributes;
 
 private:
-    void loadSensor(string chemin = "");
-    void loadPrivateIndividual(string chemin = "");
-    void loadAttributes(string chemin = "") ;
-    void loadMesurements(string chemin = "");
-    void loadCleaner(string chemin = "");
-    void loadProvider(string chemin = "");
+    void loadSensor(void);
+    void loadPrivateIndividual(void);
+    void loadAttributes(void) ;
+    void loadMesurements(void);
+    void loadCleaner(void);
+    void loadProvider(void);
 
     int indiceCorrespondingToMean(string attribut, double moyenne);
     double ComputeMeanForAnAttribute ( double latitude, double longitude, string& attribut, double radius, Timestamp startTime, Timestamp endTime);

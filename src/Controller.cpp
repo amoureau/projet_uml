@@ -1,5 +1,5 @@
 #include "Controller.h"
-#include "Test.h"
+#include "../tests/Test.h"
 
 
 
@@ -149,6 +149,8 @@ int main(void)
     // Controller *controller = new Controller();
     // controller->mainController();
     // delete controller;
-    Test::testComputeSensorAnalysed();
+    Test test = Test();
+    //test.testCalculateDistance();
+    test.testComputeSensorAnalyse();
     return 0;
 }

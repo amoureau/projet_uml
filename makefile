@@ -10,15 +10,16 @@ CXX = g++
 # Options de compilation
 CXXFLAGS = -ansi -pedantic -Wall -std=c++11 -O3 -g
 
-# Répertoire des fichiers sources
+# Répertoire des fichiers sources et tests
 SRC_DIR = $(CURDIR)/src
+TEST_DIR = $(CURDIR)/tests
 
 # Répertoire pour les fichiers objets
 OBJ_DIR = $(CURDIR)/obj
 
 # Liste des fichiers source
-SOURCES = $(wildcard $(SRC_DIR)/*.cpp)
-HEADERS = $(wildcard $(SRC_DIR)/*.h)
+SOURCES = $(wildcard $(SRC_DIR)/*.cpp) $(wildcard $(TEST_DIR)/*.cpp)
+HEADERS = $(wildcard $(SRC_DIR)/*.h) $(wildcard $(TEST_DIR)/*.h)
 
 # Liste des fichiers objets générés à partir des fichiers source
 OBJECTS = $(SOURCES:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
