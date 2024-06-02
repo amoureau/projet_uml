@@ -63,22 +63,25 @@ bool ComputationAgent::ComputeSensorAnalysed(int sensorId, double areaRadius) {
     Sensor *sensor = hmapIdSensor[sensorId];
 
     bool anomalies = false;
-    unordered_map<string, int> dicoMeanCapteur, dicoMeanAll, dicoSumOfSquaresAll, dicoSdAll, dicoNbValueAll;
+    unordered_map<string, int> dicoNbValueAll;
+    unordered_map<string, double> dicoMeanAll, dicoMeanCapteur, dicoSumOfSquaresAll, dicoSdAll;
     dicoMeanCapteur["O3"] = dicoMeanCapteur["NO2"] = dicoMeanCapteur["SO2"] = dicoMeanCapteur["PM10"] = 0;
     string list_molec[] = { "O3", "NO2", "SO2", "PM10"};
 
     for (string &molecule : list_molec) {
+        cout << molecule << ": ";
         dicoMeanAll[molecule] = ComputeMeanForAnAttribute(sensor->getLatitude(), sensor->getLongitude(), molecule, areaRadius, 0, 0);
+        cout << dicoMeanAll[molecule] << endl;
     }
 
     for (Measurement *me: vecteurMeasurements) {
-        string attributeDescription = me->getAttribute()->getDescription();
+        string attrId= me->getAttribute()->getId();
         if (me->getSensor()->getId() == sensorId) {
-            dicoMeanCapteur[ attributeDescription ] += me->getValue();
+            dicoMeanCapteur[ attrId ] += me->getValue();
         }
 
-        dicoSumOfSquaresAll[ attributeDescription ] += ( me->getValue() - dicoMeanAll[ attributeDescription ])*( me->getValue() - dicoMeanAll[ attributeDescription ]);
-        dicoNbValueAll[ attributeDescription ] += 1;
+        dicoSumOfSquaresAll[ attrId ] += ( me->getValue() - dicoMeanAll[ attrId ])*( me->getValue() - dicoMeanAll[ attrId ]);
+        dicoNbValueAll[ attrId ] += 1;
     }
 
     //On exclue les données du capteur s'il y a un problème pour la moyenne d'une des molécules au moins
@@ -93,18 +96,25 @@ bool ComputationAgent::ComputeSensorAnalysed(int sensorId, double areaRadius) {
     return anomalies;
 }
 
+
 double ComputationAgent::ComputeMeanForAnAttribute ( double latitude, double longitude, string &attribute, double radius, Timestamp startTime, Timestamp endTime) {
     double moyenne = 0;
     Attributes attributes = *(hmapAttributes[attribute]);
+
+    int i = -1;
+
     for (Measurement *me : vecteurMeasurements) {
+        i++;
         Timestamp mesureTime = me->getDate();
         Sensor *sensor = me->getSensor();
 
         if ( me->getAttribute()->getId() == attributes.getId() ) {
+            //cout << calculateDistance(latitude, longitude, sensor->getLatitude(), sensor->getLongitude()) << endl;
             if ((( startTime < mesureTime  && mesureTime < endTime) || (startTime == 0 && endTime == 0))
-                && (calculateDistance(latitude, longitude, sensor->getLatitude(), sensor->getLongitude())))
+                && (calculateDistance(latitude, longitude, sensor->getLatitude(), sensor->getLongitude()) <= radius))
             {
                 moyenne += me->getValue();
+                
             }
         }
     }
@@ -230,7 +240,6 @@ int ComputationAgent::indiceCorrespondingToMean(string attribut, double moyenne)
         return 0;
     }
 }
-
 //------------------------------------------------- Surcharge d'opérateurs
 
 
@@ -308,7 +317,6 @@ ComputationAgent::~ComputationAgent ( )
 //------------------------------------------------------------------ PRIVE
 
 //----------------------------------------------------- Méthodes protégées
-
 
 void ComputationAgent::loadSensor(void)
 {
@@ -464,7 +472,12 @@ void ComputationAgent::loadMesurements(void)
         double value = stod(valeur);
 
         Sensor *sensor = hmapIdSensor[idSensor];
+<<<<<<< HEAD
         Attributes *att = hmapAttributes[idAttributes];
+=======
+        Attributes *att = hmapAttributes[description];
+        
+>>>>>>> test-son
         Measurement *mes = new Measurement(value, date, sensor, att);
         vecteurMeasurements.push_back(mes);
     }

@@ -88,7 +88,6 @@ void Controller::displayMapCoordSensor()
 
 
 
-
 Controller::Controller(){
     /* Création du calculateur */
     ComputationAgent *calculateur = new ComputationAgent();
@@ -125,18 +124,18 @@ int Controller::mainController(void)
     //displayHmapDescriptionAttributes();
 
 
-    string userInput = "";
-    while(userInput != "exit")
-    {
-        result->GreetingsUser(user);
-        userInput = result->GetUserInput();
-        switch(userInput)
-        {
-            case "DisplayMeanQuality":
-                user
-                break;
-        }
-    }
+    // string userInput = "";
+    // while(userInput != "exit")
+    // {
+    //     result->GreetingsUser(user);
+    //     userInput = result->GetUserInput();
+    //     switch(userInput)
+    //     {
+    //         case "DisplayMeanQuality":
+    //             user
+    //             break;
+    //     }
+    // }
 
     return 0;
 
