@@ -145,7 +145,7 @@ int Controller::mainController(void)
                 int idSensor = result->GetInputIdSensor(); 
                 int radius = result->GetInputAreaRadiusSensor();
                 bool anomalie = user->getCalculateur()->ComputeSensorAnalysed(idSensor, radius);
-                result->DisplaySensorAnalysed(anomalie);
+                result->DisplaySensorAnalysed(anomalie); //affiche toujours qu'il y a une anomalie donc je pense que y'a un bug dans les fonctions
                 break;
         }
     }
