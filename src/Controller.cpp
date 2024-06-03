@@ -126,10 +126,23 @@ int Controller::mainController(void)
 
 
     int userInput = -1;
-    result->GreetingsUser(*user);
+
+    string role = "user";
+    if (dynamic_cast<Admin*>(user)) {
+        role = "admin";
+    } else if (dynamic_cast<Government*>(user)) {
+        role = "government";
+    } else if (dynamic_cast<PrivateIndividual*>(user)) {
+        role = "private individual";
+    } else if (dynamic_cast<Provider*>(user)) {
+        role = "provider";
+    }
+
+    result->GreetingsUser(*user, role);
+    int radius, latitude, longitude, timeChoice, idSensor, radiusSensor;
     while(userInput != 0)
     {
-        userInput = result->GetInputFonctionnalite();
+        userInput = result->GetInputFonctionnalite(role);
         switch(userInput)
         {
             case 0:
@@ -138,12 +151,27 @@ int Controller::mainController(void)
                 break;
             case 1:
                 // Analyser la qualité de l'air
-                //result->DisplayMeanAirQuality(user->getCalculateur()->ComputeMeanQuality(/*foutre les paramètres*/));
+                radius = result->GetInputAreaRadius();
+                latitude = result->GetInputLatitude();
+                longitude = result->GetInputLongitude();
+                timeChoice = result->GetInputTimeChoice();
+                switch(timeChoice) {
+                    case 0:
+                        // Analyse sur une période de temps
+                        result->DisplayMeanAirQuality(user->getCalculateur()->ComputeMeanQuality(latitude, longitude, radius,0,0));
+                        break;
+                    case 1:
+                        // Analyse sur une période de temps
+                        Timestamp startTime = result->GetInputStartTime();
+                        Timestamp endTime = result->GetInputEndTime();
+                        result->DisplayMeanAirQuality(user->getCalculateur()->ComputeMeanQuality(latitude, longitude, radius, startTime, endTime));
+                        break;         
+                }
                 break;
             case 2:
                 // Analyser un capteur
-                int idSensor = result->GetInputIdSensor(); 
-                int radius = result->GetInputAreaRadiusSensor();
+                idSensor = result->GetInputIdSensor(); 
+                radius = result->GetInputAreaRadius();
                 bool anomalie = user->getCalculateur()->ComputeSensorAnalysed(idSensor, radius);
                 result->DisplaySensorAnalysed(anomalie); //affiche toujours qu'il y a une anomalie donc je pense que y'a un bug dans les fonctions
                 break;

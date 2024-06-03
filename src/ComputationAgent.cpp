@@ -47,6 +47,7 @@ int ComputationAgent::ComputeMeanQuality(double latitude, double longitude, doub
         if (moyenne != -1) {
             listeMoyennes.push_back(moyenne);
             int indice = indiceCorrespondingToMean(attribut, moyenne);
+            cout << "Indice pour " << attribut << " : " << indice << endl;
             if (indice > indiceAtmo) {
                 indiceAtmo = indice;
             }
@@ -112,6 +113,7 @@ double ComputationAgent::ComputeMeanForAnAttribute ( double latitude, double lon
             double distance = calculateDistance(latitude, longitude, sensor->getLatitude(), sensor->getLongitude());
             if ((( startTime < mesureTime  && mesureTime < endTime) || (startTime == 0 && endTime == 0)) && (distance <= radius))
             {
+                cout << startTime << " " << mesureTime << " " << endTime << endl;
                 somme += me->getValue();
                 nbCapteurs++;
             }

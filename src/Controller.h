@@ -5,6 +5,9 @@
 #include "ComputationAgent.h"
 #include "User.h"
 #include "Admin.h"
+#include "Government.h"
+#include "PrivateIndividual.h"
+#include "Provider.h"
 #include "Results.h"
 class Results;
 

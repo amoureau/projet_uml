@@ -14,11 +14,23 @@ using namespace std;
 //------------------------------------------------------------- Constantes
 
 //----------------------------------------------------------------- PUBLIC
-void Results::GreetingsUser(User user)  // Fonction pour saluer l'utilisateur
+void Results::GreetingsUser(User user, string role)  // Fonction pour saluer l'utilisateur
 {
     string email = user.getEmail();
     string prenom = email.substr(0, email.find('.'));
     cout << "Bonjour " << prenom << " !" << endl;
+    if (role == "admin") {
+        std::cout << "Vous êtes connecté en tant qu'admin" << std::endl;
+    } else if (role == "government") {
+        std::cout << "Vous êtes connecté en tant que gouvernement" << std::endl;
+    } else if (role == "private individual") {
+        std::cout << "Vous êtes connecté en tant qu'individu privé" << std::endl;
+    } else if (role == "provider") {
+        std::cout << "Vous êtes connecté en tant que fournisseur" << std::endl;
+    }
+    else {
+        std::cout << "Vous n'avez aucun rôle" << std::endl;
+    }
 }
 
 string Results::GetUserInput() { // Fonction générale pour récupérer l'input de l'utilisateur
@@ -28,7 +40,7 @@ string Results::GetUserInput() { // Fonction générale pour récupérer l'input
     return input;
 } 
 
-int Results::GetInputFonctionnalite() { // Fonction pour récupérer l'input de la fonctionnalité souhaitée
+int Results::GetInputFonctionnalite(string role) { // Fonction pour récupérer l'input de la fonctionnalité souhaitée
     int fonctionnalite;
     cout << endl << "Quelle fonctionnalité souhaitez-vous utiliser ?" << endl;
     cout << "0. Quitter" << endl;
@@ -39,6 +51,22 @@ int Results::GetInputFonctionnalite() { // Fonction pour récupérer l'input de 
     return fonctionnalite;
 }
 
+int Results::GetInputLatitude() { // Fonction pour récupérer l'input de la latitude
+    int latitude;
+    cout << endl << "Quelle est la latitude de la zone que vous souhaitez analyser ?" << endl;
+    cout << "Entrer la latitude de la zone (en degré) : ";
+    cin >> latitude;
+    return latitude;
+}
+
+int Results::GetInputLongitude() { // Fonction pour récupérer l'input de la longitude
+    int longitude;
+    cout << endl << "Quelle est la longitude de la zone que vous souhaitez analyser ?" << endl;
+    cout << "Entrer la longitude de la zone (en degré) : ";
+    cin >> longitude;
+    return longitude;
+}
+
 int Results::GetInputIdSensor() { // Fonction pour récupérer l'input de l'identifiant du capteur
     int idSensor;
     cout << endl << "Quel est l'identifiant du capteur que vous souhaitez analyser ?" << endl;
@@ -47,7 +75,7 @@ int Results::GetInputIdSensor() { // Fonction pour récupérer l'input de l'iden
     return idSensor;
 }
 
-int Results::GetInputAreaRadiusSensor() { // Fonction pour récupérer l'input du rayon de la zone à analyser
+int Results::GetInputAreaRadius() { // Fonction pour récupérer l'input du rayon de la zone à analyser
     int radius;
     cout << endl << "Quel est le rayon de la zone que vous souhaitez analyser ?" << endl;
     cout << "Entrer le rayon de la zone en mètres (valeurs en moyenne autour de 300m environ) : "; //
@@ -64,18 +92,18 @@ int Results::GetInputTimeChoice() { // Fonction pour récupérer si l'utilisateu
     return choice;
 }
 
-string Results::GetInputStartTime() { // Fonction pour récupérer l'input de la date de début de la période
+Timestamp Results::GetInputStartTime() { // Fonction pour récupérer l'input de la date de début de la période
     string date;
     cout << endl << "Veuillez entrer la date de début de la période souhaitée" << endl;
-    cout << "Format : aaaa-mm-jj h:m:s" << endl;
+    cout << "Format : aaaa-mm-jj" << endl;
     cin >> date;
     return date;
 }
 
-string Results::GetInputEndTime() { // Fonction pour récupérer l'input de la date de fin de la période
+Timestamp Results::GetInputEndTime() { // Fonction pour récupérer l'input de la date de fin de la période
     string date;
     cout << endl << "Veuillez entrer la date de fin de la période souhaitée" << endl;
-    cout << "Format : aaaa-mm-jj h:m:s" << endl;
+    cout << "Format : aaaa-mm-jj" << endl;
     cin >> date;
     return date;
 }

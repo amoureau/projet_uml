@@ -28,21 +28,25 @@ public:
 //------------------------------------------------- Surcharge d'opÃ©rateurs
 
 //-------------------------------------------- Constructeurs - destructeur
-    void GreetingsUser(User user);
+    void GreetingsUser(User user, string role);
 
     string GetUserInput();
 
-    int GetInputFonctionnalite();
+    int GetInputFonctionnalite(string role);
+
+    int GetInputLatitude();
+
+    int GetInputLongitude();
 
     int GetInputIdSensor();
 
-    int GetInputAreaRadiusSensor();
+    int GetInputAreaRadius();
 
     int GetInputTimeChoice();
 
-    string GetInputStartTime();
+    Timestamp GetInputStartTime();
 
-    string GetInputEndTime();
+    Timestamp GetInputEndTime();
 
     void Print(string message);
 
