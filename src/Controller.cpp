@@ -146,11 +146,8 @@ int Controller::mainController(void)
 
 int main(void)
 {
-    // Controller *controller = new Controller();
-    // controller->mainController();
-    // delete controller;
-    Test test = Test();
-    //test.testCalculateDistance();
-    test.testComputeSensorAnalyse();
+    Test *test = new Test();
+    test->testAll();
+    delete test;
     return 0;
 }

@@ -19,39 +19,11 @@ class Test
 {
 //----------------------------------------------------------------- PUBLIC
 public:
-    void testCalculateDistance();
-    void testComputeSensorAnalyse();
 
 //----------------------------------------------------- MÃ©thodes publiques
-    // static void testComputeSensorAnalysed() {
-    //     cout << "Test pour fonction: computeSensorAnalysed" <<endl;
-
-    //     int numberTestCase = 1;
-    //     int countTestPassed = 0;
-    //     for (int i = 1; i <= numberTestCase; i++) {
-    //         string dataChemin = "dataset/tests/computeSensorAnalyse/test" + to_string(i);
-        
-    //         ComputationAgent *calculateur = new ComputationAgent();
-    //         calculateur->loadTestData(dataChemin);
-
-    //         string args[2];
-    //         string res;
-    //         getArgumentsAndResult(dataChemin, args, res);
-    //         cout << res << endl;
-
-    //         bool funcReturn = calculateur->ComputeSensorAnalysed( stoi(args[0]), stod(args[1]) );
-    //         if (funcReturn == stoi(res)) {
-    //             cout << "Test " + to_string(i) + " passed!" << endl;
-    //             countTestPassed++;
-    //         } else {
-    //             cout << "Test " + to_string(i) + " fail!" << endl;
-    //             cout << "    Expected: " + res << endl << "    Get: " << funcReturn << endl;
-    //         }
-
-    //         delete calculateur;
-    //     }
-    //     cout << countTestPassed << "/" << numberTestCase << " passed";
-    // }
+    void testAll();
+    void testCalculateDistance();
+    void testComputeSensorAnalyse();
 
     static bool isEgalDouble(double attendue, double obtenue) {
         double ecart = abs(obtenue - attendue);
@@ -81,7 +53,10 @@ protected:
     bool CD_cas5_entree_lng_invalide();
 
 // ---Tests pour Compute Sensor Analyse
-    bool CSA_cas1_meme_molecule();
+    bool CSA_cas1_meme_molecule_capteur_trucque();
+    bool CSA_cas2_meme_molecule_capteur_non_truque();
+    bool CSA_cas3_plusieur_molecule_capteur_non_truque();
+    bool CSA_cas4_plusieur_molecule_capteur_truque();
 
 //----------------------------------------------------- Attributs protégés
 
