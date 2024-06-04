@@ -27,7 +27,8 @@ class User
 //----------------------------------------------------------------- PUBLIC
 
 public:
-//----------------------------------------------------- MÃ©thodes publiques    
+
+//----------------------------------------------------- MÃ©thodes publiques
     double ComputeMeanQualityCircle(double latitude, double longitude, string start, string end);
     double ComputeWorstQualityDate(Timestamp date);
     pair<double, double>ComputeMaxSurfaceQuality(void);

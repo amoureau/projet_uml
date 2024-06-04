@@ -114,29 +114,69 @@ Controller::~Controller(){
 int Controller::mainController(void)
 {
     // Affichage des données
-    displayHmapIdSensor();
-    displayHmapIdPrivateIndividual();
-    displayHmapAttributes();
-    displayVecteurMeasurements();
-    displayHmapIdCleaner();
-    displayHmapIdProvider();
-    displayMapCoordSensor();
-    displayHmapIdSensorPrivateIndividual();
-    displayHmapDescriptionAttributes();
+    // displayHmapIdSensor();
+    // displayHmapIdPrivateIndividual();
+    // displayHmapAttributes();
+    // displayVecteurMeasurements();
+    // displayHmapIdCleaner();
+    // displayHmapIdProvider();
+    // displayMapCoordSensor();
+    // displayHmapIdSensorPrivateIndividual();
+    // displayHmapDescriptionAttributes();
 
 
-    // string userInput = "";
-    // while(userInput != "exit")
-    // {
-    //     result->GreetingsUser(user);
-    //     userInput = result->GetUserInput();
-    //     switch(userInput)
-    //     {
-    //         case "DisplayMeanQuality":
-    //             user
-    //             break;
-    //     }
-    // }
+    int userInput = -1;
+
+    string role = "user";
+    if (dynamic_cast<Admin*>(user)) {
+        role = "admin";
+    } else if (dynamic_cast<Government*>(user)) {
+        role = "government";
+    } else if (dynamic_cast<PrivateIndividual*>(user)) {
+        role = "private individual";
+    } else if (dynamic_cast<Provider*>(user)) {
+        role = "provider";
+    }
+
+    result->GreetingsUser(*user, role);
+    int radius, latitude, longitude, timeChoice, idSensor, radiusSensor;
+    while(userInput != 0)
+    {
+        userInput = result->GetInputFonctionnalite(role);
+        switch(userInput)
+        {
+            case 0:
+                // Quitter
+                cout << "Au revoir !" << endl;
+                break;
+            case 1:
+                // Analyser la qualité de l'air
+                radius = result->GetInputAreaRadius();
+                latitude = result->GetInputLatitude();
+                longitude = result->GetInputLongitude();
+                timeChoice = result->GetInputTimeChoice();
+                switch(timeChoice) {
+                    case 0:
+                        // Analyse sur une période de temps
+                        result->DisplayMeanAirQuality(user->getCalculateur()->ComputeMeanQuality(latitude, longitude, radius,0,0));
+                        break;
+                    case 1:
+                        // Analyse sur une période de temps
+                        Timestamp startTime = result->GetInputStartTime();
+                        Timestamp endTime = result->GetInputEndTime();
+                        result->DisplayMeanAirQuality(user->getCalculateur()->ComputeMeanQuality(latitude, longitude, radius, startTime, endTime));
+                        break;         
+                }
+                break;
+            case 2:
+                // Analyser un capteur
+                idSensor = result->GetInputIdSensor(); 
+                radius = result->GetInputAreaRadius();
+                bool anomalie = user->getCalculateur()->ComputeSensorAnalysed(idSensor, radius);
+                result->DisplaySensorAnalysed(anomalie); //affiche toujours qu'il y a une anomalie donc je pense que y'a un bug dans les fonctions
+                break;
+        }
+    }
 
     return 0;
 
