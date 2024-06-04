@@ -21,6 +21,7 @@ void Test::testAll() {
 }
 
 void Test::testCalculateDistance() {
+    cout << "----------------------------------------------------------\n";
     cout << "Test fonction: CalculateDistance( lat1, lng1, lat2, lng2 )" << endl;
     int nbTest = 5;
     int testPassed = 0;
@@ -35,14 +36,19 @@ void Test::testCalculateDistance() {
 }
 
 void Test::testComputeSensorAnalyse() {
+    cout << "----------------------------------------------------------\n";
     cout << "Test fonction: testComputeSensorAnalyse( idSensor, areaRadius )" << endl;
-    int nbTest = 12;
+    int nbTest = 8;
     int testPassed = 0;
 
     if (CSA_cas1_meme_molecule_capteur_trucque()) testPassed++;
     if (CSA_cas2_meme_molecule_capteur_non_truque()) testPassed++;
     if (CSA_cas3_plusieur_molecule_capteur_non_truque()) testPassed++;
     if (CSA_cas4_plusieur_molecule_capteur_truque()) testPassed++;
+    if (CSA_cas5_voisin_meme_molecule_capteur_non_truque()) testPassed++;
+    if (CSA_cas6_voisin_meme_molecule_capteur_truque()) testPassed++;
+    if (CSA_cas7_non_voisin()) testPassed++;
+    if (CSA_cas8_non_voisin_avec_meme_molecule()) testPassed++;
 
     cout << testPassed << "/" << nbTest << " tests réussis!\n" << endl;
 }

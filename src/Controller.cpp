@@ -114,15 +114,15 @@ Controller::~Controller(){
 int Controller::mainController(void)
 {
     // Affichage des données
-    // displayHmapIdSensor();
-    // displayHmapIdPrivateIndividual();
-    // displayHmapAttributes();
-    // displayVecteurMeasurements();
-    // displayHmapIdCleaner();
-    // displayHmapIdProvider();
-    // displayMapCoordSensor();
-    // displayHmapIdSensorPrivateIndividual();
-    // displayHmapDescriptionAttributes();
+    displayHmapIdSensor();
+    displayHmapIdPrivateIndividual();
+    displayHmapAttributes();
+    displayVecteurMeasurements();
+    displayHmapIdCleaner();
+    displayHmapIdProvider();
+    displayMapCoordSensor();
+    displayHmapIdSensorPrivateIndividual();
+    displayHmapDescriptionAttributes();
 
 
     // string userInput = "";
@@ -144,10 +144,20 @@ int Controller::mainController(void)
 
 
 
-int main(void)
+int main(int argc, char *argv[])
 {
-    Test *test = new Test();
-    test->testAll();
-    delete test;
+    if (argc > 1) {
+        string mode(argv[1]);
+        if (mode == "test" || mode == "Test") {
+            Test *test = new Test();
+            test->testAll();
+            delete test;
+            return 0;
+        }
+    }
+
+    Controller *controller = new Controller();
+    controller->mainController();
+    delete controller;
     return 0;
 }

@@ -91,11 +91,8 @@ bool ComputationAgent::ComputeSensorAnalysed(int sensorId, double areaRadius) {
     for (string &molecule : list_molec) {
         if (dicoNbValueAll[molecule] == 0) {continue;}
         dicoSdAll[ molecule ] = sqrt( (1/(double)dicoNbValueAll[molecule]) * dicoSumOfSquaresAll[molecule] );
-        cout << dicoMeanCapteur[ molecule ] << endl;
-        cout << dicoMeanAll[ molecule ] << endl;
-        cout << dicoSdAll[ molecule ] << endl;
-        if ((dicoMeanCapteur[ molecule ] > dicoMeanAll[molecule] + 3*dicoSdAll[molecule] ) 
-            || (dicoMeanCapteur[ molecule ] < dicoMeanAll[molecule] - 3*dicoSdAll[molecule])) {
+        if ((dicoMeanCapteur[ molecule ] > dicoMeanAll[molecule] + 1*dicoSdAll[molecule] ) 
+            || (dicoMeanCapteur[ molecule ] < dicoMeanAll[molecule] - 1*dicoSdAll[molecule])) {
                 anomalies = true;
         }
     }

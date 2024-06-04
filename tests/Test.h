@@ -57,6 +57,37 @@ protected:
     bool CSA_cas2_meme_molecule_capteur_non_truque();
     bool CSA_cas3_plusieur_molecule_capteur_non_truque();
     bool CSA_cas4_plusieur_molecule_capteur_truque();
+    bool CSA_cas5_voisin_meme_molecule_capteur_non_truque();
+    bool CSA_cas6_voisin_meme_molecule_capteur_truque();
+    bool CSA_cas7_non_voisin();
+    bool CSA_cas8_non_voisin_avec_meme_molecule();
+    // bool CSA_cas9_entree_invalide_rayon_negative();
+    // bool CSA_cas10_entree_invalide_capteur_non_existe();
+    // bool CSA_cas11_test_filtrage_capteur_non_truque();
+    // bool CSA_cas12_test_filtrage_capteur_truque();
+
+// ---Tests pour Compute Mean Quality
+    bool CMQ_case1_testDeBase(ComputationAgent c);
+    bool CMQ_case2_filtrageDate(ComputationAgent c);
+    bool CMQ_case3_filtragePosition(ComputationAgent c);
+    bool CMQ_case4_manqueUneMolecule(ComputationAgent c);
+    bool CMQ_case5_rayonInvalide(ComputationAgent c);
+    bool CMQ_case6_latitudeInvalide(ComputationAgent c);
+    bool CMQ_case7_longitudeInvalide(ComputationAgent c);
+    bool CMQ_case8_DatesInvalide(ComputationAgent c);
+    bool CMQ_case9_MesureInvalide(ComputationAgent c);
+
+// ---Test pours Compute Mean For An Attribute
+    bool CMFAA_case1_MeanForO3(ComputationAgent c);
+    bool CMFAA_case2_FiltrageDate(ComputationAgent c);
+    bool CMFAA_case3_FiltragePosition(ComputationAgent c);
+    bool CMFAA_case4_FiltrageMoleculeErreurPasMesure(ComputationAgent c);
+    bool CMFAA_case5_RayonIncorrect(ComputationAgent c);
+    bool CMFAA_case6_LatitudeIncorrecte(ComputationAgent c);
+    bool CMFAA_case7_LongitudeIncorrecte(ComputationAgent c);
+    bool CMFAA_case8_DatesIncorrectes(ComputationAgent c);
+    bool CMFAA_case9_MesureInvalide(ComputationAgent c);
+    bool CMFAA_case10_MoleculeExistePas(ComputationAgent c);
 
 //----------------------------------------------------- Attributs protégés
 

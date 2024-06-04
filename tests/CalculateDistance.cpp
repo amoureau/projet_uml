@@ -102,7 +102,7 @@ bool Test::CD_cas5_entree_lng_invalide() {
 
         double sortie_obtenue = ComputationAgent::calculateDistance(lat1, lng1, lat2, lng2);
 
-        cout << "Cas 5: entree latitude invalide. Echoue!" << endl;
+        cout << "Cas 5: entree longitude invalide. Echoue!" << endl;
         cout << "   Sortie obtenue: " << sortie_obtenue << endl;
         cout << "   Sortie attendue: " << "Exception expected" << endl;
         return false;
