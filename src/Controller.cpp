@@ -138,7 +138,7 @@ int Controller::mainController(void)
         role = "provider";
     }
 
-    result->GreetingsUser(*user, role);
+    result->GreetingsUser(user, role);
     int radius, latitude, longitude, timeChoice, idSensor, radiusSensor;
     while(userInput != 0)
     {

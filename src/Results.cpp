@@ -14,9 +14,9 @@ using namespace std;
 //------------------------------------------------------------- Constantes
 
 //----------------------------------------------------------------- PUBLIC
-void Results::GreetingsUser(User user, string role)  // Fonction pour saluer l'utilisateur
+void Results::GreetingsUser(User *user, string role)  // Fonction pour saluer l'utilisateur
 {
-    string email = user.getEmail();
+    string email = user->getEmail();
     string prenom = email.substr(0, email.find('.'));
     cout << "Bonjour " << prenom << " !" << endl;
     if (role == "admin") {

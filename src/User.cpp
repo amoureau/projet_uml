@@ -49,6 +49,7 @@ User::~User ( )
 #ifdef MAP
     cout << "Appel au destructeur de <Catalogue>" << endl;
 #endif
+delete calculateur;
 
 } //----- Fin de ~User
 

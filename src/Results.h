@@ -28,7 +28,7 @@ public:
 //------------------------------------------------- Surcharge d'opÃ©rateurs
 
 //-------------------------------------------- Constructeurs - destructeur
-    void GreetingsUser(User user, string role);
+    void GreetingsUser(User *user, string role);
 
     string GetUserInput();
 
