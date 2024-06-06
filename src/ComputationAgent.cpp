@@ -62,7 +62,8 @@ bool ComputationAgent::ComputeSensorAnalysed(int sensorId, double areaRadius) {
     Sensor *sensor = hmapIdSensor[sensorId];
 
     bool anomalies = false;
-    unordered_map<string, int> dicoMeanCapteur, dicoNbValueCapteur, dicoMeanAll, dicoSumOfSquaresAll, dicoSdAll, dicoNbValueAll;
+    unordered_map<string, int> dicoNbValueCapteur, dicoNbValueAll, dicoNbVoisin;
+    unordered_map<string, double> dicoMeanCapteur, dicoMeanAll, dicoSumOfSquaresAll, dicoSdAll;
     dicoMeanCapteur["O3"] = dicoMeanCapteur["NO2"] = dicoMeanCapteur["SO2"] = dicoMeanCapteur["PM10"] = 0;
     string list_molec[] = { "O3", "NO2", "SO2", "PM10"};
 
@@ -71,12 +72,19 @@ bool ComputationAgent::ComputeSensorAnalysed(int sensorId, double areaRadius) {
         dicoMeanAll[molecule] = (meanForAttribute == -1 ? 0 : meanForAttribute);
     }
 
-
+    double latSensor = hmapIdSensor[ sensorId ]->getLatitude();
+    double lngSensor = hmapIdSensor[ sensorId ]->getLongitude();
     for (Measurement *me: vecteurMeasurements) {
         string attributeDescription = me->getAttribute()->getId();
         if (me->getSensor()->getId() == sensorId) {
             dicoMeanCapteur[ attributeDescription ] += me->getValue();
             dicoNbValueCapteur[ attributeDescription ] += 1;
+        } else {
+            Sensor *s = me->getSensor();
+            double distance = calculateDistance(latSensor, lngSensor, s->getLatitude(), s->getLongitude());
+            if (distance <= areaRadius) {
+                dicoNbVoisin[ me->getAttribute()->getId() ] += 1;
+            }
         }
 
         dicoSumOfSquaresAll[ attributeDescription ] += ( me->getValue() - dicoMeanAll[ attributeDescription ])*( me->getValue() - dicoMeanAll[ attributeDescription ]);
@@ -86,11 +94,18 @@ bool ComputationAgent::ComputeSensorAnalysed(int sensorId, double areaRadius) {
 
     //On exclut les données du capteur s'il y a un problème pour la moyenne d'une des molécules au moins
     for (string &molecule : list_molec) {
-        dicoMeanCapteur[ molecule ] = dicoMeanCapteur[ molecule ] / dicoNbValueCapteur[ molecule ];
-        dicoSdAll[ molecule ] = sqrt( dicoSumOfSquaresAll[molecule] / dicoNbValueAll[molecule] );
+        if (dicoNbValueAll[molecule] == 0) continue;
+        if (dicoNbValueCapteur[molecule] == 0) continue;
 
-        cout << "Nom |" << " Capteur |" << " All |" << " Ecart-Type All " << endl;
-        cout << molecule << "    " << dicoMeanCapteur[ molecule ] << "        " << dicoMeanAll[molecule] << "         " << dicoSdAll[molecule] << endl;  
+        if (dicoNbVoisin [molecule] == 0) {
+            throw invalid_argument("Analyse impossible car il y a aucun autre capteur a de mesure sur la même molécule!");
+        }
+
+        dicoMeanCapteur[ molecule ] = dicoMeanCapteur[ molecule ] / (double) dicoNbValueCapteur[ molecule ];
+        dicoSdAll[ molecule ] = sqrt( dicoSumOfSquaresAll[molecule] / (double) dicoNbValueAll[molecule] );
+
+        //cout << "Nom |" << " Capteur |" << " All |" << " Ecart-Type All " << endl;
+        //cout << molecule << "    " << dicoMeanCapteur[ molecule ] << "        " << dicoMeanAll[molecule] << "         " << dicoSdAll[molecule] << endl;  
 
         if ((dicoMeanCapteur[ molecule ] > dicoMeanAll[molecule] + dicoSdAll[molecule] ) 
             || (dicoMeanCapteur[ molecule ] < dicoMeanAll[molecule] - dicoSdAll[molecule])) {
