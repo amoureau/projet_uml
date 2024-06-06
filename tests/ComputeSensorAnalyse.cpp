@@ -292,8 +292,8 @@ bool Test::CSA_cas6_voisin_meme_molecule_capteur_truque() {
     calculateur->hmapIdSensor[6] = sensor6;
     calculateur->hmapIdSensor[7] = sensor7;
     calculateur->hmapIdSensor[8] = sensor8;
-    calculateur->hmapIdSensor[8] = sensor8;
-    calculateur->hmapIdSensor[8] = sensor8;
+    calculateur->hmapIdSensor[9] = sensor9;
+    calculateur->hmapIdSensor[10] = sensor10;
 
     Measurement* m1 = new Measurement(30.0, Timestamp("2019-01-01 01:00:00"), sensor1,  O3);
     Measurement* m2 = new Measurement(9.0, Timestamp("2019-01-01 01:00:00"), sensor2,  O3);
@@ -304,9 +304,9 @@ bool Test::CSA_cas6_voisin_meme_molecule_capteur_truque() {
     Measurement* m6 = new Measurement(30.0, Timestamp("2019-01-01 01:00:00"), sensor6,  O3);
     Measurement* m7 = new Measurement(30.0, Timestamp("2019-01-01 01:00:00"), sensor7,  O3);
     Measurement* m8 = new Measurement(30.0, Timestamp("2019-01-01 01:00:00"), sensor8,  O3);
-    Measurement* m9 = new Measurement(30.0, Timestamp("2019-01-01 01:00:00"), sensor8,  O3);
-    Measurement* m10 = new Measurement(30.0, Timestamp("2019-01-01 01:00:00"), sensor8,  O3);
-    calculateur->vecteurMeasurements = {m1, m2, m3, m4, m5, m6, m7, m8};
+    Measurement* m9 = new Measurement(30.0, Timestamp("2019-01-01 01:00:00"), sensor9,  O3);
+    Measurement* m10 = new Measurement(30.0, Timestamp("2019-01-01 01:00:00"), sensor10,  O3);
+    calculateur->vecteurMeasurements = {m1, m2, m3, m4, m5, m6, m7, m8, m9, m10};
 
     bool sortie_attendue = true;
     bool sortie_obtenue = calculateur->ComputeSensorAnalysed(1, 1.0);

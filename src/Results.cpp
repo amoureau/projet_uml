@@ -78,7 +78,7 @@ int Results::GetInputIdSensor() { // Fonction pour récupérer l'input de l'iden
 int Results::GetInputAreaRadius() { // Fonction pour récupérer l'input du rayon de la zone à analyser
     int radius;
     cout << endl << "Quel est le rayon de la zone que vous souhaitez analyser ?" << endl;
-    cout << "Entrer le rayon de la zone en mètres (valeurs en moyenne autour de 300m environ) : "; //
+    cout << "Entrer le rayon de la zone en kilomètres (entier en moyenne autour de 1km environ) : "; //
     cin >> radius;
     return radius;
 }

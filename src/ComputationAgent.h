@@ -154,7 +154,7 @@ private:
     void loadProvider(void);
 
     int indiceCorrespondingToMean(string attribut, double moyenne);
-    double ComputeMeanForAnAttribute ( double latitude, double longitude, string& attribut, double radius, Timestamp startTime, Timestamp endTime);
+    double ComputeMeanForAnAttribute ( double latitude, double longitude, string attribut, double radius, Timestamp startTime, Timestamp endTime);
 };
 
 //-------------------------------- Autres définitions dépendantes

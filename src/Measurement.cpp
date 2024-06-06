@@ -36,7 +36,9 @@ Measurement::Measurement (double value, Timestamp date, Sensor* sensor, Attribut
 #ifdef MAP
     cout << "Appel au constructeur de <Measurement>" << endl;
 #endif
-
+    if (value < 0.0) {
+        throw invalid_argument("La valeur de mesure doit etre >= 0!");
+    }
 } //----- Fin de Measurement
 
 Measurement::~Measurement ( )

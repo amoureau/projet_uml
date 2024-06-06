@@ -24,6 +24,9 @@ public:
     void testAll();
     void testCalculateDistance();
     void testComputeSensorAnalyse();
+    void testComputeMeanQuality();
+    void testIndiceCorrespondingToMean();
+    void testComputeMeanForAnAttribute();
 
     static bool isEgalDouble(double attendue, double obtenue) {
         double ecart = abs(obtenue - attendue);
@@ -67,27 +70,34 @@ protected:
     // bool CSA_cas12_test_filtrage_capteur_truque();
 
 // ---Tests pour Compute Mean Quality
-    bool CMQ_case1_testDeBase(ComputationAgent c);
-    bool CMQ_case2_filtrageDate(ComputationAgent c);
-    bool CMQ_case3_filtragePosition(ComputationAgent c);
-    bool CMQ_case4_manqueUneMolecule(ComputationAgent c);
-    bool CMQ_case5_rayonInvalide(ComputationAgent c);
-    bool CMQ_case6_latitudeInvalide(ComputationAgent c);
-    bool CMQ_case7_longitudeInvalide(ComputationAgent c);
-    bool CMQ_case8_DatesInvalide(ComputationAgent c);
-    bool CMQ_case9_MesureInvalide(ComputationAgent c);
+    bool CMQ_case1_testDeBase();
+    bool CMQ_case2_filtrageDate();
+    bool CMQ_case3_filtragePosition();
+    bool CMQ_case4_manqueUneMolecule();
+    bool CMQ_case5_rayonInvalide();
+    bool CMQ_case6_latitudeInvalide();
+    bool CMQ_case7_longitudeInvalide();
+    bool CMQ_case8_DatesInvalide();
+    bool CMQ_case9_MesureInvalide();
 
-// ---Test pours Compute Mean For An Attribute
-    bool CMFAA_case1_MeanForO3(ComputationAgent c);
-    bool CMFAA_case2_FiltrageDate(ComputationAgent c);
-    bool CMFAA_case3_FiltragePosition(ComputationAgent c);
-    bool CMFAA_case4_FiltrageMoleculeErreurPasMesure(ComputationAgent c);
-    bool CMFAA_case5_RayonIncorrect(ComputationAgent c);
-    bool CMFAA_case6_LatitudeIncorrecte(ComputationAgent c);
-    bool CMFAA_case7_LongitudeIncorrecte(ComputationAgent c);
-    bool CMFAA_case8_DatesIncorrectes(ComputationAgent c);
-    bool CMFAA_case9_MesureInvalide(ComputationAgent c);
-    bool CMFAA_case10_MoleculeExistePas(ComputationAgent c);
+// ---Test pour Compute Mean For An Attribute
+    bool CMFAA_case1_MeanForO3();
+    bool CMFAA_case2_FiltrageDate();
+    bool CMFAA_case3_FiltragePosition();
+    bool CMFAA_case4_FiltrageMoleculeErreurPasMesure();
+    bool CMFAA_case5_RayonIncorrect();
+    bool CMFAA_case6_LatitudeIncorrecte();
+    bool CMFAA_case7_LongitudeIncorrecte();
+    bool CMFAA_case8_DatesIncorrectes();
+    bool CMFAA_case9_MesureInvalide();
+    bool CMFAA_case10_MoleculeExistePas();
+
+// ---Test pour Indice Corresponding To Mean
+    bool ICTM_case1_TestForO3();
+    bool ICTM_case2_TestForSO2();
+    bool ICTM_case3_TestForNO2();
+    bool ICTM_case4_TestForPM10();
+
 
 //----------------------------------------------------- Attributs protégés
 

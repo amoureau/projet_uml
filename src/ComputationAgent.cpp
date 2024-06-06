@@ -37,6 +37,22 @@ void ComputationAgent::loadData(void)
 
 int ComputationAgent::ComputeMeanQuality(double latitude, double longitude, double radius, Timestamp startTime, Timestamp endTime)
 {
+    if (radius <= 0) {
+        throw invalid_argument("Le rayon doit être positif!");
+    }
+
+    if ((latitude > 90) || (latitude < -90)) {
+        throw invalid_argument("La latitude doit être comprise entre -90° et 90°");
+    }
+
+    if ((longitude > 180) || (longitude < -180)) {
+        throw invalid_argument("La longitude doit être comprise entre -180° et 180°");
+    }
+
+    if (startTime > endTime) {
+        throw invalid_argument("La date de fin doit être > à la date du début");     
+    }
+
     vector<string> listeAttributs = {"O3", "NO2", "PM10", "SO2"};
 
     vector<int> listeMoyennes;
@@ -44,6 +60,7 @@ int ComputationAgent::ComputeMeanQuality(double latitude, double longitude, doub
 
     for (string attribut : listeAttributs) {
         double moyenne = ComputeMeanForAnAttribute(latitude, longitude, attribut, radius, startTime, endTime);
+        
         if (moyenne != -1) {
             listeMoyennes.push_back(moyenne);
             int indice = indiceCorrespondingToMean(attribut, moyenne);
@@ -51,6 +68,8 @@ int ComputationAgent::ComputeMeanQuality(double latitude, double longitude, doub
             if (indice > indiceAtmo) {
                 indiceAtmo = indice;
             }
+        } else {
+            throw invalid_argument("Il n’y a pas de mesure pour au moins une des molécules donc calcul de ATMO impossible!");
         }
     }
 
@@ -118,8 +137,28 @@ bool ComputationAgent::ComputeSensorAnalysed(int sensorId, double areaRadius) {
 
 
 
-double ComputationAgent::ComputeMeanForAnAttribute ( double latitude, double longitude, string &attribute, double radius, Timestamp startTime, Timestamp endTime) {
-    double moyenne = -1;
+double ComputationAgent::ComputeMeanForAnAttribute ( double latitude, double longitude, string attribute, double radius, Timestamp startTime, Timestamp endTime) {
+    
+    if (radius <= 0) {
+        throw invalid_argument("Le rayon doit être positif!");
+    }
+
+    if ((latitude > 90) || (latitude < -90)) {
+        throw invalid_argument("La latitude doit être comprise entre -90° et 90°");
+    }
+
+    if ((longitude > 180) || (longitude < -180)) {
+        throw invalid_argument("La longitude doit être comprise entre -180° et 180°");
+    }
+
+    if (startTime > endTime) {
+        throw invalid_argument("La date de fin doit être > à la date du début");     
+    }
+
+    if ( hmapAttributes.count(attribute) == 0 ) {
+        throw invalid_argument("La molécule n'existe pas!");     
+    }
+    
     double somme = 0;
     double nbCapteurs = 0;
     Attributes attributes = *(hmapAttributes[attribute]);
@@ -130,7 +169,7 @@ double ComputationAgent::ComputeMeanForAnAttribute ( double latitude, double lon
 
         if ( me->getAttribute()->getId() == attributes.getId() ) {
             double distance = calculateDistance(latitude, longitude, sensor->getLatitude(), sensor->getLongitude());
-            if ((( startTime < mesureTime  && mesureTime < endTime) || (startTime == 0 && endTime == 0)) && (distance <= radius))
+            if ((( startTime <= mesureTime  && mesureTime <= endTime) || (startTime == 0 && endTime == 0)) && (distance <= radius))
             {
                 // cout << startTime << " " << mesureTime << " " << endTime << endl;
                 somme += me->getValue();
@@ -138,8 +177,11 @@ double ComputationAgent::ComputeMeanForAnAttribute ( double latitude, double lon
             }
         }
     }
-    moyenne = somme/nbCapteurs;
-    return moyenne;
+
+    if (nbCapteurs == 0) 
+        return -1;
+    else
+        return somme/nbCapteurs;
 }
 
 int ComputationAgent::indiceCorrespondingToMean(string attribut, double moyenne)
@@ -223,6 +265,20 @@ int ComputationAgent::indiceCorrespondingToMean(string attribut, double moyenne)
         }
         else if (moyenne <= 34) {
             return 5;
+        }
+        else if (moyenne <= 41) {
+            return 6;
+        }
+        else if (moyenne <= 49) {
+            return 7;
+        }
+        else if (moyenne <= 64) {
+            return 8;
+        }
+        else if (moyenne <= 79) {
+            return 9;
+        } else {
+            return 10;
         }
     }
     else if (attribut == "SO2") {

@@ -45,6 +45,14 @@ public:
         return time_point == other.time_point;
     }
 
+    bool operator<=(const Timestamp& other) const{
+        return time_point <= other.time_point;
+    }
+
+    bool operator>=(const Timestamp& other) const{
+        return time_point >= other.time_point;
+    }
+
     // Overloaded operator <<
     friend std::ostream& operator<<(std::ostream& os, const Timestamp& ts) {
         std::time_t ttp = std::chrono::system_clock::to_time_t(ts.time_point);
